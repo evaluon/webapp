@@ -140,4 +140,4 @@ gulp.task('watch', function(){
 });
 
 gulp.task('default', ['webserver', 'dist-server', 'inject', 'wiredep', 'watch']);
-gulp.task('build', ['templates', 'compress', 'copy']);
+gulp.task('build', ['templates', 'compress', 'copy', 'copy-mobile']);

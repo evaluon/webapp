@@ -3,7 +3,7 @@
     <form class="list" ng-submit="login($event)">
       <label class="item item-input">
         <span class="input-label" tabindex="-1">Usuario</span>
-        <input type="text" aria-describedby="login-user-input-text">
+        <input type="text" aria-describedby="login-user-input-text" ng-model="user.username">
         <p id="login-user-input-text" class="aria-description">Ingrese el usuario</p>
       </label>
       <label class="item item-input">
@@ -11,7 +11,7 @@
         <input type="password" aria-describedby="login-user-input-pass">
         <p id="login-user-input-pass" class="aria-description">Ingrese la contraseña</p>
       </label>
-      <input type="submit" class="button button-block button-inci" value="Iniciar Sesion">
+      <input type="submit" class="button button-block button-inci" value="Iniciar Sesion" ng-model="user.password">
     </form>
     <a ui-sref="registro" ><button class="button button-block button-inci">Registrarse</button></a>
   </ion-content>

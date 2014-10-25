@@ -1,16 +1,11 @@
 angular.module('starter.controllers', [])
 
-.controller('LoginCtrl', function($scope, $state) {
-  
-  $scope.login = function(event){
-    event.preventDefault();
+.controller('LoginCtrl', function($scope, $state, Auth) {
+    $scope.user = {};
+    $scope.login = function(event){
+        event.preventDefault();
+    };
 
-    $state.go('home');
-  };
-
-  $scope.blur = function(){
-    $('#textInit').focus();
-  };
 })
 .controller('RegistroCtrl', function($scope){
   $scope.$on('$viewContentLoaded', function() {
