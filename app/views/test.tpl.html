@@ -1,0 +1,60 @@
+<ion-view title="Examen">
+  <ion-content class="padding">
+    <h2 id="testTitle">Prueba de Biología - Colegio</h2>
+    <div class="card">
+      <div class="item item-text-wrap">
+        <br>
+        <h3>Tipos de preguntas</h3>
+        <p>En el examen se utilizan preguntas de selección múltiple con única respuesta y preguntas abiertas de respuesta corta.</p>
+        <p>Las preguntas de selección múltiple con única respuesta están conformadas por un enunciado, la formulación de una tarea de evaluación y cuatro opciones de respuesta, codificadas como A, B, C y D, de las cuales sólo una es correcta o válida dada la tarea planteada.</p>
+        <p>Las preguntas abiertas de respuesta corta no presentan opciones de respuesta. El estudiante construye (produce, elabora, escribe) una respuesta de acuerdo con la tarea que se le ha asignado, en el espacio definido.</p>
+        <p>Puedes desplazarte por las preguntas y respuestas, cuándo quieras responder acertadamente a una opción solo basta un doble click.</p>
+      </div>
+    </div>
+    <h2>Preguntas:</h2>
+    <div class="list card" ng-repeat = "question in questions">
+
+      <div class="item">
+        <h3>{{question.id}}.</h3>
+        <p>{{question.text}}</p>
+      </div>
+
+      <div class="item item-image">
+      </div>
+
+      <div class="list">
+
+        <label class="item item-radio">
+          <input type="radio" name="group">
+          <div class="item-content">
+            <p><strong>a.</strong>  {{question.answerOptions[0].text}}</p>
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+        <label class="item item-radio">
+          <input type="radio" name="group">
+          <div class="item-content">
+            <p><strong>b.</strong>  {{question.answerOptions[1].text}}</p>
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+        <label class="item item-radio">
+          <input type="radio" name="group">
+          <div class="item-content">
+            <p><strong>c.</strong>  {{question.answerOptions[2].text}}</p>
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+        <label class="item item-radio">
+          <input type="radio" name="group">
+          <div class="item-content">
+            <p><strong>d.</strong>  {{question.answerOptions[3].text}}</p>
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+      </div>
+    </div>
+    <button class="button button-full button-inci">Verificar respuestas</button>
+    <a ui-sref="home"><button class="button button-full button-inci" ng-click="alert('Gracias');">Enviar</button></a>
+  </ion-content>
+</ion-view>

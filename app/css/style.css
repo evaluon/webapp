@@ -1,0 +1,89 @@
+  /* Empty. Add your own CSS if you like */
+  .aria-description{
+    display: none;
+  }
+  a:link
+  {
+    text-decoration:none;
+  }
+  .divIcon{
+    text-align: center;
+  }
+  p{
+    -ms-word-break: breakbreak-all;
+    word-break: break-all;
+  }
+  img{
+  }
+
+  /*Cambios en ionic*/
+  .bar.bar-inci {
+    border-color: #145fd2;
+    background-color: #00427a;
+    background-image: linear-gradient(0deg, #145fd7, #145fd7 50%, transparent 50%);
+    color: #fff; }
+    .bar.bar-inci .title {
+      color: #fff;
+    }
+    .bar.bar-inci.bar-footer {
+      background-image: linear-gradient(180deg, #145fd7, #145fd7 50%, transparent 50%);
+    }
+    .bar-inci .button {
+      border-color: #145fd7;
+      background-color: #00427a;
+      color: #fff;
+    }
+    .bar-inci .button:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+    .bar-inci .button.active, .bar-inci .button.activated {
+      border-color: #145fd7;
+      background-color: #145fd7;
+      box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15);
+    }
+    .bar-inci .button.button-clear {
+      border-color: transparent;
+      background: none;
+      box-shadow: none;
+      color:#00427a;
+      font-size: 17px;
+    }
+    .bar-inci .button.button-icon {
+      border-color: transparent;
+      background: none;
+    }
+    .button.button-inci {
+      border-color: #00427a;
+      background-color: #00427a;
+      color: #fff;
+    }
+    .button.button-positive:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+    .button.button-positive.active, .button.button-positive.activated {
+      border-color: #145fd7;
+      background-color: #145fd7;
+      box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15);
+    }
+    .button.button-positive.button-clear {
+      border-color: transparent;
+      background: none;
+      box-shadow: none;
+      color: #4a87ee;
+    }
+    .button.button-positive.button-icon {
+        border-color: transparent;
+        background: none;
+    }
+    .button.button-positive.button-outline {
+      border-color: #4a87ee;
+      background: transparent;
+      color: #4a87ee;
+    }
+    .button.button-positive.button-outline.active, .button.button-positive.button-outline.activated {
+      background-color: #4a87ee;
+      box-shadow: none;
+      color: #fff;
+    }

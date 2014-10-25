@@ -1,0 +1,28 @@
+<ion-view title="Registro">
+  <ion-content class="padding">
+    <form class="list" ng-submit="registrar()">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Nombres</span>
+        <input type="text"  aria-describedby="registro-user-name">
+        <p id= "registro-user-name" class="aria-description">Digite su nombre</p>
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Apellidos</span>
+        <input type="text"  aria-describedby="registro-user-surname">
+        <p id="registro-user-surname" class="aria-description">Digite sus apellidos</p>
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label" >Correo</span>
+        <input type="email" aria-describedby="registro-user-mail">
+        <p id ="registro-user-mail" class="aria-description">Digite su correo</p>
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Documento</span>
+        <input type="number" aria-describedby="registro-user-id">
+        <span id ="registro-user-id" class="aria-description">Por último, digite su correo</span>
+      </label>
+      </label>
+      <input type="submit" class="button button-block button-inci" value="Registrar">
+    </form>
+  </ion-content>
+</ion-view>
