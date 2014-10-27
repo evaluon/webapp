@@ -1,9 +1,11 @@
+'use strict';
 angular.module('starter.controllers', [])
 
 .controller('LoginCtrl', function($scope, $state, Auth) {
     $scope.user = {};
     $scope.login = function(event){
         event.preventDefault();
+        Auth.login($scope.user.username, $scope.user.password);
     };
 
 })
