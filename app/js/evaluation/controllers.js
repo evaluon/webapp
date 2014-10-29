@@ -58,6 +58,7 @@ angular.module('starter.evaluation.controllers', [])
 
   evaluationServices.getTestsByGroupId($stateParams.id).then(function(success){
     if(success) $scope.rowTests = doubled(success.data.data);
+    console.log($scope.rowTests);
   }).catch(function(error){
     console.log(error);
   })

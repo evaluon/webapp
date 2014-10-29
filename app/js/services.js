@@ -114,7 +114,8 @@ angular.module('starter.services', [])
     url: 'http://evaluon.boolinc.co:80',
     login: '/auth/token',
     institution: '/institution',
-    group: '/group'
+    group: '/group',
+    test: '/test'
 })
 .constant('access', {
     client: {
