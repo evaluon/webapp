@@ -1,7 +1,7 @@
 'use strict';
 angular.module('starter.services', [])
 
-.factory('Auth', function($http, $ionicLoading, $ionicPopup, $state, api, access, ipCookie, routingConfig) {
+.factory('Auth', function($http, $ionicLoading, $ionicPopup, $state, localStorageService, api, access, routingConfig) {
 
     var API = {
         authClient: function(data){
@@ -15,13 +15,11 @@ angular.module('starter.services', [])
             });
         },
         login: function(data){
-            console.log('cookie');
-            console.log(ipCookie(CryptoJS.SHA1(access.tokens.client).toString()).token_type);
             return $http({
                 method: 'post',
                 url: api.url + api.login,
                 headers:{
-                    'Authorization' : ipCookie(CryptoJS.SHA1(access.tokens.client).toString()).token_type + ' ' + ipCookie(CryptoJS.SHA1(access.tokens.client).toString()).access_token,
+                    'Authorization' : localStorageService.get(CryptoJS.SHA1(access.tokens.client).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.client).toString()).access_token,
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 data: $.param(data)
@@ -46,7 +44,7 @@ angular.module('starter.services', [])
 
             var success = function(success){
                 $ionicLoading.hide();
-                ipCookie(CryptoJS.SHA1(access.tokens.client).toString(), success.data, { expires: 30 });
+                localStorageService.set(CryptoJS.SHA1(access.tokens.client), success.data);
             };
 
             API.authClient(access.client).then(success,error);
@@ -55,7 +53,7 @@ angular.module('starter.services', [])
 
         },
         isLoggedIn: function(){
-            if(ipCookie(CryptoJS.SHA1(access.tokens.client).toString())){
+            if(localStorageService.get(CryptoJS.SHA1(access.tokens.client).toString())){
                 return true;
             }
             else{
@@ -70,7 +68,7 @@ angular.module('starter.services', [])
             var success = function(success){
                 $ionicLoading.hide();
                 success.data.role = routingConfig.userRoles.user;
-                ipCookie(CryptoJS.SHA1(access.tokens.user).toString(), success.data, { expires: 30 });
+                localStorageService.set(CryptoJS.SHA1(access.tokens.user).toString(), success.data);
                 $state.go('home');
             };
             var error = function(error){
@@ -115,6 +113,8 @@ angular.module('starter.services', [])
     url2: 'http://192.168.43.171:3004',
     url: 'http://evaluon.boolinc.co:80',
     login: '/auth/token',
+    institution: '/institution',
+    group: '/group'
 })
 .constant('access', {
     client: {

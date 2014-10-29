@@ -11,9 +11,11 @@ angular.module('starter', [
 'starter.controllers',
 'starter.services',
 'app.templates',
-'ipCookie'
+'starter.evaluation.controllers',
+'starter.evaluation.services',
+'LocalStorageModule'
 ])
-.config(function($stateProvider, $urlRouterProvider, $locationProvider, routingConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider, $locationProvider, routingConfigProvider, localStorageServiceProvider){
 
   //Routing
   //Public routes
@@ -77,8 +79,66 @@ angular.module('starter', [
     }
   });
 
+  //Evaluation routes
+  $stateProvider
+    .state('evaluation',{
+      url:'/evaluation/institutions',
+      templateUrl:'views/evaluation/institutions.tpl.html',
+      controller: 'EvaluationInstitutesCtrl',
+      data: {
+        access: routingConfigProvider.accessLevels.user
+      }
+    })
+    .state('evaluation-groups',{
+      url:'/evaluation/groups/:id',
+      templateUrl:'views/evaluation/groups.tpl.html',
+      controller: 'EvaluationGroupsCtrl',
+      data: {
+        access: routingConfigProvider.accessLevels.user
+      }
+    })
+    .state('evaluation-tests',{
+      url:'/evaluation/tests/:id',
+      templateUrl: 'views/evaluation/tests.tpl.html',
+      controller: 'EvaluationTestsCtrl',
+      data:{
+        access: routingConfigProvider.accessLevels.user
+      }
+    });
+
+  //Evaluate routes
+  $stateProvider
+    .state('evaluate',{
+      url:'/evaluate/institutions',
+      templateUrl:'views/evaluate/institutions.tpl.html',
+      controller: 'EvaluationInstitutesCtrl',
+      data: {
+        access: routingConfigProvider.accessLevels.user
+      }
+    })
+    .state('evaluate-groups',{
+      url:'/evaluate/groups/:id',
+      templateUrl:'views/evaluate/groups.tpl.html',
+      controller: 'EvaluationGroupsCtrl',
+      data: {
+        access: routingConfigProvider.accessLevels.user
+      }
+    })
+    .state('evaluate-tests',{
+      url:'/evaluation/evaluate/:id',
+      templateUrl: 'views/evaluate/tests.tpl.html',
+      controller: 'EvaluationTestsCtrl',
+      data:{
+        access: routingConfigProvider.accessLevels.user
+      }
+    });
+
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(false);
+
+  //Local Storage conf
+  localStorageServiceProvider
+    .setPrefix('Evaluon');
 })
 
 .run(function($ionicPlatform, $rootScope, Auth, routingConfig) {

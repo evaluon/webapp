@@ -139,5 +139,5 @@ gulp.task('watch', function(){
     gulp.watch(['./app/views/**/*.tpl.html'], ['templates']);
 });
 
-gulp.task('default', ['webserver', 'dist-server', 'inject', 'wiredep', 'watch']);
+gulp.task('default', ['webserver', 'dist-server', 'inject', /*'wiredep',*/ 'watch']);
 gulp.task('build', ['templates', 'compress', 'copy', 'copy-mobile']);
