@@ -1,10 +1,10 @@
-<ion-view title="Menu Evaluaciones">
+<ion-view title="Evaluaciones">
   <ion-content class="padding">
     <div class="row padding" ng-repeat="tests in rowTests">
       <div class="col divIcon" ng-repeat="test in tests">
 
         <h2>{{test.id}}</h2>
-        <a ui-sref="evaluation-groups"><img src="http://devbool.blob.core.windows.net/evaluon/7.png" alt="{{test.description}}"></a>
+        <a ui-sref="{{routes.testsDetails}}({id: {{test.id}}})"><img src="http://devbool.blob.core.windows.net/evaluon/7.png" alt="{{test.description}}"></a>
       </div>
     </div>
   </ion-content>

@@ -1,4 +1,4 @@
-<ion-view title="Menú Principal">
+<ion-view title="Menú Principal" hide-back-button="true">
   <ion-content class="padding">
     <div class="row padding">
       <div class="col divIcon">
@@ -17,7 +17,17 @@
       </div>
       <div class="col divIcon">
         <h2>Promedio Aprendizaje</h2>
-        <a href=""><img src="./img/4.png" alt="Conoce los avances de tu conocimiento"></a>
+        <a href=""><img src="./img/4.png" alt="Conoce los avances de tus conocimiento"></a>
+      </div>
+    </div>
+    <div class="row padding">
+      <div class="col divIcon">
+        <h2>Configuraciones</h2>
+        <a href=""><img src="./img/3.png" alt="Configura tu aplicación"></a>
+      </div>
+      <div class="col divIcon">
+        <h2>Cerrar Sesión</h2>
+        <a href="" ng-click="logout()"><img src="./img/4.png" alt="Cierra esta sesión"></a>
       </div>
     </div>
   </ion-content>

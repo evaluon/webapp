@@ -85,6 +85,10 @@ angular.module('starter.services', [])
                 password: CryptoJS.SHA1(password).toString()
             }
             API.login(data).then(success,error);
+        },
+        logout: function(){
+            localStorageService.remove(CryptoJS.SHA1(access.tokens.user).toString());
+            $state.go('login');
         }
     }
 })
@@ -115,7 +119,9 @@ angular.module('starter.services', [])
     login: '/auth/token',
     institution: '/institution',
     group: '/group',
-    test: '/test'
+    test: '/test',
+    knowledgeArea: '/knowledgearea',
+    testQuestions: '/question'
 })
 .constant('access', {
     client: {

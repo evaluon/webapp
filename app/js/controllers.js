@@ -18,10 +18,15 @@ angular.module('starter.controllers', [])
     event.preventDefault();
   }
 })
-.controller('HomeCtrl', function($scope){
+.controller('HomeCtrl', function($scope, Auth){
   $scope.$on('$viewContentLoaded', function() {
     $('#textInit').focus();
   });
+
+  $scope.logout = function(){
+    Auth.logout();
+  };
+
 })
 .controller('TestCtrl', function($scope, $http){
   $scope.test = {};

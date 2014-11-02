@@ -13,6 +13,7 @@ angular.module('starter', [
 'app.templates',
 'starter.evaluation.controllers',
 'starter.evaluation.services',
+'starter.configuration.controllers',
 'LocalStorageModule'
 ])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, routingConfigProvider, localStorageServiceProvider){
@@ -55,28 +56,6 @@ angular.module('starter', [
     data: {
       access: routingConfigProvider.accessLevels.user
     }
-  })
-  .state('evaluacion-menu', {
-    url: '/evaluacion-menu',
-    templateUrl: 'views/evaluacion-menu.tpl.html',
-    data: {
-      access: routingConfigProvider.accessLevels.user
-    }
-  })
-  .state('evaluacion-materias', {
-    url: '/evaluacion-materia',
-    templateUrl: 'views/evaluacion-materia.tpl.html',
-    data: {
-      access: routingConfigProvider.accessLevels.user
-    }
-  })
-  .state('test', {
-    url: '/test',
-    templateUrl: 'views/test.tpl.html',
-    controller: 'TestCtrl',
-    data: {
-      access: routingConfigProvider.accessLevels.user
-    }
   });
 
   //Evaluation routes
@@ -104,29 +83,45 @@ angular.module('starter', [
       data:{
         access: routingConfigProvider.accessLevels.user
       }
+    })
+    .state('evaluation-knowledge-area', {
+      url: '/evaluation/knowledge-area/:id',
+      templateUrl: 'views/evaluation/knowledge-area.tpl.html',
+      controller: 'EvaluationKnowledgeAreaCtrl',
+      data:{
+        access: routingConfigProvider.accessLevels.user
+      }
+    })
+    .state('evaluation-test-area', {
+      url: '/evaluation/test/:id/area/:area',
+      templateUrl: 'views/evaluation/test.tpl.html',
+      controller: 'EvaluationTestCtrl',
+      data: {
+        access: routingConfigProvider.accessLevels.user
+      }
     });
 
   //Evaluate routes
   $stateProvider
-    .state('evaluate',{
+    .state('selfEvaluation',{
       url:'/evaluate/institutions',
-      templateUrl:'views/evaluate/institutions.tpl.html',
+      templateUrl:'views/evaluation/institutions.tpl.html',
       controller: 'EvaluationInstitutesCtrl',
       data: {
         access: routingConfigProvider.accessLevels.user
       }
     })
-    .state('evaluate-groups',{
+    .state('selfEvaluation-groups',{
       url:'/evaluate/groups/:id',
-      templateUrl:'views/evaluate/groups.tpl.html',
+      templateUrl:'views/evaluation/groups.tpl.html',
       controller: 'EvaluationGroupsCtrl',
       data: {
         access: routingConfigProvider.accessLevels.user
       }
     })
-    .state('evaluate-tests',{
-      url:'/evaluation/evaluate/:id',
-      templateUrl: 'views/evaluate/tests.tpl.html',
+    .state('selfEvaluation-test',{
+      url:'/evaluation/evaluation/:id',
+      templateUrl: 'views/evaluation/tests.tpl.html',
       controller: 'EvaluationTestsCtrl',
       data:{
         access: routingConfigProvider.accessLevels.user
