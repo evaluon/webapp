@@ -2,7 +2,7 @@
   <ion-content class="padding">
     <div class="row padding" ng-repeat="institutes in rowInstitutes">
       <div class="col divIcon" ng-repeat="institute in institutes">
-        <h2>{{institute.name}}</h2>
+        <h2 class="titleInci">{{institute.name}}</h2>
         <a ui-sref="{{routes.groups}}({id: {{institute.id}}})"><img src="http://devbool.blob.core.windows.net/evaluon/7.png" alt="Colegio Inem de Bucaramamnga"></a>
       </div>
     </div>

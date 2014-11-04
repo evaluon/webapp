@@ -96,11 +96,35 @@ angular.module('starter.evaluation.controllers', [])
   $scope.test = {};
   $scope.questions = [];
   $scope.params = $stateParams;
+  $scope.respuesta = {};
+  $scope.rollbackAnswersFlag = false;
 
   evaluationTest.getTestAnswersByArea($stateParams).then(function(success){
     if(success) $scope.questions = success.data.data
-    console.log($scope.questions);
   }).catch(function(error){
     console.log(error);
   });
+
+  $scope.verifyAnswers = function(){
+   $scope.rollbackAnswersFlag = true;
+   var firstUnanswered = null;
+
+   _.each($scope.questions, function(question, index){
+     if(question.answer){
+       $('#answer-'+index).replaceWith('<p id="answer-'+index+'">'+(index+1)+'.</p>');
+     } else {
+        if (firstUnanswered === null){
+          firstUnanswered = index;
+          $('#answer-'+index).focus();
+        }
+      }
+    });
+  };
+
+  $scope.rollbackAnswers = function(){
+    $scope.rollbackAnswersFlag = false;
+    _.each($scope.questions, function(question, index){
+      $('#answer-'+index).replaceWith('<h3 id="answer-'+index+'">'+(index+1)+'.</h3>');
+    });
+  };
 });

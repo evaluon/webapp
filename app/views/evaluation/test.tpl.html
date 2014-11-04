@@ -2,6 +2,8 @@
   <ion-content class="padding">
     <div class="card">
       <div class="item item-text-wrap">
+        <h3>Examen evaluon</h3>
+        <p>Ten en cuenta que el examen se anulará al cerrar la aplicación</p>
         <br>
         <h3>Tipos de preguntas</h3>
         <p>En el examen se utilizan preguntas de selección múltiple con única respuesta y preguntas abiertas de respuesta corta.</p>
@@ -11,27 +13,30 @@
       </div>
     </div>
     <h2>Preguntas:</h2>
-    <div class="list card" ng-repeat = "question in questions">
+
+    <div class="list">
+      <div class="answer" ng-repeat="question in questions">
+        <div class="item item-divider">
+          <h3 id ="answer-{{$index}}">{{$index + 1}}.</h3>
+          <p>{{question.description_text}}</p>
+        </div>
+        <ion-radio ng-repeat =" answer in question.answers" ng-value="'{{answer.id}}'" ng-model="question.answer"   name="answer{{answer.id}}"><p><strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}} </p></ion-radio>
+      </div>
+    </div>
+
+    <!--<div class="list card" ng-repeat = "question in questions">
       <div class="item">
-        <h3>{{$index + 1}}.</h3>
+        <h3 id ="answer-{{$index}}">{{$index + 1}}.</h3>
         <p>{{question.description_text}}</p>
       </div>
 
-      <div class="item item-image">
-      </div>
-
       <div class="list">
-
-        <label class="item item-radio" ng-repeat =" answer in question.answers">
-          <input type="radio" name="group">
-          <div class="item-content">
-            <p><strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}}</p>
-          </div>
-          <i class="radio-icon ion-checkmark"></i>
-        </label>
+        <ion-radio ng-model="question.answer" ng-repeat =" answer in question.answers" ng-value="'{{answer.id}}'" ><p><strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}} </p></ion-radio>
       </div>
-    </div>
-    <button class="button button-full button-inci">Verificar respuestas</button>
+    </div>-->
+
+    <button class="button button-full button-inci" ng-click="verifyAnswers()">Verificar respuestas</button>
+    <button class="button button-full button-inci" ng-click="rollbackAnswers()" ng-if="rollbackAnswersFlag">Volver al original</button>
     <a ui-sref="home"><button class="button button-full button-inci" ng-click="alert('Gracias');">Enviar</button></a>
   </ion-content>
 </ion-view>
