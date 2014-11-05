@@ -114,7 +114,7 @@ angular.module('starter.evaluation.services', [])
     }
   }
 })
-.factory('evaluationTest', function($http, $ionicLoading, $q, localStorageService, api, access){
+.factory('evaluationTest', function($http, $ionicLoading, $q, $state, localStorageService, api, access){
   var API = {
     getTestAnswersByArea: function(test){
       return $http({
@@ -202,6 +202,8 @@ angular.module('starter.evaluation.services', [])
       });
       API.sendAnswers(testId, data).then(function(success){
         $ionicLoading.hide();
+        alert('Examen enviado');
+        $state.go('home');
         console.log(success);
       }).catch(function(error){
         $ionicLoading.hide();

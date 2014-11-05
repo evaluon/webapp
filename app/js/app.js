@@ -169,16 +169,16 @@ angular.module('starter', [
 
       switch(response.status) {
         case 500:
-          alertError('Alerta', 'Error desconocido, verifica tu conexión a internet');
+          alertError('Alerta', 'Error desconocido, verifica tu conexión a internet y reinicia la aplicación');
           break;
         case 404:
-          alertError('Alerta', 'Error desconocido, verifica tu conexión a internet');
+          alertError('Alerta', 'Error desconocido, verifica tu conexión a internet y reinicia la aplicación');
           break;
         case 403:
           alertError('Alerta', 'Usuario y contraseña no coinciden');
           break;
         default:
-            alertError('Alerta', 'Error desconocido, verifica tu conexión a internet');
+            alertError('Alerta', 'Error desconocido, verifica tu conexión a internet y reinicia la aplicación');
         }
 
       return $q.reject(response);
