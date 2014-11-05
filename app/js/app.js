@@ -130,6 +130,17 @@ angular.module('starter', [
     }
   });
 
+  //Results routes
+  $stateProvider
+  .state('results',{
+    url:'/results',
+    templateUrl:'views/results/results.tpl.html',
+    controller: 'ResultsCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  });
+
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(false);
 

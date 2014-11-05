@@ -1,0 +1,16 @@
+<ion-view title="Resultados">
+  <ion-content class="padding">
+    <div class="list">
+      <div ng-repeat="result in results">
+        <div class="item item-divider">
+          <h1>{{result.name}}</h1>
+        </div>
+        <a class="item item-avatar" href="#" ng-repeat="area in result.knowledgeAreas">
+          <img src="http://cdn.boolinc.co/evaluon/7.png" alt="Area de {{area.areaName}}">
+          <h2>{{area.areaName}}</h2>
+          <p>Promedio: {{area.average}}</p>
+        </a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

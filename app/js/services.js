@@ -154,7 +154,8 @@ angular.module('starter.services', [])
     knowledgeArea: '/knowledgearea',
     testQuestions: '/question',
     response: '/response',
-    user: '/user'
+    user: '/user',
+    result: '/results'
 })
 .constant('access', {
     client: {
