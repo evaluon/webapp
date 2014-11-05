@@ -181,13 +181,11 @@ $httpProvider.responseInterceptors.push(interceptor);
 .run(function($ionicPlatform, $rootScope, Auth, routingConfig) {
   $ionicPlatform.ready(function() {
     Auth.authClient();
-    var alertDismissed = function(){
-      console.log('si');
-    }
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(navigator && navigator.notification){
-      navigator.notification.alert('Ganamos la prueba!', alertDismissed, 'Prueba', 'Aceptar');
+      //navigator.notification.alert('Ganamos la prueba!', alertDismissed, 'Prueba', 'Aceptar');
     }
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
