@@ -22,6 +22,18 @@
         <p id="registro-user-birthdate" class="aria-description">Ingrese su fecha de nacimiento</p>
       </label>
       <label class="item item-input item-stacked-label">
+        <span class="input-label">Nivel de formación</span>
+        <ion-radio ng-repeat="disabilitie in disabilities" ng-model="user.evaluee.disability_id" ng-value="{{disabilitie.id}}" name="disabilities">{{disabilitie.description}}</ion-radio>
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Condición visual</span>
+        <ion-radio ng-repeat="type in types" ng-model="user.evaluee.evaluee_type" ng-value="{{type.id}}" name="types">{{type.description}}</ion-radio>
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Tipo de usuario</span>
+        <ion-radio ng-repeat="level in levels" ng-model="user.evaluee.level_id" ng-value="{{level.id}}" name="levels">{{level.description}}</ion-radio>
+      </label>
+      <label class="item item-input item-stacked-label">
         <span class="input-label" >Correo</span>
         <input type="email" aria-describedby="registro-user-mail" ng-model="user.mail" ng-required required>
         <p id ="registro-user-mail" class="aria-description">Digite su correo</p>

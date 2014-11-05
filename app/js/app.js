@@ -174,6 +174,9 @@ angular.module('starter', [
         case 404:
           alertError('Alerta', 'Error desconocido, verifica tu conexión a internet');
           break;
+        case 403:
+          alertError('Alerta', 'Usuario y contraseña no coinciden');
+          break;
         default:
             alertError('Alerta', 'Error desconocido, verifica tu conexión a internet');
         }

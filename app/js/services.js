@@ -15,6 +15,7 @@ angular.module('starter.services', [])
             });
         },
         login: function(data){
+            data.grant_type = 'password';
             return $http({
                 method: 'post',
                 url: api.url + api.login,
@@ -31,6 +32,18 @@ angular.module('starter.services', [])
                 url: api.url + api.user,
                 headers:{
                     'Authorization' : localStorageService.get(CryptoJS.SHA1(access.tokens.client).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.client).toString()).access_token,
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            });
+        },
+        createEvaluee: function(data){
+            console.log(data);
+            return $http({
+                method: 'post',
+                url: api.url + api.evaluee,
+                headers: {
+                    'Authorization' : localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
                     'Content-Type': 'application/json'
                 },
                 data: data
@@ -97,7 +110,7 @@ angular.module('starter.services', [])
             }
             API.login(data).then(success,error);
         },
-        createUser: function(data){
+        createUser: function(data, dataEvaluee){
             $ionicLoading.show({
                 template: 'Cargando...'
             });
@@ -107,9 +120,19 @@ angular.module('starter.services', [])
                     password: data.password
                 };
                 API.login(loginData).then(function(success){
-                    console.log(success);
+                    success.data.role = routingConfig.userRoles.user;
+                    localStorageService.set(CryptoJS.SHA1(access.tokens.user).toString(), success.data);
+                    API.createEvaluee(dataEvaluee).then(function(success){
+                        $ionicLoading.hide();
+                        alert('Usuario creado satisfactoriamente');
+                        $state.go('home');
+                    }).catch(function(error){
+                        $ionicLoading.hide();
+                        console.log(error);
+                    });
                 }).catch(function(error){
-                    console.log(error);
+                    $ionicLoading.hide();
+                    console.log(error)
                 });
 
             }).catch(function(error){
@@ -155,7 +178,8 @@ angular.module('starter.services', [])
     testQuestions: '/question',
     response: '/response',
     user: '/user',
-    result: '/results'
+    result: '/results',
+    evaluee: '/evaluee'
 })
 .constant('access', {
     client: {
