@@ -13,10 +13,12 @@ angular.module('starter', [
 'app.templates',
 'starter.evaluation.controllers',
 'starter.evaluation.services',
+'starter.results.controllers',
+'starter.results.services',
 'starter.configuration.controllers',
 'LocalStorageModule'
 ])
-.config(function($stateProvider, $urlRouterProvider, $locationProvider, routingConfigProvider, localStorageServiceProvider){
+.config(function($stateProvider, $urlRouterProvider, $locationProvider, routingConfigProvider, localStorageServiceProvider, $httpProvider){
 
   //Routing
   //Public routes
@@ -60,87 +62,133 @@ angular.module('starter', [
 
   //Evaluation routes
   $stateProvider
-    .state('evaluation',{
-      url:'/evaluation/institutions',
-      templateUrl:'views/evaluation/institutions.tpl.html',
-      controller: 'EvaluationInstitutesCtrl',
-      data: {
-        access: routingConfigProvider.accessLevels.user
-      }
-    })
-    .state('evaluation-groups',{
-      url:'/evaluation/groups/:id',
-      templateUrl:'views/evaluation/groups.tpl.html',
-      controller: 'EvaluationGroupsCtrl',
-      data: {
-        access: routingConfigProvider.accessLevels.user
-      }
-    })
-    .state('evaluation-tests',{
-      url:'/evaluation/tests/:id',
-      templateUrl: 'views/evaluation/tests.tpl.html',
-      controller: 'EvaluationTestsCtrl',
-      data:{
-        access: routingConfigProvider.accessLevels.user
-      }
-    })
-    .state('evaluation-knowledge-area', {
-      url: '/evaluation/knowledge-area/:id',
-      templateUrl: 'views/evaluation/knowledge-area.tpl.html',
-      controller: 'EvaluationKnowledgeAreaCtrl',
-      data:{
-        access: routingConfigProvider.accessLevels.user
-      }
-    })
-    .state('evaluation-test-area', {
-      url: '/evaluation/test/:id/area/:area',
-      templateUrl: 'views/evaluation/test.tpl.html',
-      controller: 'EvaluationTestCtrl',
-      data: {
-        access: routingConfigProvider.accessLevels.user
-      }
-    });
+  .state('evaluation',{
+    url:'/evaluation/institutions',
+    templateUrl:'views/evaluation/institutions.tpl.html',
+    controller: 'EvaluationInstitutesCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  })
+  .state('evaluation-groups',{
+    url:'/evaluation/groups/:id',
+    templateUrl:'views/evaluation/groups.tpl.html',
+    controller: 'EvaluationGroupsCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  })
+  .state('evaluation-tests',{
+    url:'/evaluation/tests/:id',
+    templateUrl: 'views/evaluation/tests.tpl.html',
+    controller: 'EvaluationTestsCtrl',
+    data:{
+      access: routingConfigProvider.accessLevels.user
+    }
+  })
+  .state('evaluation-knowledge-area', {
+    url: '/evaluation/knowledge-area/:id',
+    templateUrl: 'views/evaluation/knowledge-area.tpl.html',
+    controller: 'EvaluationKnowledgeAreaCtrl',
+    data:{
+      access: routingConfigProvider.accessLevels.user
+    }
+  })
+  .state('evaluation-test-area', {
+    url: '/evaluation/test/:id/area/:area',
+    templateUrl: 'views/evaluation/test.tpl.html',
+    controller: 'EvaluationTestCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  });
 
   //Evaluate routes
   $stateProvider
-    .state('selfEvaluation',{
-      url:'/evaluate/institutions',
-      templateUrl:'views/evaluation/institutions.tpl.html',
-      controller: 'EvaluationInstitutesCtrl',
-      data: {
-        access: routingConfigProvider.accessLevels.user
-      }
-    })
-    .state('selfEvaluation-groups',{
-      url:'/evaluate/groups/:id',
-      templateUrl:'views/evaluation/groups.tpl.html',
-      controller: 'EvaluationGroupsCtrl',
-      data: {
-        access: routingConfigProvider.accessLevels.user
-      }
-    })
-    .state('selfEvaluation-test',{
-      url:'/evaluation/evaluation/:id',
-      templateUrl: 'views/evaluation/tests.tpl.html',
-      controller: 'EvaluationTestsCtrl',
-      data:{
-        access: routingConfigProvider.accessLevels.user
-      }
-    });
+  .state('selfEvaluation',{
+    url:'/evaluate/institutions',
+    templateUrl:'views/evaluation/institutions.tpl.html',
+    controller: 'EvaluationInstitutesCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  })
+  .state('selfEvaluation-groups',{
+    url:'/evaluate/groups/:id',
+    templateUrl:'views/evaluation/groups.tpl.html',
+    controller: 'EvaluationGroupsCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  })
+  .state('selfEvaluation-test',{
+    url:'/evaluation/evaluation/:id',
+    templateUrl: 'views/evaluation/tests.tpl.html',
+    controller: 'EvaluationTestsCtrl',
+    data:{
+      access: routingConfigProvider.accessLevels.user
+    }
+  });
 
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(false);
 
   //Local Storage conf
   localStorageServiceProvider
-    .setPrefix('Evaluon');
+  .setPrefix('Evaluon');
+
+  //Interceptor
+  var alertDismissed = function(){};
+
+  var interceptor = ['$q', function($q, $ionicPopup) {
+    var alertError = function (title, message){
+      if(navigator && navigator.notification){
+        navigator.notification.alert(message, alertDismissed, title, 'Aceptar');
+      }
+      else{
+        alert(message);
+      }
+    };
+
+    function success(response) {
+      return response;
+    }
+
+    function error(response) {
+
+      switch(response.status) {
+        case 500:
+          alertError('Alerta', 'Error desconocido, verifica tu conexión a internet');
+          break;
+        case 404:
+          alertError('Alerta', 'Error desconocido, verifica tu conexión a internet');
+          break;
+        default:
+            alertError('Alerta', 'Error desconocido, verifica tu conexión a internet');
+        }
+
+      return $q.reject(response);
+    }
+
+    return function(promise) {
+      return promise.then(success, error);
+    }
+}];
+
+$httpProvider.responseInterceptors.push(interceptor);
 })
 
 .run(function($ionicPlatform, $rootScope, Auth, routingConfig) {
   $ionicPlatform.ready(function() {
     Auth.authClient();
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    var alertDismissed = function(){
+      console.log('si');
+    }
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+    if(navigator && navigator.notification){
+      navigator.notification.alert('Ganamos la prueba!', alertDismissed, 'Prueba', 'Aceptar');
+    }
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -153,9 +201,8 @@ angular.module('starter', [
     }
     else{
     }
-  });
+    });
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-
   });
 });

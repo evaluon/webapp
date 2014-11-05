@@ -35,8 +35,8 @@
       </div>
     </div>-->
 
-    <button class="button button-full button-inci" ng-click="verifyAnswers()">Verificar respuestas</button>
+    <button class="button button-full button-inci" ng-click="verifyAnswers()">Preguntas no contestadas</button>
     <button class="button button-full button-inci" ng-click="rollbackAnswers()" ng-if="rollbackAnswersFlag">Volver al original</button>
-    <a ui-sref="home"><button class="button button-full button-inci" ng-click="alert('Gracias');">Enviar</button></a>
+    <button class="button button-full button-inci" ng-click="sendAnswers()">Enviar</button>
   </ion-content>
 </ion-view>

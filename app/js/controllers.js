@@ -9,14 +9,32 @@ angular.module('starter.controllers', [])
     };
 
 })
-.controller('RegistroCtrl', function($scope){
+.controller('RegistroCtrl', function($scope, Auth){
+
   $scope.$on('$viewContentLoaded', function() {
     $('#textInit').focus();
   });
 
-  $scope.registrar = function(){
+  $scope.registrar = function($scope, user){
     event.preventDefault();
-  }
+
+    user.middle_name = ' ';
+    _.map(user.names.split(' '), function(name, index){
+      if(index === 0) user.first_name = name;
+      else  user.middle_name = user.middle_name + ' ' + name;
+    });
+
+    Auth.createUser({
+      id: user.id,
+      first_name: user.first_name,
+      middle_name: user.middle_name,
+      last_name: user.last_name,
+      birth_date: user.birth_date,
+      mail: user.mail,
+      password: CryptoJS.SHA1(user.password).toString()
+    });
+  };
+
 })
 .controller('HomeCtrl', function($scope, Auth){
   $scope.$on('$viewContentLoaded', function() {
@@ -26,27 +44,5 @@ angular.module('starter.controllers', [])
   $scope.logout = function(){
     Auth.logout();
   };
-
-})
-.controller('TestCtrl', function($scope, $http){
-  $scope.test = {};
-  $scope.questions = {};
-
-  $http({
-    method: 'GET',
-    url: 'http://evaluon.boolinc.co/test/2',
-    headers: {
-      'Authorization': 'Bearer iZk8xILkUTADFRGiUwFkduDmWLv1OvUrCPlSi7ppmogd+IV+6sPAvtlCNy6VnLgLh3V0pDHAcAWpEnpjrEu7kw==',
-      'Cache-Control': 'no-cache'
-    }
-  }).success(function(success){
-    $scope.test = success.data;
-    $scope.questions = $scope.test[0].questions;
-
-    $('#testTitle').focus();
-  }).error(function(error){
-    alert('Ha ocurrido un error');
-  });
-
 
 });

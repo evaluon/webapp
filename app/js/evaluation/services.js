@@ -114,7 +114,7 @@ angular.module('starter.evaluation.services', [])
     }
   }
 })
-.factory('evaluationTest', function($http, $ionicLoading, localStorageService, api, access){
+.factory('evaluationTest', function($http, $ionicLoading, $q, localStorageService, api, access){
   var API = {
     getTestAnswersByArea: function(test){
       return $http({
@@ -135,6 +135,41 @@ angular.module('starter.evaluation.services', [])
           'Content-Type': 'application/json'
         }
       });
+    },
+    sendAnswers: function(test, data){
+
+      var qs = [];
+
+      for(var i = 0; i < data.length; i++){
+        qs.push(
+          (function(d){
+            return $http({
+              method: 'post',
+              url: api.url + api.response,
+              headers: {
+                Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
+                'Content-Type': 'application/json'
+              },
+              data: {
+                test_id: test,
+                question_id: d.id,
+                answer_id: d.answer
+              }
+            });
+          })(data[i])
+        );
+
+      }
+
+      return $q.all(qs).then(function(responses){
+        var qSent = _.reduce(responses, function(a, r){ return a + r }, 0);
+        if(qSent === qs.length){
+          console.log("All questions sent");
+        } else {
+          console.log("%d/%d questions sent", qSent, qs.length);
+        }
+      });
+
     }
   };
 
@@ -159,6 +194,18 @@ angular.module('starter.evaluation.services', [])
         return success;
       }).catch(function(){
         $ionicLoading.hide();
+      });
+    },
+    sendAnswers: function(testId, data){
+      $ionicLoading.show({
+          template: 'Cargando...'
+      });
+      API.sendAnswers(testId, data).then(function(success){
+        $ionicLoading.hide();
+        console.log(success);
+      }).catch(function(error){
+        $ionicLoading.hide();
+        console.log(error);
       });
     }
   };

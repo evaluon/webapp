@@ -127,4 +127,8 @@ angular.module('starter.evaluation.controllers', [])
       $('#answer-'+index).replaceWith('<h3 id="answer-'+index+'">'+(index+1)+'.</h3>');
     });
   };
+
+  $scope.sendAnswers = function(){
+    evaluationTest.sendAnswers($stateParams.id, $scope.questions);
+  };
 });

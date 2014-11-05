@@ -24,16 +24,27 @@ angular.module('starter.services', [])
                 },
                 data: $.param(data)
             });
+        },
+        createUser: function(data){
+            return $http({
+                method: 'post',
+                url: api.url + api.user,
+                headers:{
+                    'Authorization' : localStorageService.get(CryptoJS.SHA1(access.tokens.client).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.client).toString()).access_token,
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            });
         }
     };
 
     var error = function(error){
         $ionicLoading.hide();
-        var alertPopup = $ionicPopup.alert({
+        /*var alertPopup = $ionicPopup.alert({
             title: 'Alerta',
             template: 'Error desconocido, verifica tu conexión a internet',
             okType: 'button-inci'
-        });
+        });*/
     };
 
     return {
@@ -73,11 +84,11 @@ angular.module('starter.services', [])
             };
             var error = function(error){
                 $ionicLoading.hide();
-                var alertPopup = $ionicPopup.alert({
+                /*var alertPopup = $ionicPopup.alert({
                     title: 'Alerta',
                     template: 'Correo o contraseña incorrectos',
                     okType: 'button-inci'
-                });
+                });*/
             };
             var data = {
                 grant_type:'password',
@@ -85,6 +96,26 @@ angular.module('starter.services', [])
                 password: CryptoJS.SHA1(password).toString()
             }
             API.login(data).then(success,error);
+        },
+        createUser: function(data){
+            $ionicLoading.show({
+                template: 'Cargando...'
+            });
+            API.createUser(data).then(function(success){
+                var loginData = {
+                    username: data.mail,
+                    password: data.password
+                };
+                API.login(loginData).then(function(success){
+                    console.log(success);
+                }).catch(function(error){
+                    console.log(error);
+                });
+
+            }).catch(function(error){
+                $ionicLoading.hide();
+                console.log(error);
+            })
         },
         logout: function(){
             localStorageService.remove(CryptoJS.SHA1(access.tokens.user).toString());
@@ -121,7 +152,9 @@ angular.module('starter.services', [])
     group: '/group',
     test: '/test',
     knowledgeArea: '/knowledgearea',
-    testQuestions: '/question'
+    testQuestions: '/question',
+    response: '/response',
+    user: '/user'
 })
 .constant('access', {
     client: {

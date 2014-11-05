@@ -1,25 +1,35 @@
 <ion-view title="Registro">
   <ion-content class="padding">
-    <form class="list" ng-submit="registrar()">
+    <form class="list" ng-submit="registrar($event, user)">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Número de documento</span>
+        <input type="number"  aria-describedby="registro-user-document" ng-model="user.id" ng-required required>
+        <p id= "registro-user-document" class="aria-description">Digite su número de documento</p>
+      </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Nombres</span>
-        <input type="text"  aria-describedby="registro-user-name">
+        <input type="text"  aria-describedby="registro-user-name" ng-model="user.names" ng-required required>
         <p id= "registro-user-name" class="aria-description">Digite su nombre</p>
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Apellidos</span>
-        <input type="text"  aria-describedby="registro-user-surname">
+        <input type="text"  aria-describedby="registro-user-surname" ng-model="user.last_name" ng-required required>
         <p id="registro-user-surname" class="aria-description">Digite sus apellidos</p>
       </label>
       <label class="item item-input item-stacked-label">
-        <span class="input-label" >Correo</span>
-        <input type="email" aria-describedby="registro-user-mail">
-        <p id ="registro-user-mail" class="aria-description">Digite su correo</p>
+        <span class="input-label">Fecha de nacimiento</span>
+        <input type="date"  aria-describedby="registro-user-birthdate" ng-model="user.birth_date" ng-required required>
+        <p id="registro-user-birthdate" class="aria-description">Ingrese su fecha de nacimiento</p>
       </label>
       <label class="item item-input item-stacked-label">
-        <span class="input-label">Documento</span>
-        <input type="number" aria-describedby="registro-user-id">
-        <span id ="registro-user-id" class="aria-description">Por último, digite su correo</span>
+        <span class="input-label" >Correo</span>
+        <input type="email" aria-describedby="registro-user-mail" ng-model="user.mail" ng-required required>
+        <p id ="registro-user-mail" class="aria-description">Digite su correo</p>
+      </label>
+      <label class="item item-input item-stacked-label" ng-required required>
+        <span class="input-label">Contraseña</span>
+        <input type="password" aria-describedby="registro-user-id" ng-model="user.password" ng-required required>
+        <span id ="registro-user-id" class="aria-description">Por último, digite su contraseña</span>
       </label>
       </label>
       <input type="submit" class="button button-block button-inci" value="Registrar">
