@@ -1,7 +1,7 @@
 <ion-view title="Menu Grupos">
   <ion-content class="padding">
-    <div class="row padding" ng-repeat="groups in rowGroups">
-      <div class="col divIcon" ng-repeat="group in groups">
+    <div class="row padding item" ng-repeat="groups in rowGroups">
+      <div class="col divIcon item-avatar" ng-repeat="group in groups">
         <h2 class="titleInci">{{group.id}}</h2>
         <a ui-sref="{{routes.test}}({id: {{group.id}}})"><img src="http://devbool.blob.core.windows.net/evaluon/7.png" alt="Colegio Inem de Bucaramamnga"></a>
       </div>

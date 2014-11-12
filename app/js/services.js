@@ -166,29 +166,4 @@ angular.module('starter.services', [])
             accessLevels: that.accessLevels
         };
     };
-})
-.constant('api', {
-    url2: 'http://192.168.43.171:3004',
-    url: 'http://evaluon.boolinc.co:80',
-    login: '/auth/token',
-    institution: '/institution',
-    group: '/group',
-    test: '/test',
-    knowledgeArea: '/knowledgearea',
-    testQuestions: '/question',
-    response: '/response',
-    user: '/user',
-    result: '/results',
-    evaluee: '/evaluee'
-})
-.constant('access', {
-    client: {
-        grant_type: 'client_credentials',
-        client_id: 'administrator',
-        client_secret: 'kv0Ls8xoIFPdE2GXMK5fodQsAEBV5GzzINZOA0NX99E=',
-    },
-    tokens: {
-        client: 'alv236c0',
-        user: 'ams43ksl'
-    }
 });

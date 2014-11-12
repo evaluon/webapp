@@ -1,11 +1,21 @@
 'use strict';
-angular.module('starter.evaluation.services', [])
-.factory('evaluationInstitutes', function($http, $ionicLoading, localStorageService, api, access){
+angular.module('starter.selfEvaluation.services', [])
+.factory('selfEvaluationTests',function($http, $ionicLoading, localStorageService, api, access){
   var API ={
-    getAllInstitutes: function(){
+    getTestsByGroupId: function(){
       return $http({
         method: 'get',
-        url: api.url + api.institution,
+        url: api.url + api.test + api.self + '/all',
+        headers: {
+          Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
+          'Content-Type': 'application/json'
+        }
+      });
+    },
+    createSelfTest: function(){
+      return $http({
+        method: 'post',
+        url: api.url + api.test + api.self,
         headers: {
           Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token
         }
@@ -14,112 +24,31 @@ angular.module('starter.evaluation.services', [])
   };
 
   return {
-    getAll: function(){
-
-      $ionicLoading.show({
-                template: 'Cargando...'
-            });
-
-      return API.getAllInstitutes().then(function(success){
-        $ionicLoading.hide();
-        return success;
-      }).catch(function(error){
-        $ionicLoading.hide();
-
-      });
-    }
-  };
-})
-.factory('evaluationGroups', function($http, $ionicLoading, localStorageService, api, access){
-  var API = {
-    getGroupsByInstitutionId: function(institutionId){
-      return $http({
-        method: 'get',
-        url: api.url + api.group + '/' + institutionId,
-        headers: {
-          Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
-          'Content-Type': 'application/json'
-        }
-      });
-    }
-  };
-
-  return {
-    getGroupsByInstitutionId: function(institutionId){
-      $ionicLoading.show({
-                template: 'Cargando...'
-            });
-      return API.getGroupsByInstitutionId(institutionId).then(function(success){
-        $ionicLoading.hide();
-        return success;
-      }).catch(function(error){
-        $ionicLoading.hide();
-      });
-    },
-  };
-})
-.factory('evaluationTests',function($http, $ionicLoading, localStorageService, api, access){
-  var API ={
-    getTestsByGroupId: function(groupId){
-      return $http({
-        method: 'get',
-        url: api.url + api.test + api.group + '/' + groupId + '/all',
-        headers: {
-          Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
-          'Content-Type': 'application/json'
-        }
-      });
-    }
-  };
-
-  return {
-    getTestsByGroupId: function(groupId){
+    getTestsByGroupId: function(){
+      var these = this;
       $ionicLoading.show({
                 template: 'Cargando...'
       });
-      return API.getTestsByGroupId(groupId).then(function(success){
-        $ionicLoading.hide();
-        return success;
-      }).catch(function(error){
-        $ionicLoading.hide();
-      });
-    }
-  };
-})
-.factory('evaluationPassword', function($http, $ionicLoading, $state, $ionicPopup, localStorageService, api, access){
-  var API = {
-    openTest: function(testId, hotp){
-      return $http({
-        method: 'post',
-        url: api.url + api.test + api.id(testId) + api.open,
-        headers:{
-          Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
-          'Content-Type': 'application/json'
-        },
-        data:{
-          hotp: hotp
-        }
-      });
-    }
-  };
-
-  return {
-    loginTest: function(testId, hotp){
-        $ionicLoading.show({
-                  template: 'Cargando...'
-        });
-
-        return API.openTest(testId, hotp).then(function(success){
+      return API.getTestsByGroupId().then(function(success){
+        if(success.data.data.length > 0){
           $ionicLoading.hide();
-          $state.go('evaluation-knowledge-area', {id: testId});
           return success;
-        }).catch(function(error){
-          $ionicLoading.hide();
-        });
+        }
+        else{
+          API.createSelfTest().then(function(success){
+            return these.getTestByGroupId();
+          }).catch(function(error){
+            console.log(error);
+          });
+        }
+
+      }).catch(function(error){
+        $ionicLoading.hide();
+      });
     }
   };
 })
-.factory('evaluationKnowledgeArea', function($http, $ionicLoading, $state, $ionicPopup, localStorageService, api, access){
+.factory('selfEvaluationKnowledgeArea', function($http, $ionicLoading, localStorageService, api, access){
   var API = {
     getAllKnowledgeArea: function(testId){
       return $http({
@@ -160,7 +89,6 @@ angular.module('starter.evaluation.services', [])
       $ionicLoading.show({
                 template: 'Cargando...'
       });
-
       return API.getAllKnowledgeArea(testId).then(function(success){
         if(success.data.data.length > 0){
           $ionicLoading.hide();
@@ -175,11 +103,11 @@ angular.module('starter.evaluation.services', [])
         }
       }).catch(function(error){
         $ionicLoading.hide();
-      });
+      })
     }
   }
 })
-.factory('evaluationTest', function($http, $ionicLoading, $q, $state, localStorageService, api, access){
+.factory('selfEvaluationTest', function($http, $ionicLoading, $q, $state, localStorageService, api, access){
   var API = {
     getTestAnswersByArea: function(test){
       return $http({
@@ -268,7 +196,7 @@ angular.module('starter.evaluation.services', [])
       API.sendAnswers(testId, data).then(function(success){
         $ionicLoading.hide();
         alert('Examen enviado');
-        $state.go('^');
+        $state.go('home');
         console.log(success);
       }).catch(function(error){
         $ionicLoading.hide();

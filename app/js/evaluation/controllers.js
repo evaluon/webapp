@@ -50,7 +50,7 @@ angular.module('starter.evaluation.controllers', [])
 .controller('EvaluationTestsCtrl', function($scope, $stateParams, evaluationTests){
   $scope.rowTests = [];
   $scope.routes = {
-    testsDetails: 'evaluation-knowledge-area'
+    testsDetails: 'evaluation-password'
   }
 
   var doubled =  function(list, newL) {
@@ -91,6 +91,13 @@ angular.module('starter.evaluation.controllers', [])
   }).catch(function(error){
     console.log(error);
   });
+})
+.controller('EvaluationPasswordCtrl', function($scope, $stateParams, evaluationPassword){
+  $scope.password = {};
+  $scope.loginTest = function(event){
+    event.preventDefault();
+    evaluationPassword.loginTest($stateParams.id, $scope.password.data);
+  }
 })
 .controller('EvaluationTestCtrl', function($scope, $stateParams, evaluationTest){
   $scope.test = {};

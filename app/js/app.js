@@ -8,11 +8,14 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
 'ionic',
+'config.services',
 'starter.controllers',
 'starter.services',
 'app.templates',
 'starter.evaluation.controllers',
 'starter.evaluation.services',
+'starter.selfEvaluation.controllers',
+'starter.selfEvaluation.services',
 'starter.results.controllers',
 'starter.results.services',
 'starter.configuration.controllers',
@@ -86,6 +89,14 @@ angular.module('starter', [
       access: routingConfigProvider.accessLevels.user
     }
   })
+  .state('evaluation-password', {
+    url: '/evaluation/password/:id',
+    templateUrl: 'views/evaluation/password.tpl.html',
+    controller: 'EvaluationPasswordCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  })
   .state('evaluation-knowledge-area', {
     url: '/evaluation/knowledge-area/:id',
     templateUrl: 'views/evaluation/knowledge-area.tpl.html',
@@ -103,29 +114,30 @@ angular.module('starter', [
     }
   });
 
-  //Evaluate routes
+  // Self Evaluation routes
+
   $stateProvider
   .state('selfEvaluation',{
-    url:'/evaluate/institutions',
-    templateUrl:'views/evaluation/institutions.tpl.html',
-    controller: 'EvaluationInstitutesCtrl',
-    data: {
-      access: routingConfigProvider.accessLevels.user
-    }
-  })
-  .state('selfEvaluation-groups',{
-    url:'/evaluate/groups/:id',
-    templateUrl:'views/evaluation/groups.tpl.html',
-    controller: 'EvaluationGroupsCtrl',
-    data: {
-      access: routingConfigProvider.accessLevels.user
-    }
-  })
-  .state('selfEvaluation-test',{
-    url:'/evaluation/evaluation/:id',
+    url:'/evaluate/tests',
     templateUrl: 'views/evaluation/tests.tpl.html',
-    controller: 'EvaluationTestsCtrl',
+    controller: 'SelfEvaluationTestsCtrl',
     data:{
+      access: routingConfigProvider.accessLevels.user
+    }
+  })
+  .state('selfEvaluation-knowledge-area', {
+    url: '/evaluate/knowledge-area/:id',
+    templateUrl: 'views/evaluation/knowledge-area.tpl.html',
+    controller: 'SelfEvaluationKnowledgeAreaCtrl',
+    data:{
+      access: routingConfigProvider.accessLevels.user
+    }
+  })
+  .state('selfEvaluation-test-area', {
+    url: '/evaluate/test/:id/area/:area',
+    templateUrl: 'views/evaluation/test.tpl.html',
+    controller: 'SelfEvaluationTestCtrl',
+    data: {
       access: routingConfigProvider.accessLevels.user
     }
   });
@@ -148,48 +160,8 @@ angular.module('starter', [
   localStorageServiceProvider
   .setPrefix('Evaluon');
 
-  //Interceptor
-  var alertDismissed = function(){};
-
-  var interceptor = ['$q', function($q, $ionicPopup) {
-    var alertError = function (title, message){
-      if(navigator && navigator.notification){
-        navigator.notification.alert(message, alertDismissed, title, 'Aceptar');
-      }
-      else{
-        alert(message);
-      }
-    };
-
-    function success(response) {
-      return response;
-    }
-
-    function error(response) {
-
-      switch(response.status) {
-        case 500:
-          alertError('Alerta', 'Error desconocido, verifica tu conexión a internet y reinicia la aplicación');
-          break;
-        case 404:
-          alertError('Alerta', 'Error desconocido, verifica tu conexión a internet y reinicia la aplicación');
-          break;
-        case 403:
-          alertError('Alerta', 'Usuario y contraseña no coinciden');
-          break;
-        default:
-            alertError('Alerta', 'Error desconocido, verifica tu conexión a internet y reinicia la aplicación');
-        }
-
-      return $q.reject(response);
-    }
-
-    return function(promise) {
-      return promise.then(success, error);
-    }
-}];
-
-$httpProvider.responseInterceptors.push(interceptor);
+//Interceptor
+$httpProvider.interceptors.push('httpInterceptor');
 })
 
 .run(function($ionicPlatform, $rootScope, Auth, routingConfig) {

@@ -16,7 +16,7 @@
     -ms-word-break: breakbreak-all;
     word-break: break-all;
   }
-  img {
+  /*img {
     width: 150pt;
     height: 150pt;
   }
@@ -95,4 +95,7 @@
     background-color: #4a87ee;
     box-shadow: none;
     color: #fff;
+  }
+  .item {
+    border: none;
   }

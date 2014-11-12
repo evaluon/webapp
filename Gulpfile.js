@@ -135,7 +135,7 @@ gulp.task('uncss', function(){
 gulp.task('watch', function(){
     gulp.watch(['./app/**/*.{html,js,css}'], ['reload']);
     gulp.watch(['./app/js/**/*.js'], ['jshint']);
-    gulp.watch(['./bower.json'], ['wiredep']);
+    gulp.watch(['./bower.json', './app/js/**/*.js'], ['wiredep']);
     gulp.watch(['./app/views/**/*.tpl.html'], ['templates']);
 });
 

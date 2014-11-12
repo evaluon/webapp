@@ -16,11 +16,19 @@
 
     <div class="list">
       <div class="answer" ng-repeat="question in questions">
-        <div class="item item-divider">
+        <div class="item">
           <h3 id ="answer-{{$index}}">{{$index + 1}}.</h3>
           <p>{{question.description_text}}</p>
         </div>
-        <ion-radio ng-repeat =" answer in question.answers" ng-value="'{{answer.id}}'" ng-model="question.answer"   name="answer{{answer.id}}"><p><strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}} </p></ion-radio>
+        <div class="row padding item" ng-if="question.image">
+          <div class="col divIcon item-avatar" >
+            <img src="{{question.image.location}}" alt="{{question.image.description}}">
+          </div>
+        </div>
+        <label ng-if="question.open == 1" class="item item-input">
+          <textarea placeholder="Ingrese su respuesta" ng-model="question.answer"></textarea>
+        </label>
+        <ion-radio if="question.open == 0"ng-repeat =" answer in question.answers" ng-value="'{{answer.id}}'" ng-model="question.answer"   name="answer{{answer.id}}"><p><strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}} </p></ion-radio>
       </div>
     </div>
 

@@ -1,7 +1,7 @@
 <ion-view title="Areas de Conocimiento">
   <ion-content class="padding">
-    <div class="row padding" ng-repeat="tests in rowTestsDetails">
-      <div class="col divIcon" ng-repeat="test in tests">
+    <div class="row padding item" ng-repeat="tests in rowTestsDetails">
+      <div class="col divIcon item-avatar" ng-repeat="test in tests">
 
         <h2 class="titleInci">{{test.id}}</h2>
         <a ui-sref="{{routes.test}}({id: {{routes.testId}}, area: {{'test.id'}} })"><img src="http://devbool.blob.core.windows.net/evaluon/7.png" alt="{{test.description}}"></a>
