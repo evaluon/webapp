@@ -144,8 +144,16 @@ angular.module('starter', [
 
   //Results routes
   $stateProvider
+  .state('resultsInstitutes',{
+    url:'/results-institutes',
+    templateUrl:'views/results/institutions.tpl.html',
+    controller: 'ResultsInstitutesCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  })
   .state('results',{
-    url:'/results',
+    url:'/results/:id',
     templateUrl:'views/results/results.tpl.html',
     controller: 'ResultsCtrl',
     data: {
