@@ -1,0 +1,28 @@
+<ion-view title="Promedio de Aprendizaje">
+  <ion-content class="padding">
+    <div class="list card">
+
+      <div class="item item-avatar">
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+        <p> Desde: {{user.register_date | date: 'MMM d, yyyy' : 'cot'}}</p>
+      </div>
+
+      <div class="item item-body">
+        <img class="full-image" src="img/1.png" alt="Grado {{levels[indicators.levelName]}}">
+        <p>
+          Grado {{levels[indicators.levelName]}}, descripción
+        </p>
+      </div>
+
+      <a class="item item-icon-left assertive" href="">
+        <i class="icon ion-checkmark-round"></i>
+          {{indicators.questions}} Preguntas acertadas
+      </a>
+      <a class="item item-icon-left assertive" href="">
+        <i class="icon ion-ios7-star-half"></i>
+          {{indicators.remainingQuestions}} Preguntas para el próximo grado
+      </a>
+
+    </div>
+  </ion-content>
+</ion-view>

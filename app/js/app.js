@@ -19,6 +19,9 @@ angular.module('starter', [
 'starter.results.controllers',
 'starter.results.services',
 'starter.configuration.controllers',
+'starter.configuration.services',
+'starter.indicators.controllers',
+'starter.indicators.services',
 'LocalStorageModule'
 ])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, routingConfigProvider, localStorageServiceProvider, $httpProvider){
@@ -156,6 +159,35 @@ angular.module('starter', [
     url:'/results/:id',
     templateUrl:'views/results/results.tpl.html',
     controller: 'ResultsCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  });
+
+  //Indicators routes
+  $stateProvider
+  .state('indicators',{
+    url: '/indicators',
+    templateUrl: 'views/indicators/indicators.tpl.html',
+    controller: 'IndicatorsCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  });
+
+  //Configuration routes
+  $stateProvider
+  .state('configurations', {
+    url: '/configurations',
+    templateUrl: 'views/configurations/configurations.tpl.html',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  })
+  .state('configurations-changePassword', {
+    url: '/configurations-changePassword',
+    templateUrl: 'views/configurations/changePassword.tpl.html',
+    controller: 'ChangePasswordCtrl',
     data: {
       access: routingConfigProvider.accessLevels.user
     }

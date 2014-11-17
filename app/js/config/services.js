@@ -44,6 +44,7 @@ angular.module('config.services', [])
     evaluee: '/evaluee',
     close: '/close',
     open: '/open',
+    indicator: '/indicator',
     id: function(id){
       return '/' + id;
     }
