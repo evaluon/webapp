@@ -9,6 +9,7 @@
 angular.module('starter', [
 'ionic',
 'config.services',
+'config.controllers',
 'starter.controllers',
 'starter.services',
 'app.templates',
@@ -29,8 +30,16 @@ angular.module('starter', [
   //Routing
   //Public routes
   $stateProvider
-  .state('public',{
-    abstract: true,
+  .state('404',{
+    url: '/404',
+    templateUrl: 'views/errors/404.tpl.html',
+    data: {
+      access: routingConfigProvider.accessLevels.public
+    }
+  })
+  .state('403',{
+    url: '/403',
+    templateUrl: 'views/errors/403.tpl.html',
     data: {
       access: routingConfigProvider.accessLevels.public
     }
@@ -39,7 +48,7 @@ angular.module('starter', [
   //Anon routes
   $stateProvider
   .state('login', {
-    url: '/',
+    url: '/login',
     templateUrl: 'views/login.tpl.html',
     controller: 'LoginCtrl',
     data: {
@@ -53,12 +62,19 @@ angular.module('starter', [
     data: {
       access: routingConfigProvider.accessLevels.anon
     }
+  })
+  .state('auth', {
+    url: '/auth',
+    controller: 'AuthCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.anon
+    }
   });
 
   //User routes
   $stateProvider
   .state('home', {
-    url: '/home',
+    url: '/',
     templateUrl: 'views/home.tpl.html',
     controller: 'HomeCtrl',
     data: {
@@ -193,8 +209,8 @@ angular.module('starter', [
     }
   });
 
-  $urlRouterProvider.otherwise('/');
-  $locationProvider.html5Mode(false);
+  $urlRouterProvider.otherwise('/404');
+  $locationProvider.html5Mode(true);
 
   //Local Storage conf
   localStorageServiceProvider
@@ -204,10 +220,8 @@ angular.module('starter', [
 $httpProvider.interceptors.push('httpInterceptor');
 })
 
-.run(function($ionicPlatform, $rootScope, Auth, routingConfig) {
+.run(function($ionicPlatform, $state, $rootScope, Auth, access, localStorageService) {
   $ionicPlatform.ready(function() {
-    Auth.authClient();
-
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(navigator && navigator.notification){
@@ -227,6 +241,37 @@ $httpProvider.interceptors.push('httpInterceptor');
     }
     });
 
-  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-  });
+    $rootScope.$on('$stateChangeStart', function(e, toState){
+
+            var ctoken = CryptoJS.SHA1(access.tokens.client).toString(),
+                rtoken = CryptoJS.SHA1(access.tokens.redirect).toString();
+
+            if(!localStorageService.get(ctoken)){
+                Auth.authClient().then(function(token){
+                    localStorageService.set(ctoken, token);
+                });
+            }
+
+
+            if((toState.name == 'registro')){
+
+            }
+            else if((toState.name != 'login')){
+                if(Auth.userLogged()){
+                    var redirection = localStorageService.get(rtoken);
+                    if(!redirection){
+                        e.preventDefault();
+                        localStorageService.set(rtoken, toState);
+                        $state.go('auth');
+                    } else if(toState.name != 'auth') {
+                        localStorageService.remove(rtoken);
+                    }
+                } else {
+                    e.preventDefault();
+                    $state.go('login');
+                }
+            }
+
+        });
+
 });

@@ -3,6 +3,8 @@ angular.module('starter.services', [])
 
 .factory('Auth', function($http, $ionicLoading, $ionicPopup, $state, localStorageService, api, access, routingConfig) {
 
+    var uToken = localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString());
+
     var API = {
         authClient: function(data){
             return $http({
@@ -12,6 +14,8 @@ angular.module('starter.services', [])
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 data: $.param(data)
+            }).then(function(data){
+                return data.data;
             });
         },
         login: function(data){
@@ -66,12 +70,11 @@ angular.module('starter.services', [])
                 template: 'Cargando...'
             });
 
-            var success = function(success){
+            return API.authClient(access.client).then(function(success){
                 $ionicLoading.hide();
                 localStorageService.set(CryptoJS.SHA1(access.tokens.client), success.data);
-            };
-
-            API.authClient(access.client).then(success,error);
+                return success;
+            });
         },
         isAuth: function(){
 
@@ -143,8 +146,11 @@ angular.module('starter.services', [])
         logout: function(){
             localStorageService.remove(CryptoJS.SHA1(access.tokens.user).toString());
             $state.go('login');
+        },
+        userLogged: function(){
+            return localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString());
         }
-    }
+    };
 })
 .provider('routingConfig', function routingConfig(){
     this.userRoles = {
