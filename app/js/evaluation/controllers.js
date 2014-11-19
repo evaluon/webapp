@@ -22,7 +22,6 @@ angular.module('starter.evaluation.controllers', [])
     }
 
   }).catch(function(error){
-    console.log(error);
   });
 })
 .controller('EvaluationGroupsCtrl', function($scope, $stateParams, evaluationGroups){
@@ -44,7 +43,6 @@ angular.module('starter.evaluation.controllers', [])
   evaluationGroups.getGroupsByInstitutionId($stateParams.id).then(function(success){
     if(success) $scope.rowGroups = doubled(success.data.data);
   }).catch(function(error){
-    console.log(error);
   });
 })
 .controller('EvaluationTestsCtrl', function($scope, $stateParams, evaluationTests){
@@ -66,7 +64,7 @@ angular.module('starter.evaluation.controllers', [])
   evaluationTests.getTestsByGroupId($stateParams.id).then(function(success){
     if(success) $scope.rowTests = doubled(success.data.data);
   }).catch(function(error){
-    console.log(error);
+
   })
 })
 .controller('EvaluationKnowledgeAreaCtrl', function($scope, $stateParams, evaluationKnowledgeArea){
@@ -89,7 +87,6 @@ angular.module('starter.evaluation.controllers', [])
   evaluationKnowledgeArea.getAllKnowledgeArea($stateParams.id).then(function(success){
     if(success) $scope.rowTestsDetails = doubled(success.data.data);
   }).catch(function(error){
-    console.log(error);
   });
 })
 .controller('EvaluationPasswordCtrl', function($scope, $stateParams, evaluationPassword){
@@ -109,7 +106,6 @@ angular.module('starter.evaluation.controllers', [])
   evaluationTest.getTestAnswersByArea($stateParams).then(function(success){
     if(success) $scope.questions = success.data.data
   }).catch(function(error){
-    console.log(error);
   });
 
   $scope.verifyAnswers = function(){

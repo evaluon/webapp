@@ -36,7 +36,7 @@ angular.module('starter.selfEvaluation.services', [])
         }
         else{
           API.createSelfTest().then(function(success){
-            return these.getTestByGroupId();
+            return these.getTestsByGroupId();
           }).catch(function(error){
             console.log(error);
           });

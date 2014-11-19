@@ -16,9 +16,9 @@
     -ms-word-break: breakbreak-all;
     word-break: break-all;
   }
-  /*img {
-    width: 150pt;
-    height: 150pt;
+  img {
+    width: 100pt;
+    height: 100pt;
   }
   /*Cambios en ionic*/
 

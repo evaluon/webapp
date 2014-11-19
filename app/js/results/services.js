@@ -23,7 +23,6 @@ factory('resultsInstitutes', function($http, $ionicLoading, localStorageService,
         return success;
       }).catch(function(error){
         $ionicLoading.hide();
-        console.log(error);
       })
     }
   };
@@ -51,7 +50,6 @@ factory('resultsInstitutes', function($http, $ionicLoading, localStorageService,
         return success;
       }).catch(function(error){
         $ionicLoading.hide();
-        console.log(error);
       })
     }
   };

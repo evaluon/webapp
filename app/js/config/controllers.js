@@ -5,15 +5,15 @@ angular.module('config.controllers', [])
 
     var rtoken = CryptoJS.SHA1(access.tokens.redirect).toString(),
         utoken = CryptoJS.SHA1(access.tokens.user).toString(),
+        ptoken = CryptoJS.SHA1(access.tokens.params).toString(),
+
         redirect = localStorageService.get(rtoken),
         user = localStorageService.get(utoken);
 
-    console.log(redirect.data.access);
-    console.log(user.role);
         if((redirect.name == "auth") || (redirect.name == "login" && user)) {
         $state.go('home');
     } else if(redirect.data.access & user.role){
-        $state.go(redirect.name);
+        $state.go(redirect.name, localStorageService.get(ptoken) || {});
     } else {
         $state.go('403');
     }

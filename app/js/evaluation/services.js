@@ -63,7 +63,7 @@ angular.module('starter.evaluation.services', [])
     getTestsByGroupId: function(groupId){
       return $http({
         method: 'get',
-        url: api.url + api.test + api.group + '/' + groupId + '/all',
+        url: api.url + api.test + api.group + '/' + groupId,
         headers: {
           Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
           'Content-Type': 'application/json'

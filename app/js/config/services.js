@@ -58,6 +58,7 @@ angular.module('config.services', [])
     tokens: {
         client: 'alv236c0',
         user: 'ams43ksl',
-        redirect: 'qoelzc'
+        redirect: 'qoelzc',
+        params: 'amco194'
     }
 });

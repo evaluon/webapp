@@ -42,7 +42,6 @@ angular.module('starter.services', [])
             });
         },
         createEvaluee: function(data){
-            console.log(data);
             return $http({
                 method: 'post',
                 url: api.url + api.evaluee,
@@ -131,16 +130,13 @@ angular.module('starter.services', [])
                         $state.go('home');
                     }).catch(function(error){
                         $ionicLoading.hide();
-                        console.log(error);
                     });
                 }).catch(function(error){
                     $ionicLoading.hide();
-                    console.log(error)
                 });
 
             }).catch(function(error){
                 $ionicLoading.hide();
-                console.log(error);
             })
         },
         logout: function(){

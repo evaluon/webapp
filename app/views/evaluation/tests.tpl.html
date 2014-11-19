@@ -4,7 +4,7 @@
       <div class="col divIcon item-avatar" ng-repeat="test in tests">
 
         <h2 class="titleInci">{{test.id}}</h2>
-        <a ui-sref="{{routes.testsDetails}}({id: {{test.id}}})"><img src="http://devbool.blob.core.windows.net/evaluon/7.png" alt="{{test.description}}"></a>
+        <a ui-sref="{{routes.testsDetails}}({id: {{test.id}}})"><img src="http://cdn.boolinc.co/evaluon/{{test.image.location}}" alt="{{test.description}}"></a>
       </div>
     </div>
   </ion-content>
