@@ -47,6 +47,7 @@ angular.module('starter.evaluation.controllers', [])
 })
 .controller('EvaluationTestsCtrl', function($scope, $stateParams, evaluationTests){
   $scope.rowTests = [];
+  $scope.rowTest2 = [];
   $scope.routes = {
     testsDetails: 'evaluation-password'
   }
@@ -62,7 +63,10 @@ angular.module('starter.evaluation.controllers', [])
   };
 
   evaluationTests.getTestsByGroupId($stateParams.id).then(function(success){
-    if(success) $scope.rowTests = doubled(success.data.data);
+    if(success){
+      $scope.rowTests2 = doubled(success.data.data);
+      $scope.rowTests = success.data.data;
+    }
   }).catch(function(error){
 
   })

@@ -58,12 +58,12 @@ angular.module('starter.evaluation.services', [])
     },
   };
 })
-.factory('evaluationTests',function($http, $ionicLoading, localStorageService, api, access){
+.factory('evaluationTests',function($http, $ionicLoading, $ionicNavBarDelegate, localStorageService, api, access){
   var API ={
     getTestsByGroupId: function(groupId){
       return $http({
         method: 'get',
-        url: api.url + api.test + api.group + '/' + groupId,
+        url: api.url + api.test + api.group + '/' + groupId  + api.active,
         headers: {
           Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
           'Content-Type': 'application/json'
@@ -82,6 +82,9 @@ angular.module('starter.evaluation.services', [])
         return success;
       }).catch(function(error){
         $ionicLoading.hide();
+        if(error.status === 404){
+          $ionicNavBarDelegate.back();
+        }
       });
     }
   };
@@ -239,7 +242,7 @@ angular.module('starter.evaluation.services', [])
   };
 
   return {
-    getTestAnswersByArea: function(test){
+    getTestAnswersByArea: function(test, $ionicNavBarDelegate){
       $ionicLoading.show({
           template: 'Cargando...'
       });
@@ -268,7 +271,7 @@ angular.module('starter.evaluation.services', [])
       API.sendAnswers(testId, data).then(function(success){
         $ionicLoading.hide();
         alert('Examen enviado');
-        $state.go('^');
+        $ionicNavBarDelegate.back();
         console.log(success);
       }).catch(function(error){
         $ionicLoading.hide();

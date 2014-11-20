@@ -9,7 +9,6 @@
 angular.module('starter', [
 'ionic',
 'config.services',
-'config.controllers',
 'starter.controllers',
 'starter.services',
 'app.templates',
@@ -241,45 +240,31 @@ $httpProvider.interceptors.push('httpInterceptor');
     }
     });
 
-    $rootScope.$on('$stateChangeStart', function(e, toState, toParams){
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams){
 
-            var ctoken = CryptoJS.SHA1(access.tokens.client).toString(),
-                rtoken = CryptoJS.SHA1(access.tokens.redirect).toString(),
-                ptoken = CryptoJS.SHA1(access.tokens.params).toString();
+      if(!localStorageService.isSupported) {
+        alert('Tu equipo no es compatible con esta aplicación');
+      }
 
-
-            if(!localStorageService.get(ctoken)){
-                Auth.authClient().then(function(token){
-                    localStorageService.set(ctoken, token);
-                });
-            }
-
-
-            if((toState.name == 'registro')){
-
-            }
-            else if((toState.name != 'login')){
-                if(Auth.userLogged()){
-                    var redirection = localStorageService.get(rtoken);
-                    if(!redirection){
-                        e.preventDefault();
-                        localStorageService.set(rtoken, toState);
-                        if(toParams != {}){
-                            localStorageService.set(ptoken, toParams);
-                        }
-                        $state.go('auth');
-                    } else if(toState.name != 'auth') {
-                      if(localStorageService.get(ptoken)){
-                            localStorageService.remove(ptoken);
-                        }
-                        localStorageService.remove(rtoken);
-                    }
-                } else {
-                    e.preventDefault();
-                    $state.go('login');
-                }
-            }
-
+      var ctoken = CryptoJS.SHA1(access.tokens.client).toString();
+      if(!localStorageService.get(ctoken)){
+        Auth.authClient().then(function(token){
+          localStorageService.set(ctoken, token);
         });
+      }
+
+      if(!(toState.name === '404' || toState.name === '403')){
+        if(!(toState.name === 'login' || toState.name === 'registro' || toState.name === '404') && !Auth.userLogged()){
+          event.preventDefault();
+          $state.go('403');
+        }
+        if((toState.name === 'login' || toState.name ==='registro') && Auth.userLogged()){
+            event.preventDefault();
+            $state.go('home');
+          }
+      }
+
+    });
+
 
 });

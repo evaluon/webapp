@@ -45,6 +45,7 @@ angular.module('config.services', [])
     close: '/close',
     open: '/open',
     indicator: '/indicator',
+    active: '/active',
     id: function(id){
       return '/' + id;
     }
