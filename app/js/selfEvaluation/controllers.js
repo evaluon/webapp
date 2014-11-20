@@ -17,7 +17,7 @@ angular.module('starter.selfEvaluation.controllers', [])
   };
 
   selfEvaluationTests.getTestsByGroupId().then(function(success){
-    if(success) $scope.rowTests = doubled(success.data.data);
+    if(success) $scope.rowTests = success.data.data
   }).catch(function(error){
     console.log(error);
   })
