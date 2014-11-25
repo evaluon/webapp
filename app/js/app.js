@@ -209,7 +209,7 @@ angular.module('starter', [
   });
 
   $urlRouterProvider.otherwise('/404');
-  $locationProvider.html5Mode(true);
+  $locationProvider.html5Mode(false);
 
   //Local Storage conf
   localStorageServiceProvider
