@@ -29,6 +29,7 @@ angular.module('config.services', [])
 })
 
 .constant('api', {
+    url3: 'http://localhost:3004',
     url2: 'http://192.168.43.171:3004',
     url: 'http://evaluon.boolinc.co:80',
     login: '/auth/token',

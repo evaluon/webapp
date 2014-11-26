@@ -211,18 +211,28 @@ angular.module('starter.evaluation.services', [])
       for(var i = 0; i < data.length; i++){
         qs.push(
           (function(d){
+
+            var sendData = {
+                test_id: test,
+                question_id: d.id
+            };
+
+            if(d.text){
+                sendData = _.extend(
+                    { answer_id: null, text: d.answer }, sendData
+                );
+            } else {
+                sendData = _.extend({ answer_id: d.answer }, send_data);
+            }
+
             return $http({
               method: 'post',
-              url: api.url + api.response,
+              url: api.url3 + api.response,
               headers: {
                 Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
                 'Content-Type': 'application/json'
               },
-              data: {
-                test_id: test,
-                question_id: d.id,
-                answer_id: d.answer
-              }
+              data: send_data
             });
           })(data[i])
         );
