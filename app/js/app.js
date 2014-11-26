@@ -81,6 +81,16 @@ angular.module('starter', [
     }
   });
 
+  $stateProvider
+  .state('home2', {
+    url: '',
+    templateUrl: 'views/home.tpl.html',
+    controller: 'HomeCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  });
+
   //Evaluation routes
   $stateProvider
   .state('evaluation',{
@@ -209,7 +219,7 @@ angular.module('starter', [
   });
 
   $urlRouterProvider.otherwise('/404');
-  $locationProvider.html5Mode(true);
+  $locationProvider.html5Mode(false);
 
   //Local Storage conf
   localStorageServiceProvider
@@ -253,14 +263,22 @@ $httpProvider.interceptors.push('httpInterceptor');
         });
       }
 
+      console.log(toState);
+
       if(!(toState.name === '404' || toState.name === '403')){
         if(!(toState.name === 'login' || toState.name === 'registro' || toState.name === '404') && !Auth.userLogged()){
           event.preventDefault();
-          $state.go('403');
+          if(toState.name === 'home' || toState.name === 'home2'){
+            $state.go('login');
+          }
+          else{
+            $state.go('403');
+          }
+
         }
         if((toState.name === 'login' || toState.name ==='registro') && Auth.userLogged()){
             event.preventDefault();
-            $state.go('home');
+            $state.go('/');
           }
       }
 
