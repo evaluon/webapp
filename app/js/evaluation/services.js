@@ -217,7 +217,7 @@ angular.module('starter.evaluation.services', [])
                 question_id: d.id
             };
 
-            if(d.text){
+            if(d.open){
                 sendData = _.extend(
                     { answer_id: null, text: d.answer }, sendData
                 );
@@ -227,12 +227,12 @@ angular.module('starter.evaluation.services', [])
 
             return $http({
               method: 'post',
-              url: api.url3 + api.response,
+              url: api.url + api.response,
               headers: {
                 Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
                 'Content-Type': 'application/json'
               },
-              data: send_data
+              data: sendData
             });
           })(data[i])
         );
