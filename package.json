@@ -15,6 +15,12 @@
     "type": "git",
     "url": ""
   },
+  "main": "./dist/index.html",
+  "window": {
+      "toolbar": false,
+      "width": 1280,
+      "height": 720
+  },
   "dependencies": {},
   "devDependencies": {
     "gulp": "^3.8.8",
