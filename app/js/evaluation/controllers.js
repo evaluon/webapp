@@ -108,7 +108,14 @@ angular.module('starter.evaluation.controllers', [])
   $scope.rollbackAnswersFlag = false;
 
   evaluationTest.getTestAnswersByArea($stateParams).then(function(success){
-    if(success) $scope.questions = success.data.data
+    if(success) $scope.questions = success.data.data;
+
+    for(var p in $scope.questions){
+      if($scope.questions[p].open == 0){
+        $scope.questions[p].answers = _.shuffle($scope.questions[p].answers);
+      }
+    }
+
   }).catch(function(error){
   });
 

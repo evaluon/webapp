@@ -195,7 +195,7 @@ angular.module('starter.selfEvaluation.services', [])
       });
       API.sendAnswers(testId, data).then(function(success){
         $ionicLoading.hide();
-        alert('Examen enviado');
+        alert('Examen enviada');
         $state.go('home');
         console.log(success);
       }).catch(function(error){

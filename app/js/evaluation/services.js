@@ -182,7 +182,7 @@ angular.module('starter.evaluation.services', [])
     }
   }
 })
-.factory('evaluationTest', function($http, $ionicLoading, $q, $state, localStorageService, api, access){
+.factory('evaluationTest', function($http, $ionicLoading, $q, $state, localStorageService, api, access, $ionicNavBarDelegate){
   var API = {
     getTestAnswersByArea: function(test){
       return $http({
@@ -242,7 +242,7 @@ angular.module('starter.evaluation.services', [])
   };
 
   return {
-    getTestAnswersByArea: function(test, $ionicNavBarDelegate){
+    getTestAnswersByArea: function(test){
       $ionicLoading.show({
           template: 'Cargando...'
       });
@@ -270,7 +270,7 @@ angular.module('starter.evaluation.services', [])
       });
       API.sendAnswers(testId, data).then(function(success){
         $ionicLoading.hide();
-        alert('Examen enviado');
+        alert('Area enviada');
         $ionicNavBarDelegate.back();
         console.log(success);
       }).catch(function(error){
