@@ -15,7 +15,7 @@ angular.module('starter.indicators.controllers', [])
 
  indicators.getIndicators().then(function(success){
    $scope.indicators = success.data.data;
- });
+});
 
  indicators.getUser().then(function(success){
    $scope.user = success.data.data;

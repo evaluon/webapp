@@ -42,19 +42,26 @@ angular.module('config.services', [])
   return {
     responseError: function(response) {
 
+      console.log(response);
+
       var message;
 
       if(response.status == 500){
           messsage = "Ha ocurrido un error en el servidor";
         }
-        else if(errors[response.status][response.data.error]){
-          message = errors[response.status][response.data.error];
+        else if(errors[response.status]){
+          if(errors[response.status][response.data.error.message]){
+            message = errors[response.status][response.data.error.message];
+          }
+          else{
+            message = 'Error desconocido, si este persigue contáctanos';
+          }
         }
         else{
           message = 'Error desconocido, verifica tu conexión a internet y reinicia la aplicación';
         }
 
-        alertError('Alerta', message);
+        alert(message);
 
         return $q.reject(response);
     }

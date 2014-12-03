@@ -263,8 +263,6 @@ $httpProvider.interceptors.push('httpInterceptor');
         });
       }
 
-      console.log(toState);
-
       if(!(toState.name === '404' || toState.name === '403')){
         if(!(toState.name === 'login' || toState.name === 'registro' || toState.name === '404') && !Auth.userLogged()){
           event.preventDefault();
