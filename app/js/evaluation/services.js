@@ -222,7 +222,7 @@ angular.module('starter.evaluation.services', [])
                     { answer_id: null, text: d.answer }, sendData
                 );
             } else {
-                sendData = _.extend({ answer_id: d.answer }, send_data);
+                sendData = _.extend({ answer_id: d.answer }, sendData);
             }
 
             return $http({
