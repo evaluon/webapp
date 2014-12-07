@@ -23,7 +23,7 @@
         {{question.image}}
         <div class="row padding item" ng-if="question.image">
           <div class="col divIcon item-avatar" >
-            <img src="http://cdn.boolinc.co/evaluon/{{question.image.location}}" alt="{{question.image.description}}">
+            <img ng-src="http://cdn.boolinc.co/evaluon/{{question.image.location}}" alt="{{question.image.description}}">
           </div>
         </div>
         <label ng-if="question.open == 1" class="item item-input">

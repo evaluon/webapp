@@ -3,7 +3,8 @@
     <div class="row padding item" ng-repeat="institutes in rowInstitutes">
       <div class="col divIcon item-avatar" ng-repeat="institute in institutes">
         <h2 class="titleInci">{{institute.name}}</h2>
-        <a ui-sref="{{routes.groups}}({id: {{institute.id}}})"><img src="http://cdn.boolinc.co/evaluon/{{institute.image.location}}" alt="{{institute.name}}"></a>
+        <a ui-sref="{{routes.groups}}({id: {{institute.id}}})"><img ng-src="http://cdn.boolinc.co/evaluon/{{institute.image.location}}
+          " alt="{{institute.name}}"></a>
       </div>
     </div>
   </ion-content>
