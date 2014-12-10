@@ -250,6 +250,10 @@ $httpProvider.interceptors.push('httpInterceptor');
     }
     });
 
+    $rootScope.validate = function(form, camp){
+      return form[camp].$invalid && form[camp].$dirty
+    };
+
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams){
 
       if(!localStorageService.isSupported) {
