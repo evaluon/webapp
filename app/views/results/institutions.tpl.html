@@ -1,7 +1,7 @@
 <ion-view title="Instituciones">
   <ion-content class="padding">
     <div class="row padding item" ng-repeat="institutes in rowInstitutes">
-      <div class="col divIcon item-avatar" ng-repeat="institute in institutes">
+      <div class="col col-50 divIcon item-avatar" ng-repeat="institute in institutes">
         <h2 class="titleInci">{{institute.name}}</h2>
         <a  ui-sref="results({id: {{institute.id}}})"><img src="http://cdn.boolinc.co/evaluon/{{institute.image.location}}" alt="Colegio Inem de Bucaramamnga"></a>
       </div>

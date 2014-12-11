@@ -20,10 +20,9 @@
           <h3 id ="answer-{{$index}}">{{$index + 1}}.</h3>
           <p>{{question.description_text}}</p>
         </div>
-        {{question.image}}
-        <div class="row padding item" ng-if="question.image">
-          <div class="col divIcon item-avatar" >
-            <img ng-src="http://cdn.boolinc.co/evaluon/{{question.image.location}}" alt="{{question.image.description}}">
+        <div class="row" ng-if="question.image">
+          <div class="col col-80 col-offset-10 text-center" >
+            <img ng-src="http://cdn.boolinc.co/evaluon/{{question.image.location}}" alt="{{question.image.description}}" class="img-responsive">
           </div>
         </div>
         <label ng-if="question.open == 1" class="item item-input">

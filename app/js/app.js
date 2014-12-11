@@ -216,6 +216,20 @@ angular.module('starter', [
     data: {
       access: routingConfigProvider.accessLevels.user
     }
+  })
+  .state('configurations-about', {
+    url: '/configurations-about',
+    templateUrl: 'views/configurations/about.tpl.html',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
+  })
+  .state('configurations-help', {
+    url: '/configurations-help',
+    templateUrl: 'views/configurations/help.tpl.html',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
   });
 
   $urlRouterProvider.otherwise('/404');
