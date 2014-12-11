@@ -40,6 +40,18 @@ angular.module('starter.controllers', [])
   };
 
 })
+.controller('RecoverPasswordCtrl', function($scope, $state, Auth) {
+  $scope.mail = {};
+  $scope.recover = function(event){
+    event.preventDefault();
+    Auth.recoverPassword().then(function(success){
+      alert('Revise su correo electrónico');
+    }).catch(function(error){
+      alert('Usuario no encontrado');
+    });
+  };
+
+})
 .controller('HomeCtrl', function($scope, Auth){
   $scope.$on('$viewContentLoaded', function() {
     $('#textInit').focus();

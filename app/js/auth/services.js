@@ -51,6 +51,11 @@ angular.module('starter.services', [])
                 },
                 data: data
             });
+        },
+        recoverPassword: function(mail){
+            return $http({
+
+            });
         }
     };
 
@@ -145,6 +150,9 @@ angular.module('starter.services', [])
         },
         userLogged: function(){
             return localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString());
+        },
+        recoverPassword: function(mail){
+
         }
     };
 })

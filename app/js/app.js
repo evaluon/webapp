@@ -62,6 +62,14 @@ angular.module('starter', [
       access: routingConfigProvider.accessLevels.anon
     }
   })
+  .state('recover', {
+    url: '/recover',
+    templateUrl: 'views/auth/recover.tpl.html',
+    controller: 'RecoverPasswordCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.anon
+    }
+  })
   .state('auth', {
     url: '/auth',
     controller: 'AuthCtrl',
@@ -84,7 +92,7 @@ angular.module('starter', [
   $stateProvider
   .state('home2', {
     url: '',
-    templateUrl: 'views/home.tpl.html',
+    templateUrl: 'views/auth/home.tpl.html',
     controller: 'HomeCtrl',
     data: {
       access: routingConfigProvider.accessLevels.user
@@ -282,7 +290,7 @@ $httpProvider.interceptors.push('httpInterceptor');
       }
 
       if(!(toState.name === '404' || toState.name === '403')){
-        if(!(toState.name === 'login' || toState.name === 'registro' || toState.name === '404') && !Auth.userLogged()){
+        if(!(toState.name === 'login' || toState.name === 'registro' || toState.name === 'recover' || toState.name === '404') && !Auth.userLogged()){
           event.preventDefault();
           if(toState.name === 'home' || toState.name === 'home2'){
             $state.go('login');
@@ -292,7 +300,7 @@ $httpProvider.interceptors.push('httpInterceptor');
           }
 
         }
-        if((toState.name === 'login' || toState.name ==='registro') && Auth.userLogged()){
+        if((toState.name === 'login' || toState.name ==='registro' || toState.name === 'recover') && Auth.userLogged()){
             event.preventDefault();
             $state.go('/');
           }
