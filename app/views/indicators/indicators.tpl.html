@@ -7,8 +7,13 @@
         <p> Desde: {{user.register_date | date: 'MMM d, yyyy' : 'cot'}}</p>
       </div>
 
-      <div class="item item-body">
-        <img class="full-image" src="img/indicators/{{indicators.levelName}}.svg" alt="Grado {{levels[indicators.levelName]}}">
+      <div class="item item-body" class="text-center">
+        <div class="row">
+          <div class="col col-80 col-offset-10 text-center">
+            <i ng-if="!indicators.levelName" class="ion-load-a"></i>
+            <img ng-if="indicators.levelName" class="full-image" src="img/indicators/{{indicators.levelName}}.svg" alt="Grado {{levels[indicators.levelName]}}">
+          </div>
+        </div>
         <p>
           Grado {{levels[indicators.levelName]}}, descripción
         </p>

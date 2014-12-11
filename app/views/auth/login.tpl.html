@@ -6,6 +6,11 @@
         <input type="email" aria-describedby="login-user-input-text" ng-model="user.username" required>
         <p id="login-user-input-text" class="aria-description">Ingrese el correo</p>
       </label>
+      <label class="item item-input">
+        <span class="input-label" tabindex="-1">Contraseña</span>
+        <input type="password" aria-describedby="login-user-input-pass" ng-model="user.password" required>
+        <p id="login-user-input-pass" class="aria-description">Ingrese la contraseña</p>
+      </label>
       <input type="submit" ng-disabled="loginForm.$invalid" class="button button-block button-inci" value="Iniciar Sesion" ng-model="user.password">
     </form>
     <a ui-sref="registro" ><button class="button button-block button-inci">Registrarse</button></a>
