@@ -96,7 +96,7 @@ gulp.task('templates', function(){
          module: 'app.templates',
          standalone: true
    }))
-   .pipe(gulp.dest('./app/js'));
+   .pipe(gulp.dest('./app/js/templates'));
 });
 
 gulp.task('compress', function(){

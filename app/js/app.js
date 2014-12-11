@@ -48,7 +48,7 @@ angular.module('starter', [
   $stateProvider
   .state('login', {
     url: '/login',
-    templateUrl: 'views/login.tpl.html',
+    templateUrl: 'views/auth/login.tpl.html',
     controller: 'LoginCtrl',
     data: {
       access: routingConfigProvider.accessLevels.anon
@@ -56,7 +56,7 @@ angular.module('starter', [
   })
   .state('registro', {
     url: '/registro',
-    templateUrl: 'views/registro.tpl.html',
+    templateUrl: 'views/auth/registro.tpl.html',
     controller: 'RegistroCtrl',
     data: {
       access: routingConfigProvider.accessLevels.anon
@@ -74,7 +74,7 @@ angular.module('starter', [
   $stateProvider
   .state('home', {
     url: '/',
-    templateUrl: 'views/home.tpl.html',
+    templateUrl: 'views/auth/home.tpl.html',
     controller: 'HomeCtrl',
     data: {
       access: routingConfigProvider.accessLevels.user
