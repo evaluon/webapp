@@ -54,7 +54,15 @@ angular.module('starter.services', [])
         },
         recoverPassword: function(mail){
             return $http({
-
+                method: 'delete',
+                url: api.url + api.user,
+                headers: {
+                    Authorization: localStorageService.get(CryptoJS.SHA1(access.tokens.client).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.client).toString()).access_token,
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    mail: mail
+                }
             });
         }
     };
@@ -144,15 +152,24 @@ angular.module('starter.services', [])
                 $ionicLoading.hide();
             })
         },
+        recoverPassword: function(mail){
+            $ionicLoading.show({
+                template: 'Cargando...'
+            });
+
+            return API.recoverPassword(mail).then(function(success){
+                return success;
+                $ionicLoading.hide();
+            }).catch(function(error){
+                $ionicLoading.hide();
+            });
+        },
         logout: function(){
             localStorageService.remove(CryptoJS.SHA1(access.tokens.user).toString());
             $state.go('login');
         },
         userLogged: function(){
             return localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString());
-        },
-        recoverPassword: function(mail){
-
         }
     };
 })

@@ -41,13 +41,10 @@ angular.module('config.services', [])
 
   return {
     responseError: function(response) {
-
-      console.log(response);
-
       var message;
 
       if(response.status == 500){
-          messsage = "Ha ocurrido un error en el servidor";
+          message = "Ha ocurrido un error en el servidor";
         }
         else if(errors[response.status]){
           if(errors[response.status][response.data.error.message]){
