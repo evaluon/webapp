@@ -10,9 +10,9 @@
     text-align: center;
   }
   .divIcon a img {
-    height: 80%;
-    width: 80%;
-    max-width: 180 px;
+    height: auto;
+    width: 180px;
+    max-width: 180;
   }
   .titleInci{
     font-size: 15px:
