@@ -6,10 +6,13 @@
         <p>Ten en cuenta que el examen se anulará al cerrar la aplicación</p>
         <br>
         <h3>Tipos de preguntas</h3>
-        <p>En el examen se utilizan preguntas de selección múltiple con única respuesta y preguntas abiertas de respuesta corta.</p>
-        <p>Las preguntas de selección múltiple con única respuesta están conformadas por un enunciado, la formulación de una tarea de evaluación y cuatro opciones de respuesta, codificadas como A, B, C y D, de las cuales sólo una es correcta o válida dada la tarea planteada.</p>
-        <p>Las preguntas abiertas de respuesta corta no presentan opciones de respuesta. El estudiante construye (produce, elabora, escribe) una respuesta de acuerdo con la tarea que se le ha asignado, en el espacio definido.</p>
-        <p>Puedes desplazarte por las preguntas y respuestas, cuándo quieras responder acertadamente a una opción solo basta un doble click.</p>
+        <div>
+          <p>En el examen se pueden utilizan preguntas de selección múltiple con única respuesta y preguntas abiertas de respuesta corta.</div> </p>
+          <p ng-if="close">Las preguntas de selección múltiple con única respuesta están conformadas por un enunciado, la formulación de una tarea de evaluación y cuatro opciones de respuesta, codificadas como A, B, C y D, de las cuales sólo una es correcta o válida dada la tarea planteada.</p>
+          <p ng-if="close">Puedes desplazarte por las preguntas y respuestas, cuándo quieras responder acertadamente a una opción solo basta un doble click.</p>
+          <p ng-if="open">Las preguntas abiertas de respuesta corta no presentan opciones de respuesta. El estudiante construye (produce, elabora, escribe) una respuesta de acuerdo con la tarea que se le ha asignado, en el espacio definido.</p>
+          <p ng-if="open">Puedes resplazarte por las preguntas y respuestas, cuándo quieras responder solo basta llenar el campo de texto</p>
+        </div>
       </div>
     </div>
     <h2>Preguntas:</h2>

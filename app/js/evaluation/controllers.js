@@ -101,18 +101,29 @@ angular.module('starter.evaluation.controllers', [])
   }
 })
 .controller('EvaluationTestCtrl', function($scope, $stateParams, evaluationTest){
+
   $scope.test = {};
   $scope.questions = [];
   $scope.params = $stateParams;
   $scope.respuesta = {};
   $scope.rollbackAnswersFlag = false;
+  $scope.open = false;
+  $scope.close = false;
+
+
 
   evaluationTest.getTestAnswersByArea($stateParams).then(function(success){
+
     if(success) $scope.questions = success.data.data;
 
     for(var p in $scope.questions){
+
       if($scope.questions[p].open == 0){
+        $scope.close = true;
         $scope.questions[p].answers = _.shuffle($scope.questions[p].answers);
+      }
+      if($scope.questions[p].open == 1){
+        $scope.open = true;
       }
     }
 

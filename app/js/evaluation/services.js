@@ -33,12 +33,15 @@ angular.module('starter.evaluation.services', [])
 .factory('evaluationGroups', function($http, $ionicLoading, localStorageService, api, access){
   var API = {
     getGroupsByInstitutionId: function(institutionId){
+
       return $http({
         method: 'get',
-        url: api.url + api.group + '/' + institutionId,
+        url: api.url + api.evaluee + api.group,
         headers: {
-          Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
-          'Content-Type': 'application/json'
+          Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token
+        },
+        params: {
+          institution: institutionId
         }
       });
     }
