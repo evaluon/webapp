@@ -41,10 +41,11 @@ angular.module('starter.controllers', [])
 
 })
 .controller('RecoverPasswordCtrl', function($scope, $state, Auth) {
-  $scope.mail = {};
-  $scope.recover = function(event){
+
+  $scope.recover = function(event, mail){
+
     event.preventDefault()
-    Auth.recoverPassword().then(function(success){
+    Auth.recoverPassword(mail).then(function(success){
       if(success){
         alert('Revise su correo electrónico');
       }

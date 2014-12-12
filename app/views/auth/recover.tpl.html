@@ -1,9 +1,9 @@
 <ion-view title="Recordar contraseña">
     <ion-content class="padding">
-        <form class="list" name="recoverForm" ng-submit="recover($event)">
-            <label for="email" class="item item-input item-stacked-label">
+        <form class="list" name="recoverForm" ng-submit="recover($event, user.mail)">
+            <label for="email" class="item item-input">
                 <span class="input-label" >Correo</span>
-                <input name="email" ng-pattern="/^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i" type="email" aria-describedby="registro-user-mail" ng-model="mail"  required>
+                <input name="email" ng-pattern="/^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i" type="email" aria-describedby="registro-user-mail" ng-model="user.mail"  required>
                 <p id ="registro-user-mail" class="aria-description">Digite su correo</p>
                 <span ng-if="validate(recoverForm, 'email')" class="text-assertive">Tiene que ser un correo válido</span>
             </label>

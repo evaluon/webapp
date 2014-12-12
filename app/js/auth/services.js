@@ -53,6 +53,7 @@ angular.module('starter.services', [])
             });
         },
         recoverPassword: function(mail){
+
             return $http({
                 method: 'delete',
                 url: api.url + api.user,
@@ -153,13 +154,15 @@ angular.module('starter.services', [])
             })
         },
         recoverPassword: function(mail){
+
             $ionicLoading.show({
                 template: 'Cargando...'
             });
 
             return API.recoverPassword(mail).then(function(success){
-                return success;
                 $ionicLoading.hide();
+                
+                return success;
             }).catch(function(error){
                 $ionicLoading.hide();
             });

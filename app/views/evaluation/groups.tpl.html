@@ -3,7 +3,7 @@
     <div class="row padding item" ng-repeat="groups in rowGroups">
       <div class="col col-50 divIcon item-avatar" ng-repeat="group in groups">
         <h2 class="titleInci">{{group.id}} - {{group.user.first_name}} {{group.user.last_name}}</h2>
-        <a ui-sref="{{routes.test}}({id: {{group.id}}})"><img src="img/bank/10.svg" alt="{{group.id}} - {{group.user.first_name}} {{group.user.last_name}}"></a>
+        <a ui-sref="{{routes.test}}({id: {{group.id}}})"><img src="http://placehold.it/180/FFFFFF/00427a&text={{group.id}}" alt="{{group.id}} - {{group.user.first_name}} {{group.user.last_name}}"></a>
       </div>
     </div>
   </ion-content>
