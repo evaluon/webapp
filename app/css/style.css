@@ -9,6 +9,11 @@
   .divIcon {
     text-align: center;
   }
+  .divIcon a img {
+    height: 80%;
+    width: 80%;
+    max-width: 180px;
+  }
   .titleInci{
     font-size: 15px:
   }
@@ -18,7 +23,7 @@
   }
   a img {
     height: auto;
-    max-width: 80%;;
+    max-width: 80%;
   }
 
   .img-center{
