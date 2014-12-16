@@ -40,14 +40,14 @@ angular.module('starter.controllers', [])
   };
 
 })
-.controller('RecoverPasswordCtrl', function($scope, $state, Auth) {
+.controller('RecoverPasswordCtrl', function($scope, $state, $alert, Auth) {
 
   $scope.recover = function(event, mail){
 
     event.preventDefault()
     Auth.recoverPassword(mail).then(function(success){
       if(success){
-        alert('Revise su correo electrónico');
+        $alert.show('Exito','Revise su correo electrónico');
       }
     });
   };

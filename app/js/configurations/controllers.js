@@ -1,6 +1,6 @@
 'use strict';
 angular.module('starter.configuration.controllers', [])
-.controller('ChangePasswordCtrl', function($scope, changePassword){
+.controller('ChangePasswordCtrl', function($scope, $alert, changePassword){
 
   $scope.user = {};
 
@@ -9,7 +9,7 @@ angular.module('starter.configuration.controllers', [])
       changePassword.changePassword($scope.user.password1);
     }
 
-    else alert('Las contraseñas no coinciden');
+    else $alert.show('Error','Las contraseñas no coinciden');
   };
 })
 .controller('AboutCtrl', function(){

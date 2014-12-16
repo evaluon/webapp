@@ -125,7 +125,7 @@ angular.module('starter.evaluation.services', [])
     }
   };
 })
-.factory('evaluationKnowledgeArea', function($http, $ionicLoading, $state, $ionicPopup, localStorageService, api, access){
+.factory('evaluationKnowledgeArea', function($http, $ionicLoading, $state, $ionicPopup, $alert, localStorageService, api, access){
   var API = {
     getAllKnowledgeArea: function(testId){
       return $http({
@@ -148,19 +148,6 @@ angular.module('starter.evaluation.services', [])
     }
   };
 
-  var alertError = function (title, message){
-    if(navigator && navigator.notification){
-      navigator.notification.alert(message, alertDismissed, title, 'Aceptar');
-    }
-    else{
-      var alertPopup = $ionicPopup.alert({
-              title: title,
-              template: message,
-              okType: 'button-inci'
-          });
-    }
-  };
-
   return {
     getAllKnowledgeArea: function(testId){
       $ionicLoading.show({
@@ -175,7 +162,7 @@ angular.module('starter.evaluation.services', [])
         else{
           API.closeTest(testId).then(function(success){
             $ionicLoading.hide();
-            alertError('Mensaje', 'Prueba finalizada exitosamente');
+            $alert.show('Mensaje', 'Prueba finalizada exitosamente');
             $state.go('home');
           });
         }
@@ -283,7 +270,7 @@ angular.module('starter.evaluation.services', [])
       });
       API.sendAnswers(testId, data).then(function(success){
         $ionicLoading.hide();
-        alert('Area enviada');
+        $alert.show('Exito','Area enviada');
         $ionicNavBarDelegate.back();
       }).catch(function(error){
         $ionicLoading.hide();

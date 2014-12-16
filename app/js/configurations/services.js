@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('starter.configuration.services', [])
-.factory('changePassword', function($http, $ionicLoading, $state, localStorageService, api, access){
+.factory('changePassword', function($http, $ionicLoading, $state, $alert, localStorageService, api, access){
   var API = {
     changePassword: function(password){
       return $http({
@@ -26,7 +26,7 @@ angular.module('starter.configuration.services', [])
 
       return API.changePassword(password).then(function(success){
         $ionicLoading.hide();
-        alert('Contraseña cambiada satisfactoriamente');
+        $alert.show('Exito', 'Contraseña cambiada satisfactoriamente');
         $state.go('home');
         success;
       }).catch(function(error){

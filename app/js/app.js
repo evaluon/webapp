@@ -251,7 +251,7 @@ angular.module('starter', [
 $httpProvider.interceptors.push('httpInterceptor');
 })
 
-.run(function($ionicPlatform, $state, $rootScope, Auth, access, localStorageService) {
+.run(function($ionicPlatform, $state, $rootScope, $alert, Auth, access, localStorageService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -279,7 +279,7 @@ $httpProvider.interceptors.push('httpInterceptor');
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams){
 
       if(!localStorageService.isSupported) {
-        alert('Tu equipo no es compatible con esta aplicación');
+        $alert.show('Alerta','Tu equipo no es compatible con esta aplicación');
       }
 
       var ctoken = CryptoJS.SHA1(access.tokens.client).toString();

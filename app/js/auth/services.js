@@ -1,7 +1,7 @@
 'use strict';
 angular.module('starter.services', [])
 
-.factory('Auth', function($http, $ionicLoading, $ionicPopup, $state, localStorageService, api, access, routingConfig) {
+.factory('Auth', function($http, $ionicLoading, $ionicPopup, $state, $alert, localStorageService, api, access, routingConfig) {
 
     var uToken = localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString());
 
@@ -70,11 +70,6 @@ angular.module('starter.services', [])
 
     var error = function(error){
         $ionicLoading.hide();
-        /*var alertPopup = $ionicPopup.alert({
-            title: 'Alerta',
-            template: 'Error desconocido, verifica tu conexión a internet',
-            okType: 'button-inci'
-        });*/
     };
 
     return {
@@ -113,11 +108,6 @@ angular.module('starter.services', [])
             };
             var error = function(error){
                 $ionicLoading.hide();
-                /*var alertPopup = $ionicPopup.alert({
-                    title: 'Alerta',
-                    template: 'Correo o contraseña incorrectos',
-                    okType: 'button-inci'
-                });*/
             };
             var data = {
                 grant_type:'password',
@@ -140,7 +130,7 @@ angular.module('starter.services', [])
                     localStorageService.set(CryptoJS.SHA1(access.tokens.user).toString(), success.data);
                     API.createEvaluee(dataEvaluee).then(function(success){
                         $ionicLoading.hide();
-                        alert('Usuario creado satisfactoriamente');
+                        $alert.show('Exito', 'Usuario creado satisfactoriamente');
                         $state.go('home');
                     }).catch(function(error){
                         $ionicLoading.hide();
@@ -161,7 +151,7 @@ angular.module('starter.services', [])
 
             return API.recoverPassword(mail).then(function(success){
                 $ionicLoading.hide();
-                
+
                 return success;
             }).catch(function(error){
                 $ionicLoading.hide();

@@ -3,7 +3,7 @@
 angular.module('config.services', [])
 .factory('httpInterceptor', function($q){
 
-  var alertError = function (title, message){
+  var $alert = function (title, message){
     if(navigator && navigator.notification){
       navigator.notification.alert(message, alertDismissed, title, 'Aceptar');
     }
@@ -18,16 +18,17 @@ angular.module('config.services', [])
     },
     403: {
       invalid_permissions: 'No tienes permiso para acceder a estos recursos.',
-      is_evaluee: "User tries to identify itself as an evaluee, but it's not.",
-      not_an_evaluee: "User tries to make a request enabled for evaluees, but is an evaluator.",
-      is_evaluator: "User tries to identify itself as an evaluator, but it's not.",
-      not_an_evaluator: "User tries to make a request enabled for evaluators, but is an evaluee.",
-      not_evaluees: "Some users try to identify themselves as evaluees, but they are not.",
+      is_evaluee: "Imposible realizar acción. Es un estudiante.",
+      not_an_evaluee: "Imposible realizar acción. No es un docente.",
+      is_evaluator: "Imposible realizar acción. Es un docente.",
+      not_an_evaluator: "Imposible realizar acción. No es un docente.",
+      not_evaluees: "Alguno de los usuarios no es un estudiante.",
       test_unopened: "Este test aún no está abierto",
-      unabled_institution: "User tries to do an operation over an existing institution where isn't related to.",
+      unabled_institution: "Imposible realizar acción sobre esta institución.",
       insuficient_privileges: 'No tienes permiso para acceder a estos recursos',
       invalid_hotp_code: 'Clave de acceso inválida',
-      invalid_grant: 'Usuario y contraseña no coinciden'
+      invalid_grant: 'Usuario y contraseña no coinciden',
+      access_denied: 'Usuario bloqueado'
     },
     404: {
       no_active_groups: 'No hay grupos activos',
@@ -79,9 +80,9 @@ angular.module('config.services', [])
         response.message = message;
 
         if(response.config.data){
-          if(!response.config.data.nonErrorMessage) alert(message);
+          if(!response.config.data.nonErrorMessage) $alert('Error',message);
         }
-        else alert(message);
+        else $alert('Error',message);
 
         return $q.reject(response);
     }
@@ -124,4 +125,20 @@ angular.module('config.services', [])
         redirect: 'qoelzc',
         params: 'amco194'
     }
+})
+.service('$alert', function($ionicPopup){
+
+  this.show = function(title, message){
+    if(navigator && navigator.notification){
+      navigator.notification.alert(message, alertDismissed, title, 'Aceptar');
+    }
+    else{
+      var alertPopup = $ionicPopup.alert({
+        title: title,
+        template: message,
+        okType: 'button-inci'
+      });
+    }
+  };
+
 });

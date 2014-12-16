@@ -58,7 +58,7 @@ angular.module('starter.selfEvaluation.services', [])
     }
   };
 })
-.factory('selfEvaluationKnowledgeArea', function($http, $ionicLoading, $ionicPopup, $state, localStorageService, api, access){
+.factory('selfEvaluationKnowledgeArea', function($http, $alert, $ionicLoading, $ionicPopup, $state, localStorageService, api, access){
   var API = {
     getAllKnowledgeArea: function(testId){
       return $http({
@@ -81,19 +81,6 @@ angular.module('starter.selfEvaluation.services', [])
     }
   };
 
-  var alertError = function (title, message){
-    if(navigator && navigator.notification){
-      navigator.notification.alert(message, alertDismissed, title, 'Aceptar');
-    }
-    else{
-      var alertPopup = $ionicPopup.alert({
-              title: title,
-              template: message,
-              okType: 'button-inci'
-          });
-    }
-  };
-
   return {
     getAllKnowledgeArea: function(testId){
       $ionicLoading.show({
@@ -106,7 +93,7 @@ angular.module('starter.selfEvaluation.services', [])
         }
         else{
           $ionicLoading.hide();
-          alertError('Mensaje', 'Prueba finalizada exitosamente');
+          $alert.show('Mensaje', 'Prueba finalizada exitosamente');
           $state.go('home');
         }
       }).catch(function(error){
@@ -115,7 +102,7 @@ angular.module('starter.selfEvaluation.services', [])
     }
   }
 })
-.factory('selfEvaluationTest', function($http, $ionicLoading, $q, $state, localStorageService, api, $ionicNavBarDelegate, access){
+.factory('selfEvaluationTest', function($http, $alert, $ionicLoading, $q, $state, localStorageService, api, $ionicNavBarDelegate, access){
   var API = {
     getTestAnswersByArea: function(test){
       return $http({
@@ -203,7 +190,7 @@ angular.module('starter.selfEvaluation.services', [])
       });
       API.sendAnswers(testId, data).then(function(success){
         $ionicLoading.hide();
-        alert('Area enviada');
+        $alert.show('Exito','Area enviada');
         $ionicNavBarDelegate.back();
       }).catch(function(error){
         $ionicLoading.hide();
