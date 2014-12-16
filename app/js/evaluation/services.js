@@ -285,10 +285,8 @@ angular.module('starter.evaluation.services', [])
         $ionicLoading.hide();
         alert('Area enviada');
         $ionicNavBarDelegate.back();
-        console.log(success);
       }).catch(function(error){
         $ionicLoading.hide();
-        console.log(error);
       });
     }
   };

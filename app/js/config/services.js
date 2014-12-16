@@ -35,7 +35,8 @@ angular.module('config.services', [])
       no_active_test: 'No hay test activos para este grupo',
       test_unavailable: 'La prueba seleccionada no está disponible',
       client_not_found: "Cliente de aplicación no encontrado",
-      results_not_found: "Los resultados del evaluado son muy pocos para hacer una estadística o no se encontraron. Posiblemente el evaluado es inválido"
+      results_not_found: "Los resultados del evaluado son muy pocos para hacer una estadística o no se encontraron. Posiblemente el evaluado es inválido",
+      no_questions_available: "No hay preguntas disponibles"
     }
   };
 
@@ -43,25 +44,44 @@ angular.module('config.services', [])
     responseError: function(response) {
       var message;
 
-      if(response.status == 500){
-          message = "Ha ocurrido un error en el servidor";
+      if(errors[response.status]){
+        if(errors[response.status][response.data.error.message]){
+          message = errors[response.status][response.data.error.message];
         }
-        else if(response.status == 0){
-          message = "No hay conección a internet";
-        }
-        else if(errors[response.status]){
-          if(errors[response.status][response.data.error.message]){
-            message = errors[response.status][response.data.error.message];
-          }
-          else{
-            message = 'Error desconocido, si este persigue contáctanos';
-          }
+        else if(errors[response.status][response.data.error]){
+          message = errors[response.status][response.data.error];
         }
         else{
-          message = 'Error desconocido, verifica tu conexión a internet y reinicia la aplicación';
+          message = 'Error desconocido, si este persiste contacte al administrador';
         }
+      }
+      else if(response.status == 500){
 
-        alert(message);
+        if(response.data.error_description == 'user_not_found'){
+          message = 'Usuario y contraseña no coinciden';
+        }
+        else if(response.data.error_description == 'blocked_user'){
+          message = 'Usuario bloqueado';
+        }
+        else{
+          message = "Ha ocurrido un error en el servidor";
+        }
+      }
+      else if(response.status == 0){
+        message = "No hay conección a internet";
+      }
+
+      else{
+        message = 'Error desconocido, si este persiste contacte al administrador';
+      }
+
+
+        response.message = message;
+
+        if(response.config.data){
+          if(!response.config.data.nonErrorMessage) alert(message);
+        }
+        else alert(message);
 
         return $q.reject(response);
     }
