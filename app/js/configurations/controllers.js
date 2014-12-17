@@ -12,7 +12,7 @@ angular.module('starter.configuration.controllers', [])
     else $alert.show('Error','Las contraseñas no coinciden');
   };
 })
-.controller('UpdateUserCtrl', function($scope, updateUser){
+.controller('UpdateUserCtrl', function($scope, $filter, updateUser){
 
   $scope.disabilities = [{'id':0,'description':'Sin discapacidad'},{'id':1,'description':'Persona ciega'},{'id':2,'description':'Persona con baja visión'},{'id':3,'description':'Persona sordociega'}];
   $scope.types = [{'id':1,'description':'Estudiante'},{'id':2,'description':'Empleado'},{'id':3,'description':'Aspirante universitario'},{'id':4,'description':'Aspirante empleado'},{'id':5,'description':'Otro'}];
@@ -21,17 +21,16 @@ angular.module('starter.configuration.controllers', [])
 
   updateUser.getUser().then(function(data){
     $scope.user = data;
-    $scope.user.birth_date = new Date(data.birth_date);
+    $scope.id = Number(data.id);
+    $scope.user.birth_date = $filter('date')(new Date(data.birth_date), 'yyyy-MM-dd');
 
     if(data.middle_name) $scope.user.names = data.first_name + ' ' + data.middle_name;
     else $scope.user.names = data.first_name;
-    
+
   });
 
   $scope.update = function($event, user){
-    event.preventDefault();
-
-    event.preventDefault();
+    $event.preventDefault();
 
     user.middle_name = ' ';
     _.map(user.names.split(' '), function(name, index){

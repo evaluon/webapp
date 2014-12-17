@@ -19,8 +19,8 @@ angular.module('starter.controllers', [])
   $scope.types = [{"id":1,"description":"Estudiante"},{"id":2,"description":"Empleado"},{"id":3,"description":"Aspirante universitario"},{"id":4,"description":"Aspirante empleado"},{"id":5,"description":"Otro"}];
   $scope.levels = [{"id":1,"description":"Educación Básica Primaria"},{"id":2,"description":"Educación Básica Secundaria"},{"id":3,"description":"Empleo con el Estado"},{"id":4,"description":"Universidad"},{"id":5,"description":"Otro"}];
   $scope.genders = [{"id": 1, "description": "Hombre"},{"id": 2, "description": "Mujer"}]
-  $scope.registrar = function($scope, user){
-    event.preventDefault();
+  $scope.registrar = function($event, user){
+    $event.preventDefault();
 
     user.middle_name = ' ';
     _.map(user.names.split(' '), function(name, index){

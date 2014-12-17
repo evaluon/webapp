@@ -1,72 +1,72 @@
 <ion-view title="Registro" hide-back-button="false">
   <ion-content class="padding">
-    <form class="list" name="registryForm" ng-submit="registrar($event, user)">
+    <form class="list" name="registryUserForm" ng-submit="registrar($event, user)">
       <label for="id" class="item item-input item-stacked-label">
         <span class="input-label">Número de documento</span>
         <input name="id" type="number"  aria-describedby="registro-user-document" ng-model="user.id" required>
         <p id= "registro-user-document" class="aria-description">Digite su número de documento</p>
-        <span ng-if="validate(registryForm, 'id')" class="text-assertive">Tiene que ser un número</span>
+        <span ng-if="validate(registryUserForm, 'id')" class="text-assertive">Tiene que ser un número</span>
       </label>
       <label for="name" class="item item-input item-stacked-label">
         <span class="input-label">Nombres</span>
         <input name="name" type="text"  aria-describedby="registro-user-name" ng-model="user.names"  required>
         <p id= "registro-user-name" class="aria-description">Digite su nombre</p>
-        <span ng-if="validate(registryForm, 'name')" class="text-assertive">Campo obligatorio</span>
+        <span ng-if="validate(registryUserForm, 'name')" class="text-assertive">Campo obligatorio</span>
       </label>
       <label for="lastName" class="item item-input item-stacked-label">
         <span class="input-label">Apellidos</span>
         <input name="lastName" type="text" aria-describedby="registro-user-surname" ng-model="user.last_name"  required>
         <p id="registro-user-surname" class="aria-description">Digite sus apellidos</p>
-        <span ng-if="validate(registryForm, 'lastName')" class="text-assertive">Campo obligatorio</span>
+        <span ng-if="validate(registryUserForm, 'lastName')" class="text-assertive">Campo obligatorio</span>
       </label>
       <label for="birth_date" class="item item-input item-stacked-label">
         <span class="input-label">Fecha de nacimiento</span>
         <input name="birth_date" type="date"  aria-describedby="registro-user-birthdate" ng-model="user.birth_date"  required>
         <p id="registro-user-birthdate" class="aria-description">Ingrese su fecha de nacimiento</p>
-        <span ng-if="validate(registryForm, 'birth_date')" class="text-assertive">Campo obligatorio/span>
+        <span ng-if="validate(registryUserForm, 'birth_date')" class="text-assertive">Campo obligatorio/span>
       </label>
       <label for="gender" class="item item-input item-stacked-label">
         <span class="input-label">Género</span>
         <ion-radio name="gender" ng-repeat="gender in genders" ng-model="user.gender_id" ng-value="{{gender.id}}" name="disabilities" required>{{gender.description}}</ion-radio>
-        <span ng-if="validate(registryForm, 'gender')" class="text-assertive">Campo obligatorio/span>
+        <span ng-if="validate(registryUserForm, 'gender')" class="text-assertive">Campo obligatorio/span>
       </label>
       <label for="disabilitie" class="item item-input item-stacked-label">
         <span class="input-label">Condición visual</span>
         <ion-radio name="disabilitie" ng-repeat="disabilitie in disabilities" ng-model="user.evaluee.disability_id" ng-value="{{disabilitie.id}}" name="disabilities" required>{{disabilitie.description}}</ion-radio>
-        <span ng-if="validate(registryForm, 'disabilitie')" class="text-assertive">Campo obligatorio/span>
+        <span ng-if="validate(registryUserForm, 'disabilitie')" class="text-assertive">Campo obligatorio/span>
       </label>
       <label for="type" class="item item-input item-stacked-label">
         <span class="input-label">Tipo de usuario</span>
         <ion-radio name="type" ng-repeat="type in types" ng-model="user.evaluee.evaluee_type" ng-value="{{type.id}}" name="types" required>{{type.description}}</ion-radio>
-        <span ng-if="validate(registryForm, 'type')" class="text-assertive">Campo obligatorio/span>
+        <span ng-if="validate(registryUserForm, 'type')" class="text-assertive">Campo obligatorio/span>
       </label>
       <label for="level" class="item item-input item-stacked-label">
         <span class="input-label">Nivel de formación</span>
         <ion-radio name="level" ng-repeat="level in levels" ng-model="user.evaluee.level_id" ng-value="{{level.id}}" name="levels" required>{{level.description}}</ion-radio>
-        <span ng-if="validate(registryForm, 'level')" class="text-assertive">Campo obligatorio/span>
+        <span ng-if="validate(registryUserForm, 'level')" class="text-assertive">Campo obligatorio/span>
       </label>
       <label for="email" class="item item-input item-stacked-label">
         <span class="input-label" >Correo</span>
         <input name="email" ng-pattern="/^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i" type="email" aria-describedby="registro-user-mail" ng-model="user.mail"  required>
         <p id ="registro-user-mail" class="aria-description">Digite su correo</p>
-        <span ng-if="validate(registryForm, 'email')" class="text-assertive">Tiene que ser un correo válido</span>
+        <span ng-if="validate(registryUserForm, 'email')" class="text-assertive">Tiene que ser un correo válido</span>
       </label>
       <label name="password" class="item item-input item-stacked-label"  required>
         <span class="input-label">Contraseña</span>
         <input name="password" type="password"  ng-minlength="6" aria-describedby="registro-user-id" ng-model="user.password"  required>
         <span id ="registro-user-id" class="aria-description">Digite su contraseña</span>
-        <span ng-if="validate(registryForm, 'password')" class="text-assertive">Tiene que tener mínimo 6 carácteres</span>
+        <span ng-if="validate(registryUserForm, 'password')" class="text-assertive">Tiene que tener mínimo 6 carácteres</span>
       </label>
       <label name="password2" class="item item-input item-stacked-label"  required>
         <span class="input-label">Repite la contraseña</span>
         <input name="password2" type="password" aria-describedby="registro-user-id" ng-model="password2"  required>
         <span id ="registro-user-id" class="aria-description">Por último, repita su contraseña</span>
-        <span ng-if="(user.password != password2) && registryForm.password2.$dirty" class="text-assertive">Las contraseñas no coinciden</span>
+        <span ng-if="(user.password != password2) && registryUserForm.password2.$dirty" class="text-assertive">Las contraseñas no coinciden</span>
       </label>
       </label>
 
-      <h5 style="text-align: center" ng-if="registryForm.$invalid || (user.password != password2)" class="text-assertive">Tu formulario contiene campos inválidos</h5>
-      <input ng-disabled="registryForm.$invalid || (user.password != password2) " type="submit" class="button button-block button-inci" value="Registrar">
+      <h5 style="text-align: center" ng-if="registryUserForm.$invalid || (user.password != password2)" class="text-assertive">Tu formulario contiene campos inválidos</h5>
+      <input ng-disabled="registryUserForm.$invalid || (user.password != password2) " type="submit" class="button button-block button-inci" value="Registrar">
     </form>
   </ion-content>
 </ion-view>
