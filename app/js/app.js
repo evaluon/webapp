@@ -238,6 +238,14 @@ angular.module('starter', [
     data: {
       access: routingConfigProvider.accessLevels.user
     }
+  })
+  .state('configurations-update', {
+    url: '/configurations-update',
+    templateUrl: 'views/configurations/updateUser.tpl.html',
+    controller: 'UpdateUserCtrl',
+    data: {
+      access: routingConfigProvider.accessLevels.user
+    }
   });
 
   $urlRouterProvider.otherwise('/404');

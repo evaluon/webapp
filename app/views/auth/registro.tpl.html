@@ -27,22 +27,22 @@
       </label>
       <label for="gender" class="item item-input item-stacked-label">
         <span class="input-label">Género</span>
-        <ion-radio name="gender" ng-repeat="gender in genders" ng-model="user.gender_id" ng-value="{{gender.id}}" name="disabilities">{{gender.description}}</ion-radio>
+        <ion-radio name="gender" ng-repeat="gender in genders" ng-model="user.gender_id" ng-value="{{gender.id}}" name="disabilities" required>{{gender.description}}</ion-radio>
         <span ng-if="validate(registryForm, 'gender')" class="text-assertive">Campo obligatorio/span>
       </label>
       <label for="disabilitie" class="item item-input item-stacked-label">
         <span class="input-label">Condición visual</span>
-        <ion-radio name="disabilitie" ng-repeat="disabilitie in disabilities" ng-model="user.evaluee.disability_id" ng-value="{{disabilitie.id}}" name="disabilities">{{disabilitie.description}}</ion-radio>
+        <ion-radio name="disabilitie" ng-repeat="disabilitie in disabilities" ng-model="user.evaluee.disability_id" ng-value="{{disabilitie.id}}" name="disabilities" required>{{disabilitie.description}}</ion-radio>
         <span ng-if="validate(registryForm, 'disabilitie')" class="text-assertive">Campo obligatorio/span>
       </label>
       <label for="type" class="item item-input item-stacked-label">
         <span class="input-label">Tipo de usuario</span>
-        <ion-radio name="type" ng-repeat="type in types" ng-model="user.evaluee.evaluee_type" ng-value="{{type.id}}" name="types">{{type.description}}</ion-radio>
+        <ion-radio name="type" ng-repeat="type in types" ng-model="user.evaluee.evaluee_type" ng-value="{{type.id}}" name="types" required>{{type.description}}</ion-radio>
         <span ng-if="validate(registryForm, 'type')" class="text-assertive">Campo obligatorio/span>
       </label>
       <label for="level" class="item item-input item-stacked-label">
         <span class="input-label">Nivel de formación</span>
-        <ion-radio name="level" ng-repeat="level in levels" ng-model="user.evaluee.level_id" ng-value="{{level.id}}" name="levels">{{level.description}}</ion-radio>
+        <ion-radio name="level" ng-repeat="level in levels" ng-model="user.evaluee.level_id" ng-value="{{level.id}}" name="levels" required>{{level.description}}</ion-radio>
         <span ng-if="validate(registryForm, 'level')" class="text-assertive">Campo obligatorio/span>
       </label>
       <label for="email" class="item item-input item-stacked-label">

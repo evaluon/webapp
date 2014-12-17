@@ -34,4 +34,41 @@ angular.module('starter.configuration.services', [])
       });
     }
   };
+}).factory('updateUser', function($http, $ionicLoading, $alert, localStorageService, api, access){
+    var API = {
+      getUser: function(){
+        return $http({
+          method: 'GET',
+          url: api.url + api.user,
+          headers: {
+            Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
+          }
+        });
+      },
+      updateUser: function(){
+        return $http({
+
+        });
+      }
+    };
+
+    return {
+      getUser: function(){
+        $ionicLoading.show({
+          template: 'Cargando...'
+        });
+
+        return API.getUser().then(function(success){
+
+          $ionicLoading.hide();
+          return success.data.data;
+        }).catch(function(){
+          console.log('Error');
+          $ionicLoading.hide();
+        })
+      },
+      updateUser: function(){
+
+      }
+    }
 });
