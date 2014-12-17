@@ -32,13 +32,26 @@ angular.module('starter.configuration.controllers', [])
   $scope.update = function($event, user){
     $event.preventDefault();
 
-    user.middle_name = ' ';
+    user.middle_name = '';
     _.map(user.names.split(' '), function(name, index){
       if(index === 0) user.first_name = name;
       else  user.middle_name = user.middle_name + ' ' + name;
     });
+    var update = {
+      id: user.id,
+      first_name: user.first_name,
+      middle_name: user.middle_name,
+      last_name: user.last_name,
+      birth_date: user.birth_date,
+      mail: user.mail
+    };
 
-    console.log(user);
+    updateUser.updateUser(update).then(function(success){
+      updateUser.updateEvaluee(user.evaluee).then(function(success){
+        console.log('si');
+      });
+    });
+
   };
 
 });

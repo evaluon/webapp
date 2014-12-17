@@ -45,9 +45,24 @@ angular.module('starter.configuration.services', [])
           }
         });
       },
-      updateUser: function(){
+      updateUser: function(user){
         return $http({
-
+          method: 'PUT',
+          url: api.url + api.user,
+          headers: {
+            Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
+          },
+          data: user
+        });
+      },
+      updateEvalue: function(evaluee){
+        return $http({
+          method: 'PUT',
+          url: api.url + api.evaluee,
+          headers: {
+            Authorization:  localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).token_type + ' ' + localStorageService.get(CryptoJS.SHA1(access.tokens.user).toString()).access_token,
+          },
+          data: evaluee
         });
       }
     };
@@ -63,12 +78,35 @@ angular.module('starter.configuration.services', [])
           $ionicLoading.hide();
           return success.data.data;
         }).catch(function(){
-          console.log('Error');
+
           $ionicLoading.hide();
         })
       },
-      updateUser: function(){
+      updateUser: function(user){
+        $ionicLoading.show({
+          template: 'Cargando...'
+        });
+        return API.updateUser(user).then(function(success){
+          return success;
+          $ionicLoading.hide();
+        }).catch(function(){
+          $ionicLoading.hide();
+        })
+      },
+      updateEvaluee: function(evaluee){
+        $ionicLoading.show({
+          template: 'Cargando...'
+        });
+        return API.updateEvalue(evaluee).then(function(success){
 
+          $ionicLoading.hide();
+
+          $alert.show('Exito', 'Actualizado correctamente');
+          return success;
+
+        }).catch(function(){
+          $ionicLoading.hide();
+        })
       }
-    }
+    };
 });

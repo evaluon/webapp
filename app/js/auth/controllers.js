@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
   $scope.registrar = function($event, user){
     $event.preventDefault();
 
-    user.middle_name = ' ';
+    user.middle_name = '';
     _.map(user.names.split(' '), function(name, index){
       if(index === 0) user.first_name = name;
       else  user.middle_name = user.middle_name + ' ' + name;
