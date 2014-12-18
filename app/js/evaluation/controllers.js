@@ -71,7 +71,8 @@ angular.module('starter.evaluation.controllers', [])
 
   })
 })
-.controller('EvaluationKnowledgeAreaCtrl', function($scope, $stateParams, evaluationKnowledgeArea){
+.controller('EvaluationKnowledgeAreaCtrl', function($scope, $stateParams, $state, $alert, evaluationKnowledgeArea){
+
   $scope.rowTestsDetails = [];
   $scope.routes ={
     test: 'evaluation-test-area',
@@ -92,6 +93,12 @@ angular.module('starter.evaluation.controllers', [])
     if(success) $scope.rowTestsDetails = doubled(success.data.data);
   }).catch(function(error){
   });
+
+  $scope.exit = function(){
+    $alert.confirm('Alerta', 'Tu examen será tomado como no enviado', function(){
+      $state.go('home');
+    });
+  };
 })
 .controller('EvaluationPasswordCtrl', function($scope, $stateParams, evaluationPassword){
   $scope.password = {};
@@ -100,7 +107,7 @@ angular.module('starter.evaluation.controllers', [])
     evaluationPassword.loginTest($stateParams.id, $scope.password.data);
   }
 })
-.controller('EvaluationTestCtrl', function($scope, $stateParams, evaluationTest){
+.controller('EvaluationTestCtrl', function($scope, $stateParams, $alert, $ionicNavBarDelegate, evaluationTest){
 
   $scope.test = {};
   $scope.questions = [];
@@ -155,5 +162,11 @@ angular.module('starter.evaluation.controllers', [])
 
   $scope.sendAnswers = function(){
     evaluationTest.sendAnswers($stateParams.id, $scope.questions);
+  };
+
+  $scope.exit = function(){
+    $alert.confirm('Alerta', 'El área será tomada como no enviada', function(){
+      $ionicNavBarDelegate.back();
+    });
   };
 });

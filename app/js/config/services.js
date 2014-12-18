@@ -5,7 +5,7 @@ angular.module('config.services', [])
 
   var $alert = function (title, message){
     if(navigator && navigator.notification){
-      navigator.notification.alert(message, alertDismissed, title, 'Aceptar');
+      navigator.notification.alert(message, function(){}, title, 'Aceptar');
     }
     else{
       alert(message);
@@ -28,7 +28,9 @@ angular.module('config.services', [])
       insuficient_privileges: 'No tienes permiso para acceder a estos recursos',
       invalid_hotp_code: 'Clave de acceso inválida',
       invalid_grant: 'Usuario y contraseña no coinciden',
-      access_denied: 'Usuario bloqueado'
+      access_denied: 'Usuario bloqueado',
+      already_opened_test: 'El test que intenta abrir ya ha sido abierto',
+      existing_user: 'El usuario ya existe'
     },
     404: {
       no_active_groups: 'No hay grupos activos',
@@ -129,8 +131,9 @@ angular.module('config.services', [])
 .service('$alert', function($ionicPopup){
 
   this.show = function(title, message){
+
     if(navigator && navigator.notification){
-      navigator.notification.alert(message, alertDismissed, title, 'Aceptar');
+      navigator.notification.alert(message, function(){}, title, 'Aceptar');
     }
     else{
       var alertPopup = $ionicPopup.alert({
@@ -139,6 +142,43 @@ angular.module('config.services', [])
         okType: 'button-inci'
       });
     }
+  };
+
+  this.confirm = function(title, message, success){
+    if(navigator && navigator.notification){
+
+      var onConfirm = function(res){
+        if(res == 1){
+          success();
+        }
+      };
+
+      navigator.notification.confirm(
+        message,
+        onConfirm,
+        title,
+        ['Aceptar','Cancelar']
+      );
+
+    }
+
+    else{
+      var confirmPopup = $ionicPopup.confirm({
+        title: title,
+        template: message,
+        cancelText: 'Cancelar',
+        okText: 'Aceptar',
+        okType: 'button-inci'
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+          success();
+        } else {
+
+        }
+      });
+    }
+
   };
 
 });

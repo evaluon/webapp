@@ -58,9 +58,6 @@ angular.module('starter.controllers', [])
 
 })
 .controller('HomeCtrl', function($scope, Auth){
-  $scope.$on('$viewContentLoaded', function() {
-    $('#textInit').focus();
-  });
 
   $scope.logout = function(){
     Auth.logout();

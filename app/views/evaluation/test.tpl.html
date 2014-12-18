@@ -1,4 +1,4 @@
-<ion-view title="Examen de {{params.area}}">
+<ion-view title="Examen de {{params.area}}" hide-back-button="true">
   <ion-content class="padding">
     <div class="card">
       <div class="item item-text-wrap">
@@ -49,5 +49,6 @@
     <button class="button button-full button-inci" ng-click="verifyAnswers()">Preguntas no contestadas</button>
     <button class="button button-full button-inci" ng-click="rollbackAnswers()" ng-if="rollbackAnswersFlag">Volver al original</button>
     <button class="button button-full button-inci" ng-click="sendAnswers()">Enviar</button>
+    <button class="button button-full button-inci" ng-click="exit()">Volver</button>
   </ion-content>
 </ion-view>
