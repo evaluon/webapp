@@ -9,11 +9,15 @@ angular.module('starter.controllers', [])
     };
 
 })
-.controller('RegistroCtrl', function($scope, Auth){
+.controller('RegistroCtrl', function($scope, $filter, Auth){
 
   $scope.$on('$viewContentLoaded', function() {
     $('#textInit').focus();
   });
+
+  var now = new Date();
+  now.setFullYear(now.getFullYear() - 3);
+  $scope.maxDate = $filter('date')(now, 'yyyy-MM-dd');
 
   $scope.disabilities = [{"id":0,"description":"Sin discapacidad"},{"id":1,"description":"Persona ciega"},{"id":2,"description":"Persona con baja visión"},{"id":3,"description":"Persona sordociega"}];
   $scope.types = [{"id":1,"description":"Estudiante"},{"id":2,"description":"Empleado"},{"id":3,"description":"Aspirante universitario"},{"id":4,"description":"Aspirante empleado"},{"id":5,"description":"Otro"}];

@@ -120,6 +120,7 @@ angular.module('starter.services', [])
             $ionicLoading.show({
                 template: 'Cargando...'
             });
+
             API.createUser(data).then(function(success){
                 var loginData = {
                     username: data.mail,
@@ -141,7 +142,7 @@ angular.module('starter.services', [])
 
             }).catch(function(error){
                 $ionicLoading.hide();
-            })
+            });
         },
         recoverPassword: function(mail){
 

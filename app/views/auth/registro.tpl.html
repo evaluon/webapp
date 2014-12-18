@@ -21,9 +21,11 @@
       </label>
       <label for="birth_date" class="item item-input item-stacked-label">
         <span class="input-label">Fecha de nacimiento</span>
-        <input name="birth_date" type="date"  aria-describedby="registro-user-birthdate" ng-model="user.birth_date"  required>
+        <input name="birth_date" type="date"  aria-describedby="registro-user-birthdate" ng-model="user.birth_date" required>
         <p id="registro-user-birthdate" class="aria-description">Ingrese su fecha de nacimiento</p>
-        <span ng-if="validate(registryUserForm, 'birth_date')" class="text-assertive">Campo obligatorio/span>
+        <span ng-if="validate(registryUserForm, 'birth_date')" class="text-assertive">Fecha de nacimiento no válida</span>
+        <span ng-if="user.birth_date > maxDate" class="text-assertive">Fecha de nacimiento no válida</span>
+
       </label>
       <label for="gender" class="item item-input item-stacked-label">
         <span class="input-label">Género</span>
@@ -65,8 +67,8 @@
       </label>
       </label>
 
-      <h5 style="text-align: center" ng-if="registryUserForm.$invalid || (user.password != password2)" class="text-assertive">Tu formulario contiene campos inválidos</h5>
-      <input ng-disabled="registryUserForm.$invalid || (user.password != password2) " type="submit" class="button button-block button-inci" value="Registrar">
+      <h5 style="text-align: center" ng-if="registryUserForm.$invalid || (user.password != password2) || user.birth_date > maxDate" class="text-assertive">Tu formulario contiene campos inválidos</h5>
+      <input ng-disabled="registryUserForm.$invalid || (user.password != password2) || user.birth_date > maxDate" type="submit" class="button button-block button-inci" value="Registrar">
     </form>
   </ion-content>
 </ion-view>
