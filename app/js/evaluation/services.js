@@ -172,7 +172,7 @@ angular.module('starter.evaluation.services', [])
     }
   }
 })
-.factory('evaluationTest', function($http, $ionicLoading, $q, $state, localStorageService, api, access, $ionicNavBarDelegate){
+.factory('evaluationTest', function($http, $ionicLoading, $q, $state, $alert, localStorageService, api, access, $ionicNavBarDelegate){
   var API = {
     getTestAnswersByArea: function(test){
       return $http({

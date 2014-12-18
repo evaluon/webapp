@@ -48,7 +48,7 @@ angular.module('starter.configuration.controllers', [])
 
     updateUser.updateUser(update).then(function(success){
       updateUser.updateEvaluee(user.evaluee).then(function(success){
-        console.log('si');
+
       });
     });
 
