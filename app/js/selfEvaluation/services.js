@@ -34,26 +34,14 @@ angular.module('starter.selfEvaluation.services', [])
       });
 
       return API.getTestsByGroupId().then(function(success){
-        console.log(success);
-        if(success.data.data.length > 0){
-          $ionicLoading.hide();
-          return success;
-        }
-        else{
-          API.createSelfTest().then(function(success){
-            return these.getTestsByGroupId();
-          }).catch(function(error){
-          });
-        }
-      }).catch(function(error){
-
-        if(error.status == 404){
-          API.createSelfTest().then(function(success){
-            return these.getTestsByGroupId();
-          }).catch(function(error){
-          });
-        }
         $ionicLoading.hide();
+        return success;
+      });
+    },
+    createSelfTest: function(){
+      var these = this;
+      return API.createSelfTest().then(function(success){
+        return success;
       });
     }
   };

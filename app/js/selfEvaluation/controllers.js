@@ -1,6 +1,6 @@
 'use strict';
 angular.module('starter.selfEvaluation.controllers', [])
-.controller('SelfEvaluationTestsCtrl', function($scope, selfEvaluationTests){
+.controller('SelfEvaluationTestsCtrl', function($scope, $ionicLoading, selfEvaluationTests){
   $scope.rowTests = [];
   $scope.routes = {
     testsDetails: 'selfEvaluation-knowledge-area'
@@ -16,11 +16,23 @@ angular.module('starter.selfEvaluation.controllers', [])
     );
   };
 
-  selfEvaluationTests.getTestsByGroupId().then(function(success){
-    if(success) $scope.rowTests = success.data.data
-  }).catch(function(error){
-    console.log(error);
-  })
+  var getSelfEvaluation = function(){
+    selfEvaluationTests.getTestsByGroupId().then(function(success){
+      $scope.rowTests = success.data.data;
+    }).catch(function(error){
+      if(error.status == 404){
+        selfEvaluationTests.createSelfTest().then(function(success){
+          getSelfEvaluation();
+        }).catch(function(error){
+          $ionicLoading.hide();
+        });
+      }
+      else $ionicLoading.hide();
+    });
+  };
+
+  getSelfEvaluation();
+
 })
 .controller('SelfEvaluationKnowledgeAreaCtrl', function($scope, $stateParams, selfEvaluationKnowledgeArea){
   $scope.rowTestsDetails = [];
