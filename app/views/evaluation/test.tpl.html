@@ -2,36 +2,36 @@
   <ion-content class="padding">
     <div class="card">
       <div class="item item-text-wrap">
-        <h3>Examen evaluon</h3>
-        <p>Ten en cuenta que el examen se anulará al cerrar la aplicación</p>
+        <h3 tabindex="0">Examen evaluon</h3>
+        <p tabindex="0">Ten en cuenta que el examen se anulará al cerrar la aplicación</p>
         <br>
-        <h3>Tipos de preguntas</h3>
+        <h3 tabindex="0">Tipos de preguntas</h3>
         <div>
-          <p>En el examen se pueden utilizan preguntas de selección múltiple con única respuesta y preguntas abiertas de respuesta corta.</div> </p>
-          <p ng-if="close">Las preguntas de selección múltiple con única respuesta están conformadas por un enunciado, la formulación de una tarea de evaluación y cuatro opciones de respuesta, codificadas como A, B, C y D, de las cuales sólo una es correcta o válida dada la tarea planteada.</p>
-          <p ng-if="close">Puedes desplazarte por las preguntas y respuestas, cuándo quieras responder acertadamente a una opción solo basta un doble click.</p>
-          <p ng-if="open">Las preguntas abiertas de respuesta corta no presentan opciones de respuesta. El estudiante construye (produce, elabora, escribe) una respuesta de acuerdo con la tarea que se le ha asignado, en el espacio definido.</p>
-          <p ng-if="open">Puedes resplazarte por las preguntas y respuestas, cuándo quieras responder solo basta llenar el campo de texto</p>
+          <p tabindex="0">En el examen se pueden utilizan preguntas de selección múltiple con única respuesta y preguntas abiertas de respuesta corta.</div> </p>
+          <p ng-if="close" tabindex="0">Las preguntas de selección múltiple con única respuesta están conformadas por un enunciado, la formulación de una tarea de evaluación y cuatro opciones de respuesta, codificadas como A, B, C y D, de las cuales sólo una es correcta o válida dada la tarea planteada.</p>
+          <p ng-if="close" tabindex="0">Puedes desplazarte por las preguntas y respuestas, cuándo quieras responder acertadamente a una opción solo basta un doble click.</p>
+          <p ng-if="open" tabindex="0">Las preguntas abiertas de respuesta corta no presentan opciones de respuesta. El estudiante construye (produce, elabora, escribe) una respuesta de acuerdo con la tarea que se le ha asignado, en el espacio definido.</p>
+          <p ng-if="open" tabindex="0">Puedes resplazarte por las preguntas y respuestas, cuándo quieras responder solo basta llenar el campo de texto</p>
         </div>
       </div>
     </div>
-    <h2>Preguntas:</h2>
+    <h2 tabindex="0">Preguntas:</h2>
 
     <div class="list">
       <div class="answer" ng-repeat="question in questions">
         <div class="item">
-          <h3 id ="answer-{{$index}}">{{$index + 1}}.</h3>
-          <p>{{question.description_text}}</p>
+          <h3 id ="answer-{{$index}}" tabindex="0">{{$index + 1}}.</h3>
+          <p tabindex="0">{{question.description_text}}</p>
         </div>
         <div class="row" ng-if="question.image">
           <div class="col col-80 col-offset-10 text-center" >
-            <img ng-src="http://cdn.boolinc.co/evaluon/{{question.image.location}}" alt="{{question.image.description}}" class="img-responsive">
+            <img ng-src="http://cdn.boolinc.co/evaluon/{{question.image.location}}" alt="{{question.image.description}}" class="img-responsive" tabindex="0">
           </div>
         </div>
-        <label ng-if="question.open == 1" class="item item-input">
-          <textarea placeholder="Ingrese su respuesta" ng-model="question.answer"></textarea>
+        <label ng-if="question.open == 1" class="item item-input" tabindex="0">
+          <textarea placeholder="Ingrese su respuesta" ng-model="question.answer" tabindex="0"></textarea>
         </label>
-        <ion-radio ng-if="question.open == 0" ng-repeat = "answer in question.answers" ng-value="'{{answer.id}}'" ng-model="question.answer"   name="answer{{answer.id}}"><p><strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}} </p></ion-radio>
+        <ion-radio tabindex="0" ng-if="question.open == 0" ng-repeat = "answer in question.answers" ng-value="'{{answer.id}}'" ng-model="question.answer"   name="answer{{answer.id}}"><p><strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}} </p></ion-radio>
       </div>
     </div>
 

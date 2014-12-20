@@ -56,6 +56,13 @@ angular.module('starter.selfEvaluation.controllers', [])
   }).catch(function(error){
     console.log(error);
   });
+
+  $scope.exit = function(){
+    $alert.confirm('Alerta', 'Tu examen será tomado como no enviado', function(){
+      $state.go('home');
+    });
+  };
+
 })
 .controller('SelfEvaluationTestCtrl', function($scope, $stateParams, selfEvaluationTest){
   $scope.test = {};
@@ -107,4 +114,11 @@ angular.module('starter.selfEvaluation.controllers', [])
   $scope.sendAnswers = function(){
     selfEvaluationTest.sendAnswers($stateParams.id, $scope.questions);
   };
+  
+  $scope.exit = function(){
+    $alert.confirm('Alerta', 'El área será tomada como no enviada', function(){
+      $ionicNavBarDelegate.back();
+    });
+  };
+
 });
