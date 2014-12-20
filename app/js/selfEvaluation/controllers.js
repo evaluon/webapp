@@ -34,7 +34,7 @@ angular.module('starter.selfEvaluation.controllers', [])
   getSelfEvaluation();
 
 })
-.controller('SelfEvaluationKnowledgeAreaCtrl', function($scope, $stateParams, selfEvaluationKnowledgeArea){
+.controller('SelfEvaluationKnowledgeAreaCtrl', function($scope, $stateParams, $alert, $state, selfEvaluationKnowledgeArea){
   $scope.rowTestsDetails = [];
   $scope.routes ={
     test: 'selfEvaluation-test-area',
@@ -64,7 +64,7 @@ angular.module('starter.selfEvaluation.controllers', [])
   };
 
 })
-.controller('SelfEvaluationTestCtrl', function($scope, $stateParams, selfEvaluationTest){
+.controller('SelfEvaluationTestCtrl', function($scope, $stateParams, $alert, $ionicNavBarDelegate, selfEvaluationTest){
   $scope.test = {};
   $scope.questions = [];
   $scope.params = $stateParams;
@@ -114,7 +114,7 @@ angular.module('starter.selfEvaluation.controllers', [])
   $scope.sendAnswers = function(){
     selfEvaluationTest.sendAnswers($stateParams.id, $scope.questions);
   };
-  
+
   $scope.exit = function(){
     $alert.confirm('Alerta', 'El área será tomada como no enviada', function(){
       $ionicNavBarDelegate.back();
