@@ -1,16 +1,7 @@
 'use strict';
 
 angular.module('config.services', [])
-.factory('httpInterceptor', function($q){
-
-  var $alert = function (title, message){
-    if(navigator && navigator.notification){
-      navigator.notification.alert(message, function(){}, title, 'Aceptar');
-    }
-    else{
-      alert(message);
-    }
-  };
+.factory('httpInterceptor', function($q, $injector){
 
   var errors = {
     400: {
@@ -44,6 +35,23 @@ angular.module('config.services', [])
   };
 
   return {
+
+    request: function(config){
+
+      $injector.get('$ionicLoading').show({
+        template: 'Cargando...'
+      });
+
+      return config;
+    },
+
+    response: function(response){
+
+      $injector.get('$ionicLoading').hide();
+
+      return response;
+    },
+
     responseError: function(response) {
       var message;
 
@@ -78,13 +86,14 @@ angular.module('config.services', [])
         message = 'Error desconocido, si este persiste contacte al administrador';
       }
 
-
         response.message = message;
 
+        $injector.get('$ionicLoading').hide();
+
         if(response.config.data){
-          if(!response.config.data.nonErrorMessage) $alert('Error',message);
+          if(!response.config.data.nonErrorMessage) $injector.get('$alert').show('Error', message);
         }
-        else $alert('Error',message);
+        else $injector.get('$alert').show('Error', message);
 
         return $q.reject(response);
     }
