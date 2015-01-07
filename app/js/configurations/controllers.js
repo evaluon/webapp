@@ -12,7 +12,7 @@ angular.module('starter.configuration.controllers', [])
     else $alert.show('Error','Las contraseñas no coinciden');
   };
 })
-.controller('UpdateUserCtrl', function($scope, $filter, updateUser){
+.controller('UpdateUserCtrl', function($scope, $filter, updateUser, $state, $alert){
 
   $scope.disabilities = [{'id':0,'description':'Sin discapacidad'},{'id':1,'description':'Persona ciega'},{'id':2,'description':'Persona con baja visión'},{'id':3,'description':'Persona sordociega'}];
   $scope.types = [{'id':1,'description':'Estudiante'},{'id':2,'description':'Empleado'},{'id':3,'description':'Aspirante universitario'},{'id':4,'description':'Aspirante empleado'},{'id':5,'description':'Otro'}];
@@ -48,7 +48,7 @@ angular.module('starter.configuration.controllers', [])
 
     updateUser.updateUser(update).then(function(success){
       updateUser.updateEvaluee(user.evaluee).then(function(success){
-
+        $state.go('home');
       });
     });
 
