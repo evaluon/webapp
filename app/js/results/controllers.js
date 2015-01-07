@@ -23,4 +23,9 @@ angular.module('starter.results.controllers', [])
   results.getAllResultsByInstitute($stateParams.id).then(function(success){
     $scope.results = success.data.data;
   });
+
+  $scope.decimals = function(result){
+    return result.toFixed(2);
+  };
+
 });
