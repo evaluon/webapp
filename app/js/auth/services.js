@@ -100,21 +100,19 @@ angular.module('starter.services', [])
                 template: 'Cargando...'
             });
 
-            var success = function(success){
-                $ionicLoading.hide();
-                success.data.role = routingConfig.userRoles.user;
-                localStorageService.set(CryptoJS.SHA1(access.tokens.user).toString(), success.data);
-                $state.go('home');
-            };
-            var error = function(error){
-                $ionicLoading.hide();
-            };
-            var data = {
+            return API.login({
                 grant_type:'password',
                 username: username,
                 password: CryptoJS.SHA1(password).toString()
-            }
-            API.login(data).then(success,error);
+            }).then(function(success){
+
+                $ionicLoading.hide();
+                success.data.role = routingConfig.userRoles.user;
+                localStorageService.set(CryptoJS.SHA1(access.tokens.user).toString(), success.data);
+
+            }).catch(function(error){
+                $ionicLoading.hide();
+            });
         },
         createUser: function(data, dataEvaluee){
             $ionicLoading.show({

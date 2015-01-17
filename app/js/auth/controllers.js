@@ -1,11 +1,20 @@
 'use strict';
 angular.module('starter.controllers', [])
 
-.controller('LoginCtrl', function($scope, $state, Auth) {
+.controller('LoginCtrl', function($scope, $state, Auth, updateUser) {
     $scope.user = {};
     $scope.login = function(event){
         event.preventDefault();
-        Auth.login($scope.user.username, $scope.user.password);
+        Auth.login(
+            $scope.user.username, $scope.user.password
+        ).then(function(){
+            return updateUser.getUser();
+        }).then(function(user){
+            console.log(user);
+            if(user.role <= 1){
+                $state.go('home');
+            }
+        });
     };
 
 })
