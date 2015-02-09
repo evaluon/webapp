@@ -267,7 +267,7 @@ $httpProvider.interceptors.push('httpInterceptor');
       //navigator.notification.alert('Ganamos la prueba!', alertDismissed, 'Prueba', 'Aceptar');
     }
     if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
     }
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required

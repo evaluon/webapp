@@ -107,7 +107,7 @@ angular.module('starter.evaluation.controllers', [])
     evaluationPassword.loginTest($stateParams.id, $scope.password.data);
   }
 })
-.controller('EvaluationTestCtrl', function($scope, $stateParams, $alert, $ionicNavBarDelegate, evaluationTest){
+.controller('EvaluationTestCtrl', function($scope, $stateParams, $alert, $ionicNavBarDelegate, evaluationTest, localStorageService){
 
   $scope.test = {};
   $scope.questions = [];
@@ -117,25 +117,35 @@ angular.module('starter.evaluation.controllers', [])
   $scope.open = false;
   $scope.close = false;
 
+  console.log($stateParams);
 
 
-  evaluationTest.getTestAnswersByArea($stateParams).then(function(success){
-
-    if(success) $scope.questions = success.data.data;
-
-    for(var p in $scope.questions){
-
-      if($scope.questions[p].open == 0){
-        $scope.close = true;
-        $scope.questions[p].answers = _.shuffle($scope.questions[p].answers);
-      }
-      if($scope.questions[p].open == 1){
-        $scope.open = true;
-      }
+  var getArea = function(){
+    if(localStorageService.get($scope.params.id + $scope.params.area)){
+      $scope.questions = localStorageService.get($scope.params.id + $scope.params.area);
     }
+    else{
+      evaluationTest.getTestAnswersByArea($stateParams).then(function(success){
 
-  }).catch(function(error){
-  });
+        if(success) $scope.questions = success.data.data;
+
+        for(var p in $scope.questions){
+
+          if($scope.questions[p].open == 0){
+            $scope.close = true;
+            $scope.questions[p].answers = _.shuffle($scope.questions[p].answers);
+          }
+          if($scope.questions[p].open == 1){
+            $scope.open = true;
+          }
+        }
+
+      }).catch(function(error){
+      });
+    }
+  };
+
+  getArea();
 
   $scope.verifyAnswers = function(){
    $scope.rollbackAnswersFlag = true;
@@ -162,9 +172,11 @@ angular.module('starter.evaluation.controllers', [])
 
   $scope.sendAnswers = function(){
     evaluationTest.sendAnswers($stateParams.id, $scope.questions);
+    localStorageService.remove($scope.params.id + $scope.params.area);
   };
 
   $scope.exit = function(){
+    localStorageService.set($scope.params.id + $scope.params.area, $scope.questions);
     $alert.confirm('Alerta', 'El área será tomada como no enviada', function(){
       $ionicNavBarDelegate.back();
     });
