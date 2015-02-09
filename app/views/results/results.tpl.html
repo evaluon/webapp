@@ -3,7 +3,7 @@
     <div class="list">
       <a class="item item-avatar" ng-repeat="result in results">
         <h2>{{result.description}}</h2>
-        <p>Resultado: {{decimals(result.note*10)}} de 10p</p>
+        <p>{{result.rightQuestions}} preguntas acertadas de {{result.totalQuestions}}<p>
         <p ng-if="result.feedback">Comentarios: {{result.feedback}}</p>
       </a>
     </div>

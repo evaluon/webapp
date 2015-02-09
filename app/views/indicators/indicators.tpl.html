@@ -15,22 +15,22 @@
           </div>
         </div>
         <p>
-          <h2 class="text-center">Grado {{levels[indicators.levelName]}}</h2> {{indicators.description}}
+          <h2 class="text-center">Al completar tus evaluaciones has conseguido el grado {{levels[indicators.levelName]}}</h2> {{indicators.description}}
         </p>
       </div>
 
-      <a class="item item-icon-left assertive" href="">
+      <p class="item item-icon-left assertive" href="">
         <i class="icon ion-checkmark-round" alt="Preguntas acertadas"></i>
           {{indicators.questions}} Preguntas acertadas
-      </a>
-      <a class="item item-icon-left assertive" href="">
+      </p>
+      <p class="item item-icon-left assertive" href="">
         <i class="icon ion-stats-bars" alt="Promedio"></i>
           Promedio:  {{indicators.average}}
-      </a>
-      <a class="item item-icon-left assertive" href="">
+      </p>
+      <p class="item item-icon-left assertive" href="">
         <i class="icon ion-ios7-star-half" alt="Preguntas para el próximo grado"></i>
           {{indicators.remainingQuestions}} Preguntas para el próximo grado
-      </a>
+      </p>
 
     </div>
   </ion-content>

@@ -2,32 +2,32 @@
   <ion-content class="padding">
     <div class="row padding item">
       <div class="col divIcon item-avatar">
-        <h2>Evaluación</h2>
-        <a ui-sref="evaluation"><img src="./img/1.svg" alt="Encuentra las pruebas que debes presentar según su asignatura"></a>
+        <a ui-sref="evaluation"><h2>Evaluación</h2></a>
+        <a tabindex="0" ui-sref="evaluation"><img tabindex="0" src="./img/1.svg" alt="Encuentra las pruebas que debes presentar según su asignatura"></a>
       </div>
       <div class="col divIcon item-avatar">
-        <h2>Evalúate</h2>
-        <a ui-sref="selfEvaluation"><img src="./img/2.svg" alt="Reta tu conocimiento y prepárate para tus pruebas"></a>
-      </div>
-    </div>
-    <div class="row padding item">
-      <div class="col divIcon item-avatar">
-        <h2>Resultados</h2>
-        <a ui-sref="resultsInstitutes"><img src="./img/3.svg" alt="Revisa el puntaje en poco tiempo y la retroalimentación para mejorar "></a>
-      </div>
-      <div class="col divIcon item-avatar">
-        <h2>Promedio</h2>
-        <a ui-sref="indicators"><img src="./img/4.svg" alt="Conoce los avances de tus conocimiento"></a>
+        <a ui-sref="selfEvaluation"><h2>Evalúate</h2></a>
+        <a tabindex="0" ui-sref="selfEvaluation"><img tabindex="0" src="./img/2.svg" alt="Reta tu conocimiento y prepárate para tus pruebas"></a>
       </div>
     </div>
     <div class="row padding item">
       <div class="col divIcon item-avatar">
-        <h2>Configuraciones</h2>
-        <a ui-sref="configurations"><img src="./img/5.svg" alt="Configura tu aplicación"></a>
+        <a ui-sref="resultsInstitutes"><h2>Resultados</h2></a>
+        <a tabindex="0" ui-sref="resultsInstitutes"><img tabindex="0" src="./img/3.svg" alt="Revisa el puntaje en poco tiempo y la retroalimentación para mejorar "></a>
       </div>
       <div class="col divIcon item-avatar">
-        <h2>Cerrar Sesión</h2>
-        <a href="" ng-click="logout()"><img src="./img/9.svg" alt="Cierra esta sesión"></a>
+        <a ui-sref="indicators"><h2>Promedio</h2></a>
+        <a tabindex="0" ui-sref="indicators"><img tabindex="0" src="./img/4.svg" alt="Conoce los avances de tus conocimiento"></a>
+      </div>
+    </div>
+    <div class="row padding item">
+      <div class="col divIcon item-avatar">
+        <a ui-sref="configurations"><h2>Configuraciones</h2></a>
+        <a tabindex="0" ui-sref="configurations"><img tabindex="0" src="./img/5.svg" alt="Configura tu aplicación"></a>
+      </div>
+      <div class="col divIcon item-avatar">
+        <a ng-click="logout()"><h2>Cerrar Sesión</h2></a>
+        <a tabindex="0" ng-click="logout()"><img tabindex="0" src="./img/9.svg" alt="Cierra esta sesión"></a>
       </div>
     </div>
   </ion-content>

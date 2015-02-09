@@ -17,9 +17,9 @@
     </div>
     <h2 tabindex="0">Preguntas:</h2>
 
-    <div class="list">
+    <div class="list card">
       <div class="answer" ng-repeat="question in questions">
-        <div class="item">
+        <div class="item item-text-wrap">
           <h3 id ="answer-{{$index}}" tabindex="0">{{$index + 1}}.</h3>
           <p tabindex="0">{{question.description_text}}</p>
         </div>
@@ -31,20 +31,25 @@
         <label ng-if="question.open == 1" class="item item-input" tabindex="0">
           <textarea placeholder="Ingrese su respuesta" ng-model="question.answer" tabindex="0"></textarea>
         </label>
-        <ion-radio tabindex="0" ng-if="question.open == 0" ng-repeat = "answer in question.answers" ng-value="'{{answer.id}}'" ng-model="question.answer"   name="answer{{answer.id}}"><p><strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}} </p></ion-radio>
+
+        <ion-radio class="item-text-wrap" tabindex="0" ng-if="question.open == 0" ng-repeat = "answer in question.answers" ng-value="'{{answer.id}}'" ng-model="question.answer"   name="answer{{answer.id}}"><p><strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}} </p></ion-radio>
+
       </div>
     </div>
 
-    <!--<div class="list card" ng-repeat = "question in questions">
-      <div class="item">
+    <!--
+
+    <div class="list card" ng-repeat = "question in questions">
+      <div class="item item-text-wrap" style="height: auto; width: auto;">
         <h3 id ="answer-{{$index}}">{{$index + 1}}.</h3>
         <p>{{question.description_text}}</p>
       </div>
 
-      <div class="list">
+      <div class="list item item-text-wrap">
         <ion-radio ng-model="question.answer" ng-repeat =" answer in question.answers" ng-value="'{{answer.id}}'" ><p><strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}} </p></ion-radio>
       </div>
-    </div>-->
+    </div>
+  -->
 
     <button class="button button-full button-inci" ng-click="verifyAnswers()">Preguntas no contestadas</button>
     <button class="button button-full button-inci" ng-click="rollbackAnswers()" ng-if="rollbackAnswersFlag">Volver al original</button>
