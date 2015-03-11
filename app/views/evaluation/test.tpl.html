@@ -17,7 +17,7 @@
     </div>
     <h2 tabindex="0">Preguntas:</h2>
 
-    <div class="list card">
+    <div class="list card" >
       <div class="answer" ng-repeat="question in questions">
         <div class="item item-text-wrap">
           <h3 id ="answer-{{$index}}" tabindex="0">{{$index + 1}}.</h3>
@@ -32,9 +32,30 @@
           <textarea placeholder="Ingrese su respuesta" ng-model="question.answer" tabindex="0"></textarea>
         </label>
 
+
         <ion-radio class="item-text-wrap" tabindex="0" ng-if="question.open == 0" ng-repeat = "answer in question.answers" ng-value="'{{answer.id}}'" ng-model="question.answer"   name="answer{{answer.id}}"><p><strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}} </p></ion-radio>
 
-      </div>
+
+        <!--
+
+        <div role="radiogroup" ng-if="question.open == 0">
+
+            <div ng-repeat = "answer in question.answers" class="">
+
+                <evaluon-select role="radio" ng-model="question.answer" ng-class="{active: checked}"
+                   ng-disabled="isDisabled" ng-click="toggleRadio(question.answer)"
+                   aria-label="Custom Radio" text="text" index="1">
+                   <span class="icon" aria-hidden="true"></span>
+                   <strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}}
+                 </evaluon-select>
+                <input type="radio" role="radio" tabindex="0" ng-value="'{{answer.id}}'" ng-model="question.answer" name="answer{{answer.id}}" aria-labelledby="answer{{answer.id}}-label" required="true">
+                <label for="answer{{answer.id}}" id="answer{{answer.id}}-label" aria-hidden="true"> <strong>{{'abcdefghijklmnopqrstuvwxyz'[$index]}}.</strong>  {{answer.description_text}}</label>
+            </div>
+        </div>
+        -->
+
+
+     </div>
     </div>
 
     <!--

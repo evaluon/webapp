@@ -53,6 +53,9 @@ angular.module('config.services', [])
     },
 
     responseError: function(response) {
+
+      $injector.get('$ionicLoading').hide();
+
       var message;
 
       if(errors[response.status]){
@@ -94,6 +97,9 @@ angular.module('config.services', [])
           if(!response.config.data.nonErrorMessage) $injector.get('$alert').show('Error', message);
         }
         else $injector.get('$alert').show('Error', message);
+
+        $injector.get('$ionicLoading').hide();
+
 
         return $q.reject(response);
     }

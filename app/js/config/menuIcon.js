@@ -4,7 +4,7 @@ angular.module('starter')
 .directive('menuIcon', function(){
   return{
     restrict: 'E',
-    template: '<button ui-sref="{{ref}}" class="button-menu img-responsive"> <img tabindex="0" class="img-menu" ng-src="{{img}}" alt="{{description}}"></button>',
+    templateUrl: 'views/directives/menuIcon.tpl.html',
     scope: {
       ref: '@',
       img: '@',

@@ -181,4 +181,9 @@ angular.module('starter.evaluation.controllers', [])
       $ionicNavBarDelegate.back();
     });
   };
+
+  $scope.toggleRadio = function(value){
+      console.log('si');
+      value = !value;
+  };
 });

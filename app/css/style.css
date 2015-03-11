@@ -135,3 +135,24 @@
     width: 100%;
     height: 100%;
   }
+
+  /* radio button */
+
+  [role=radio] {
+     cursor: pointer;
+     display: inline-block;
+   }
+   [role=radio] .icon:before {
+     content: '\2610';
+     display: inline-block;
+     font-size: 2em;
+     line-height: 1;
+     vertical-align: middle;
+     speak: none;
+   }
+   [role=radio].active .icon:before {
+     content: '\2611';
+   }
+   pre {
+       white-space: pre-wrap;
+   }

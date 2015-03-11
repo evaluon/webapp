@@ -17,11 +17,13 @@
   },
   "main": "./dist/index.html",
   "window": {
-      "toolbar": false,
-      "width": 1280,
-      "height": 720
+    "toolbar": false,
+    "width": 1280,
+    "height": 720
   },
-  "dependencies": {},
+  "dependencies": {
+    "gulp": "^3.8.10"
+  },
   "devDependencies": {
     "gulp": "^3.8.8",
     "connect-history-api-fallback": "0.0.4",

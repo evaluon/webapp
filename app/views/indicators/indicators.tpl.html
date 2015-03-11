@@ -14,7 +14,7 @@
             <img ng-if="indicators.levelName" class="full-image" src="img/indicators/{{indicators.levelName}}.svg" alt="Grado {{levels[indicators.levelName]}}">
           </div>
         </div>
-        <h2 class="text-center">Al completar tus evaluaciones has conseguido el grado {{levels[indicators.levelName]}} </h2>
+        <p class="text-center">Al completar tus evaluaciones has conseguido el grado {{levels[indicators.levelName]}} <p>
 
         <p>
           {{indicators.description}}
@@ -23,15 +23,15 @@
 
       <p class="item item-icon-left assertive" tabindex="0">
         <i class="icon ion-checkmark-round" alt="Preguntas acertadas"></i>
-         Preguntas acertadas: {{indicators.questions}}
+         Preguntas acertadas: {{indicators.questions | number}}
       </p>
       <p class="item item-icon-left assertive" tabindex="0">
         <i class="icon ion-stats-bars" alt="Promedio"></i>
-          Promedio: {{indicators.average}}
+          Promedio: {{indicators.average | number}}
       </p>
       <p class="item item-icon-left assertive" tabindex="0">
         <i class="icon ion-ios7-star-half" alt="Preguntas para el próximo grado"></i>
-         Preguntas para el próximo grado: {{indicators.remainingQuestions}}
+         Preguntas para el próximo grado: {{indicators.remainingQuestions | number}}
       </p>
 
     </div>
