@@ -74,10 +74,6 @@ angular.module('starter.services', [])
 
     return {
         authClient: function(){
-            $ionicLoading.show({
-                template: 'Cargando...'
-            });
-
             return API.authClient(access.client).then(function(success){
                 $ionicLoading.hide();
                 localStorageService.set(CryptoJS.SHA1(access.tokens.client), success.data);
@@ -96,9 +92,6 @@ angular.module('starter.services', [])
             }
         },
         login: function(username, password){
-            $ionicLoading.show({
-                template: 'Cargando...'
-            });
 
             return API.login({
                 grant_type:'password',
@@ -115,9 +108,6 @@ angular.module('starter.services', [])
             });
         },
         createUser: function(data, dataEvaluee){
-            $ionicLoading.show({
-                template: 'Cargando...'
-            });
 
             API.createUser(data).then(function(success){
                 var loginData = {
@@ -143,10 +133,6 @@ angular.module('starter.services', [])
             });
         },
         recoverPassword: function(mail){
-
-            $ionicLoading.show({
-                template: 'Cargando...'
-            });
 
             return API.recoverPassword(mail).then(function(success){
                 $ionicLoading.hide();

@@ -29,9 +29,6 @@ angular.module('starter.selfEvaluation.services', [])
   return {
     getTestsByGroupId: function(){
       var these = this;
-      $ionicLoading.show({
-                template: 'Cargando...'
-      });
 
       return API.getTestsByGroupId().then(function(success){
         $ionicLoading.hide();
@@ -71,9 +68,7 @@ angular.module('starter.selfEvaluation.services', [])
 
   return {
     getAllKnowledgeArea: function(testId){
-      $ionicLoading.show({
-                template: 'Cargando...'
-      });
+
       return API.getAllKnowledgeArea(testId).then(function(success){
         if(success.data.data.length > 0){
           $ionicLoading.hide();
@@ -151,9 +146,7 @@ angular.module('starter.selfEvaluation.services', [])
 
   return {
     getTestAnswersByArea: function(test){
-      $ionicLoading.show({
-          template: 'Cargando...'
-      });
+
       return API.getTestAnswersByArea(test).then(function(success){
         $ionicLoading.hide();
         return success;
@@ -161,10 +154,9 @@ angular.module('starter.selfEvaluation.services', [])
         $ionicLoading.hide();
       });
     },
+
     getTestById: function(testId){
-      $ionicLoading.show({
-          template: 'Cargando...'
-      });
+
       return API.getTestAnswersByArea(test).then(function(success){
         $ionicLoading.hide();
         return success;
@@ -173,9 +165,7 @@ angular.module('starter.selfEvaluation.services', [])
       });
     },
     sendAnswers: function(testId, data){
-      $ionicLoading.show({
-          template: 'Cargando...'
-      });
+
       API.sendAnswers(testId, data).then(function(success){
         $ionicLoading.hide();
         $alert.show('Exito','Area enviada');

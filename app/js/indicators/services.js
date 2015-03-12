@@ -25,9 +25,6 @@ angular.module('starter.indicators.services', [])
 
   return {
     getIndicators: function(){
-      $ionicLoading.show({
-                template: 'Cargando...'
-            });
 
       return API.getIndicators().then(function(success){
         $ionicLoading.hide();
@@ -37,9 +34,6 @@ angular.module('starter.indicators.services', [])
       });
     },
     getUser: function(){
-      $ionicLoading.show({
-                template: 'Cargando...'
-            });
 
       return API.getUser().then(function(success){
         $ionicLoading.hide();

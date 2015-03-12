@@ -20,9 +20,6 @@ angular.module('starter.configuration.services', [])
 
   return {
     changePassword: function(password){
-      $ionicLoading.show({
-                template: 'Cargando...'
-      });
 
       return API.changePassword(password).then(function(success){
         $ionicLoading.hide();
@@ -68,10 +65,8 @@ angular.module('starter.configuration.services', [])
     };
 
     return {
+
       getUser: function(){
-        $ionicLoading.show({
-          template: 'Cargando...'
-        });
 
         return API.getUser().then(function(success){
 
@@ -82,10 +77,9 @@ angular.module('starter.configuration.services', [])
           $ionicLoading.hide();
         })
       },
+
       updateUser: function(user){
-        $ionicLoading.show({
-          template: 'Cargando...'
-        });
+
         return API.updateUser(user).then(function(success){
           return success;
           $ionicLoading.hide();
@@ -93,10 +87,9 @@ angular.module('starter.configuration.services', [])
           $ionicLoading.hide();
         })
       },
+
       updateEvaluee: function(evaluee){
-        $ionicLoading.show({
-          template: 'Cargando...'
-        });
+
         return API.updateEvalue(evaluee).then(function(success){
 
           $ionicLoading.hide();

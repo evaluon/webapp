@@ -16,10 +16,6 @@ angular.module('starter.evaluation.services', [])
   return {
     getAll: function(){
 
-      $ionicLoading.show({
-                template: 'Cargando...'
-            });
-
       return API.getAllInstitutes().then(function(success){
         $ionicLoading.hide();
         return success;
@@ -48,10 +44,9 @@ angular.module('starter.evaluation.services', [])
   };
 
   return {
+
     getGroupsByInstitutionId: function(institutionId){
-      $ionicLoading.show({
-                template: 'Cargando...'
-            });
+
       return API.getGroupsByInstitutionId(institutionId).then(function(success){
         $ionicLoading.hide();
         return success;
@@ -77,9 +72,7 @@ angular.module('starter.evaluation.services', [])
 
   return {
     getTestsByGroupId: function(groupId){
-      $ionicLoading.show({
-                template: 'Cargando...'
-      });
+
       return API.getTestsByGroupId(groupId).then(function(success){
         $ionicLoading.hide();
         return success;
@@ -111,9 +104,6 @@ angular.module('starter.evaluation.services', [])
 
   return {
     loginTest: function(testId, hotp){
-        $ionicLoading.show({
-                  template: 'Cargando...'
-        });
 
         return API.openTest(testId, hotp).then(function(success){
           $ionicLoading.hide();
@@ -150,9 +140,6 @@ angular.module('starter.evaluation.services', [])
 
   return {
     getAllKnowledgeArea: function(testId){
-      $ionicLoading.show({
-                template: 'Cargando...'
-      });
 
       return API.getAllKnowledgeArea(testId).then(function(success){
         if(success.data.data.length > 0){
@@ -243,9 +230,7 @@ angular.module('starter.evaluation.services', [])
 
   return {
     getTestAnswersByArea: function(test){
-      $ionicLoading.show({
-          template: 'Cargando...'
-      });
+
       return API.getTestAnswersByArea(test).then(function(success){
         $ionicLoading.hide();
         return success;
@@ -254,9 +239,7 @@ angular.module('starter.evaluation.services', [])
       });
     },
     getTestById: function(testId){
-      $ionicLoading.show({
-          template: 'Cargando...'
-      });
+
       return API.getTestAnswersByArea(test).then(function(success){
         $ionicLoading.hide();
         return success;
@@ -265,9 +248,7 @@ angular.module('starter.evaluation.services', [])
       });
     },
     sendAnswers: function(testId, data){
-      $ionicLoading.show({
-          template: 'Cargando...'
-      });
+
       API.sendAnswers(testId, data).then(function(success){
         $ionicLoading.hide();
         $alert.show('Exito','Area enviada');

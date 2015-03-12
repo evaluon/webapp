@@ -15,9 +15,7 @@ factory('resultsInstitutes', function($http, $ionicLoading, localStorageService,
 
   return {
     getAllInstitutes: function(){
-      $ionicLoading.show({
-        template: 'Cargando...'
-      });
+
       return API.getAllInstitutes().then(function(success){
         $ionicLoading.hide();
         return success;
@@ -42,9 +40,7 @@ factory('resultsInstitutes', function($http, $ionicLoading, localStorageService,
 
   return {
     getAllResultsByInstitute: function(instituteId){
-      $ionicLoading.show({
-        template: 'Cargando...'
-      });
+
       return API.getAllResultsByInstitute(instituteId).then(function(success){
         $ionicLoading.hide();
         return success;
