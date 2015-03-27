@@ -31,7 +31,6 @@ angular.module('starter.selfEvaluation.services', [])
       var these = this;
 
       return API.getTestsByGroupId().then(function(success){
-        $ionicLoading.hide();
         return success;
       });
     },
@@ -71,16 +70,13 @@ angular.module('starter.selfEvaluation.services', [])
 
       return API.getAllKnowledgeArea(testId).then(function(success){
         if(success.data.data.length > 0){
-          $ionicLoading.hide();
           return success;
         }
         else{
-          $ionicLoading.hide();
           $alert.show('Mensaje', 'Prueba finalizada exitosamente');
           $state.go('home');
         }
       }).catch(function(error){
-        $ionicLoading.hide();
       })
     }
   }
@@ -148,30 +144,24 @@ angular.module('starter.selfEvaluation.services', [])
     getTestAnswersByArea: function(test){
 
       return API.getTestAnswersByArea(test).then(function(success){
-        $ionicLoading.hide();
         return success;
       }).catch(function(){
-        $ionicLoading.hide();
       });
     },
 
     getTestById: function(testId){
 
       return API.getTestAnswersByArea(test).then(function(success){
-        $ionicLoading.hide();
         return success;
       }).catch(function(){
-        $ionicLoading.hide();
       });
     },
     sendAnswers: function(testId, data){
 
       API.sendAnswers(testId, data).then(function(success){
-        $ionicLoading.hide();
         $alert.show('Exito','Area enviada');
         $ionicNavBarDelegate.back();
       }).catch(function(error){
-        $ionicLoading.hide();
       });
     }
   };

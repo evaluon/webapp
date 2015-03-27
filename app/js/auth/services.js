@@ -75,7 +75,6 @@ angular.module('starter.services', [])
     return {
         authClient: function(){
             return API.authClient(access.client).then(function(success){
-                $ionicLoading.hide();
                 localStorageService.set(CryptoJS.SHA1(access.tokens.client), success.data);
                 return success;
             });
@@ -99,12 +98,10 @@ angular.module('starter.services', [])
                 password: CryptoJS.SHA1(password).toString()
             }).then(function(success){
 
-                $ionicLoading.hide();
                 success.data.role = routingConfig.userRoles.user;
                 localStorageService.set(CryptoJS.SHA1(access.tokens.user).toString(), success.data);
 
             }).catch(function(error){
-                $ionicLoading.hide();
             });
         },
         createUser: function(data, dataEvaluee){
@@ -118,28 +115,22 @@ angular.module('starter.services', [])
                     success.data.role = routingConfig.userRoles.user;
                     localStorageService.set(CryptoJS.SHA1(access.tokens.user).toString(), success.data);
                     API.createEvaluee(dataEvaluee).then(function(success){
-                        $ionicLoading.hide();
                         $alert.show('Exito', 'Usuario creado satisfactoriamente');
                         $state.go('home');
                     }).catch(function(error){
-                        $ionicLoading.hide();
                     });
                 }).catch(function(error){
-                    $ionicLoading.hide();
                 });
 
             }).catch(function(error){
-                $ionicLoading.hide();
             });
         },
         recoverPassword: function(mail){
 
             return API.recoverPassword(mail).then(function(success){
-                $ionicLoading.hide();
 
                 return success;
             }).catch(function(error){
-                $ionicLoading.hide();
             });
         },
         logout: function(){

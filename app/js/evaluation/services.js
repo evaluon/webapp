@@ -17,11 +17,8 @@ angular.module('starter.evaluation.services', [])
     getAll: function(){
 
       return API.getAllInstitutes().then(function(success){
-        $ionicLoading.hide();
         return success;
       }).catch(function(error){
-        $ionicLoading.hide();
-
       });
     }
   };
@@ -48,10 +45,8 @@ angular.module('starter.evaluation.services', [])
     getGroupsByInstitutionId: function(institutionId){
 
       return API.getGroupsByInstitutionId(institutionId).then(function(success){
-        $ionicLoading.hide();
         return success;
       }).catch(function(error){
-        $ionicLoading.hide();
       });
     },
   };
@@ -74,10 +69,8 @@ angular.module('starter.evaluation.services', [])
     getTestsByGroupId: function(groupId){
 
       return API.getTestsByGroupId(groupId).then(function(success){
-        $ionicLoading.hide();
         return success;
       }).catch(function(error){
-        $ionicLoading.hide();
         if(error.status === 404){
           $ionicNavBarDelegate.back();
         }
@@ -106,11 +99,9 @@ angular.module('starter.evaluation.services', [])
     loginTest: function(testId, hotp){
 
         return API.openTest(testId, hotp).then(function(success){
-          $ionicLoading.hide();
           $state.go('evaluation-knowledge-area', {id: testId});
           return success;
         }).catch(function(error){
-          $ionicLoading.hide();
         });
     }
   };
@@ -143,18 +134,15 @@ angular.module('starter.evaluation.services', [])
 
       return API.getAllKnowledgeArea(testId).then(function(success){
         if(success.data.data.length > 0){
-          $ionicLoading.hide();
           return success;
         }
         else{
           API.closeTest(testId).then(function(success){
-            $ionicLoading.hide();
             $alert.show('Mensaje', 'Prueba finalizada exitosamente');
             $state.go('home');
           });
         }
       }).catch(function(error){
-        $ionicLoading.hide();
       });
     }
   }
@@ -232,29 +220,23 @@ angular.module('starter.evaluation.services', [])
     getTestAnswersByArea: function(test){
 
       return API.getTestAnswersByArea(test).then(function(success){
-        $ionicLoading.hide();
         return success;
       }).catch(function(){
-        $ionicLoading.hide();
       });
     },
     getTestById: function(testId){
 
       return API.getTestAnswersByArea(test).then(function(success){
-        $ionicLoading.hide();
         return success;
       }).catch(function(){
-        $ionicLoading.hide();
       });
     },
     sendAnswers: function(testId, data){
 
       API.sendAnswers(testId, data).then(function(success){
-        $ionicLoading.hide();
         $alert.show('Exito','Area enviada');
         $ionicNavBarDelegate.back();
       }).catch(function(error){
-        $ionicLoading.hide();
       });
     }
   };

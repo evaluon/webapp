@@ -17,10 +17,8 @@ factory('resultsInstitutes', function($http, $ionicLoading, localStorageService,
     getAllInstitutes: function(){
 
       return API.getAllInstitutes().then(function(success){
-        $ionicLoading.hide();
         return success;
       }).catch(function(error){
-        $ionicLoading.hide();
       })
     }
   };
@@ -42,10 +40,8 @@ factory('resultsInstitutes', function($http, $ionicLoading, localStorageService,
     getAllResultsByInstitute: function(instituteId){
 
       return API.getAllResultsByInstitute(instituteId).then(function(success){
-        $ionicLoading.hide();
         return success;
       }).catch(function(error){
-        $ionicLoading.hide();
       })
     }
   };

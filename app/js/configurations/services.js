@@ -22,12 +22,10 @@ angular.module('starter.configuration.services', [])
     changePassword: function(password){
 
       return API.changePassword(password).then(function(success){
-        $ionicLoading.hide();
         $alert.show('Exito', 'Contraseña cambiada satisfactoriamente');
         $state.go('home');
         success;
       }).catch(function(error){
-        $ionicLoading.hide();
       });
     }
   };
@@ -70,11 +68,9 @@ angular.module('starter.configuration.services', [])
 
         return API.getUser().then(function(success){
 
-          $ionicLoading.hide();
           return success.data.data;
         }).catch(function(){
 
-          $ionicLoading.hide();
         })
       },
 
@@ -82,9 +78,7 @@ angular.module('starter.configuration.services', [])
 
         return API.updateUser(user).then(function(success){
           return success;
-          $ionicLoading.hide();
         }).catch(function(){
-          $ionicLoading.hide();
         })
       },
 
@@ -92,13 +86,10 @@ angular.module('starter.configuration.services', [])
 
         return API.updateEvalue(evaluee).then(function(success){
 
-          $ionicLoading.hide();
-
           $alert.show('Exito', 'Actualizado correctamente');
           return success;
 
         }).catch(function(){
-          $ionicLoading.hide();
         })
       }
     };

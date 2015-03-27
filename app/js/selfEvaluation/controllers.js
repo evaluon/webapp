@@ -24,10 +24,8 @@ angular.module('starter.selfEvaluation.controllers', [])
         selfEvaluationTests.createSelfTest().then(function(success){
           getSelfEvaluation();
         }).catch(function(error){
-          $ionicLoading.hide();
         });
       }
-      else $ionicLoading.hide();
     });
   };
 
