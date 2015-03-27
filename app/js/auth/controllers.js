@@ -35,6 +35,11 @@ angular.module('starter.controllers', [])
   $scope.registrar = function($event, user){
     $event.preventDefault();
 
+    var date = user.birth_date.toString(10)
+                .replace(/(\d\d)(?=(\d\d)+(?!\d\d))/g, "$1,").split(',');
+
+    user.birth_date = new Date(date[0]+date[1], date[2]-1, date[3]);
+
     user.middle_name = '';
     _.map(user.names.split(' '), function(name, index){
       if(index === 0) user.first_name = name;
