@@ -33,9 +33,6 @@ angular.module('starter', [
   .state('404',{
     url: '/404',
     templateUrl: 'views/errors/404.tpl.html',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.public
     }
@@ -43,9 +40,6 @@ angular.module('starter', [
   .state('403',{
     url: '/403',
     templateUrl: 'views/errors/403.tpl.html',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.public
     }
@@ -57,9 +51,6 @@ angular.module('starter', [
     url: '/login',
     templateUrl: 'views/auth/login.tpl.html',
     controller: 'LoginCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.anon
     }
@@ -68,9 +59,6 @@ angular.module('starter', [
     url: '/registro',
     templateUrl: 'views/auth/registro.tpl.html',
     controller: 'RegistroCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.anon
     }
@@ -79,9 +67,6 @@ angular.module('starter', [
     url: '/recover',
     templateUrl: 'views/auth/recover.tpl.html',
     controller: 'RecoverPasswordCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.anon
     }
@@ -89,9 +74,6 @@ angular.module('starter', [
   .state('auth', {
     url: '/auth',
     controller: 'AuthCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.anon
     }
@@ -103,9 +85,6 @@ angular.module('starter', [
     url: '/',
     templateUrl: 'views/auth/home.tpl.html',
     controller: 'HomeCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -116,12 +95,18 @@ angular.module('starter', [
     url: '',
     templateUrl: 'views/auth/home.tpl.html',
     controller: 'HomeCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
+  });
+
+  $stateProvider
+  .state('logout', {
+      url: '/logout',
+      controller: 'LogoutCtrl',
+      data: {
+          access: routingConfigProvider.accessLevels.user
+      }
   });
 
   //Evaluation routes
@@ -130,9 +115,6 @@ angular.module('starter', [
     url:'/evaluation/institutions',
     templateUrl:'views/evaluation/institutions.tpl.html',
     controller: 'EvaluationInstitutesCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -141,9 +123,6 @@ angular.module('starter', [
     url:'/evaluation/groups/:id',
     templateUrl:'views/evaluation/groups.tpl.html',
     controller: 'EvaluationGroupsCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -152,9 +131,6 @@ angular.module('starter', [
     url:'/evaluation/tests/:id',
     templateUrl: 'views/evaluation/tests.tpl.html',
     controller: 'EvaluationTestsCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data:{
       access: routingConfigProvider.accessLevels.user
     }
@@ -163,9 +139,6 @@ angular.module('starter', [
     url: '/evaluation/password/:id',
     templateUrl: 'views/evaluation/password.tpl.html',
     controller: 'EvaluationPasswordCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -174,9 +147,6 @@ angular.module('starter', [
     url: '/evaluation/knowledge-area/:id',
     templateUrl: 'views/evaluation/knowledge-area.tpl.html',
     controller: 'EvaluationKnowledgeAreaCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data:{
       access: routingConfigProvider.accessLevels.user
     }
@@ -185,9 +155,6 @@ angular.module('starter', [
     url: '/evaluation/test/:id/area/:area',
     templateUrl: 'views/evaluation/test.tpl.html',
     controller: 'EvaluationTestCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -200,9 +167,6 @@ angular.module('starter', [
     url:'/evaluate/tests',
     templateUrl: 'views/evaluation/tests.tpl.html',
     controller: 'SelfEvaluationTestsCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data:{
       access: routingConfigProvider.accessLevels.user
     }
@@ -211,9 +175,6 @@ angular.module('starter', [
     url: '/evaluate/knowledge-area/:id',
     templateUrl: 'views/evaluation/knowledge-area.tpl.html',
     controller: 'SelfEvaluationKnowledgeAreaCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data:{
       access: routingConfigProvider.accessLevels.user
     }
@@ -222,9 +183,6 @@ angular.module('starter', [
     url: '/evaluate/test/:id/area/:area',
     templateUrl: 'views/evaluation/test.tpl.html',
     controller: 'SelfEvaluationTestCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -236,9 +194,6 @@ angular.module('starter', [
     url:'/results-institutes',
     templateUrl:'views/results/institutions.tpl.html',
     controller: 'ResultsInstitutesCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -247,9 +202,6 @@ angular.module('starter', [
     url:'/results/:id',
     templateUrl:'views/results/results.tpl.html',
     controller: 'ResultsCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -261,9 +213,6 @@ angular.module('starter', [
     url: '/indicators',
     templateUrl: 'views/indicators/indicators.tpl.html',
     controller: 'IndicatorsCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -274,9 +223,6 @@ angular.module('starter', [
   .state('configurations', {
     url: '/configurations',
     templateUrl: 'views/configurations/configurations.tpl.html',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -285,9 +231,6 @@ angular.module('starter', [
     url: '/configurations-changePassword',
     templateUrl: 'views/configurations/changePassword.tpl.html',
     controller: 'ChangePasswordCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -295,9 +238,6 @@ angular.module('starter', [
   .state('configurations-about', {
     url: '/configurations-about',
     templateUrl: 'views/configurations/about.tpl.html',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -305,9 +245,6 @@ angular.module('starter', [
   .state('configurations-help', {
     url: '/configurations-help',
     templateUrl: 'views/configurations/help.tpl.html',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }
@@ -316,9 +253,6 @@ angular.module('starter', [
     url: '/configurations-update',
     templateUrl: 'views/configurations/updateUser.tpl.html',
     controller: 'UpdateUserCtrl',
-    force: true,
-    cache: false,
-    reload: true,
     data: {
       access: routingConfigProvider.accessLevels.user
     }

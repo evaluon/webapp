@@ -77,4 +77,7 @@ angular.module('starter.controllers', [])
     Auth.logout();
   };
 
+})
+.controller('LogoutCtrl', function($scope, Auth){
+    Auth.logout();
 });

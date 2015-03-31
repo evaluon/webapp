@@ -17,12 +17,10 @@ angular.module('starter.evaluation.controllers', [])
   };
 
   evaluationInstitutes.getAll().then(function(success){
-    if(success){
-      $scope.rowInstitutes = doubled(success.data.data);
-    }
-
-  }).catch(function(error){
-  });
+     if(success){
+         $scope.rowInstitutes = doubled(success.data.data);
+         }
+     });
 })
 .controller('EvaluationGroupsCtrl', function($scope, $stateParams, evaluationGroups){
   $scope.rowGroups = [];
