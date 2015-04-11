@@ -20,9 +20,10 @@
             </label>
             <label for="birth_date" class="item item-input item-stacked-label">
                 <span class="input-label">Fecha de nacimiento</span>
-                <input name="birth_date" type="date"  aria-describedby="registro-user-birthdate" ng-model="user.birth_date"  required>
-                <p id="registro-user-birthdate" class="aria-description">Ingrese su fecha de nacimiento</p>
-                <span ng-if="validate(updateUserForm, 'birth_date')" class="text-assertive">Campo obligatorio/span>
+                <input name="birth_date" type="number"  aria-describedby="registro-user-birthdate"  ng-maxlength="8" ng-minlength="8" ng-model="user.birth_date" placeholder="aaammdd" required aria-required="true">
+                <p id="registro-user-birthdate" class="aria-description">Debe diligenciar la fecha de nacimiento en el formato Año(4 caracteres),Mes(2 caracteres),Día (2 Caracteres). sin espacios ni guiones</p>
+
+                <span ng-if="validate(updateUserForm, 'birth_date')" class="text-assertive">Campo obligatorio</span>
             </label>
             <label for="gender" class="item item-input item-stacked-label">
                 <span class="input-label">Género</span>

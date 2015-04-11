@@ -22,7 +22,7 @@ angular.module('starter.configuration.controllers', [])
   updateUser.getUser().then(function(data){
     $scope.user = data;
     $scope.id = Number(data.id);
-    $scope.user.birth_date = $filter('date')(new Date(data.birth_date), 'yyyy-MM-dd');
+    $scope.user.birth_date = parseInt($filter('date')(new Date(data.birth_date), 'yyyyMMdd'));
 
     if(data.middle_name) $scope.user.names = data.first_name + ' ' + data.middle_name;
     else $scope.user.names = data.first_name;
@@ -31,6 +31,11 @@ angular.module('starter.configuration.controllers', [])
 
   $scope.update = function($event, user){
     $event.preventDefault();
+
+    var date = user.birth_date.toString(10)
+                .replace(/(\d\d)(?=(\d\d)+(?!\d\d))/g, "$1,").split(',');
+
+    user.birth_date = new Date(date[0]+date[1], date[2]-1, date[3]);
 
     user.middle_name = '';
     _.map(user.names.split(' '), function(name, index){
