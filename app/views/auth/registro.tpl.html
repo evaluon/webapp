@@ -3,25 +3,25 @@
     <form class="list" name="registryUserForm" ng-submit="registrar($event, user)">
       <label for="id" class="item item-input item-stacked-label">
         <span class="input-label">Número de documento</span>
-        <input name="id" type="number"  aria-describedby="registro-user-document" ng-model="user.id" required aria-required="true">
+        <input name="id" type="number"  aria-describedby="registro-user-document" ng-model="user.id" required >
         <p id= "registro-user-document" class="aria-description">Digite su número de documento</p>
         <span ng-show="validate(registryUserForm, 'id')" class="text-assertive">Tiene que ser un número</span>
       </label>
       <label for="name" class="item item-input item-stacked-label">
         <span class="input-label">Nombres</span>
-        <input name="name" type="text"  aria-describedby="registro-user-name" ng-model="user.names" required aria-required="true">
+        <input name="name" type="text"  aria-describedby="registro-user-name" ng-model="user.names" required >
         <p id= "registro-user-name" class="aria-description">Digite su nombre</p>
         <span ng-show="validate(registryUserForm, 'name')" class="text-assertive">Campo obligatorio</span>
       </label>
       <label for="lastName" class="item item-input item-stacked-label">
         <span class="input-label">Apellidos</span>
-        <input name="lastName" type="text" aria-describedby="registro-user-surname" ng-model="user.last_name"  required aria-required="true">
+        <input name="lastName" type="text" aria-describedby="registro-user-surname" ng-model="user.last_name"  required >
         <p id="registro-user-surname" class="aria-description">Digite sus apellidos</p>
         <span ng-show="validate(registryUserForm, 'lastName')" class="text-assertive">Campo obligatorio</span>
       </label>
       <label for="birth_date" class="item item-input item-stacked-label">
         <span class="input-label">Fecha de nacimiento</span>
-        <input name="birth_date" type="number"  aria-describedby="registro-user-birthdate"  ng-maxlength="8" ng-minlength="8" ng-model="user.birth_date" placeholder="aaammdd" required aria-required="true">
+        <input name="birth_date" type="number"  aria-describedby="registro-user-birthdate"  ng-maxlength="8" ng-minlength="8" ng-model="user.birth_date" placeholder="aaammdd" required >
         <p id="registro-user-birthdate" class="aria-description">Debe diligenciar la fecha de nacimiento en el formato Año(4 caracteres),Mes(2 caracteres),Día (2 Caracteres). sin espacios ni guiones</p>
         <span ng-show="validate(registryUserForm, 'birth_date')" class="text-assertive">Fecha de nacimiento no válida</span>
         <span ng-show="user.birth_date > maxDate" class="text-assertive">Fecha de nacimiento no válida</span>
@@ -49,19 +49,19 @@
       </label>
       <label for="email" class="item item-input item-stacked-label">
         <span class="input-label" tabindex="0">Correo</span>
-        <input name="email" ng-pattern="/^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i" type="email" aria-describedby="registro-user-mail" ng-model="user.mail"  required aria-required="true">
+        <input name="email" ng-pattern="/^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i" type="email" aria-describedby="registro-user-mail" ng-model="user.mail"  required >
         <p id ="registro-user-mail" class="aria-description">Digite su correo</p>
         <span ng-show="validate(registryUserForm, 'email')" class="text-assertive">Tiene que ser un correo válido</span>
       </label>
       <label name="password" class="item item-input item-stacked-label"  required>
         <span class="input-label">Contraseña</span>
-        <input name="password" type="password"  ng-minlength="6" aria-describedby="registro-user-id" ng-model="user.password"  required aria-required="true">
+        <input name="password" type="password"  ng-minlength="6" aria-describedby="registro-user-id" ng-model="user.password"  required >
         <span id ="registro-user-id" class="aria-description">Digite su contraseña</span>
         <span ng-show="validate(registryUserForm, 'password')" class="text-assertive">Tiene que tener mínimo 6 carácteres</span>
       </label>
       <label name="password2" class="item item-input item-stacked-label"  required>
         <span class="input-label">Repite la contraseña</span>
-        <input name="password2" type="password" aria-describedby="registro-user-id" ng-model="password2"  required aria-required="true">
+        <input name="password2" type="password" aria-describedby="registro-user-id" ng-model="password2"  required >
         <span id ="registro-user-id" class="aria-description">Por último, repita su contraseña</span>
         <span ng-show="(user.password != password2) && registryUserForm.password2.$dirty" class="text-assertive">Las contraseñas no coinciden</span>
       </label>
