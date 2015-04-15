@@ -99,25 +99,22 @@ angular.module('starter.selfEvaluation.controllers', [])
 
   $scope.verifyAnswers = function(){
    $scope.rollbackAnswersFlag = true;
-   var firstUnanswered = null;
 
    _.each($scope.questions, function(question, index){
      if(question.answer){
-       $('#answer-'+index).replaceWith('<p id="answer-'+index+'">'+(index+1)+'.</p>');
-     } else {
-        if (firstUnanswered === null){
-          firstUnanswered = index;
-          $('#answer-'+index).focus();
-        }
-      }
+       question.invisible = true;
+     }
     });
+
   };
 
   $scope.rollbackAnswers = function(){
     $scope.rollbackAnswersFlag = false;
+
     _.each($scope.questions, function(question, index){
-      $('#answer-'+index).replaceWith('<h3 id="answer-'+index+'">'+(index+1)+'.</h3>');
+      question.invisible = false;
     });
+
   };
 
   $scope.sendAnswers = function(){
