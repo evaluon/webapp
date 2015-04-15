@@ -1,8 +1,8 @@
 <ion-view title="Examen de {{params.area}}" hide-back-button="true">
   <ion-content class="padding">
+    <h2 tabindex="0">Instrucciones</h2>
     <div class="card">
       <div class="item item-text-wrap">
-        <!--<h2 tabindex="0">Instrucciones</h2> -->
         <div>
           <p tabindex="0">Ten en cuenta que el examen se anulará al cerrar la aplicación</p>
           <p tabindex="0">En el examen se pueden utilizan preguntas de selección múltiple con única respuesta y preguntas abiertas de respuesta corta.</div> </p>
@@ -16,7 +16,7 @@
     <h2 tabindex="0">Preguntas:</h2>
 
     <div class="">
-      <div class="answer" ng-repeat="question in questions">
+      <div class="answer" ng-repeat="question in questions" ng-show="!question.invisible">
         <div class="item item-text-wrap">
           <h3 id ="answer-{{$index}}" tabindex="0">{{$index + 1}}.</h3>
           <p tabindex="0">{{question.description_text}}</p>
