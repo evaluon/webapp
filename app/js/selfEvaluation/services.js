@@ -131,9 +131,9 @@ angular.module('starter.selfEvaluation.services', [])
       return $q.all(qs).then(function(responses){
         var qSent = _.reduce(responses, function(a, r){ return a + r }, 0);
         if(qSent === qs.length){
-          console.log("All questions sent");
+          //console.log("All questions sent");
         } else {
-          console.log("%d/%d questions sent", qSent, qs.length);
+          //console.log("%d/%d questions sent", qSent, qs.length);
         }
       });
 
