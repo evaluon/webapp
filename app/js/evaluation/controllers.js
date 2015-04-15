@@ -175,7 +175,6 @@ angular.module('starter.evaluation.controllers', [])
   };
 
   $scope.toggleRadio = function(value){
-      console.log('si');
       value = !value;
   };
 });

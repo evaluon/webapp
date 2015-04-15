@@ -8,7 +8,6 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
 'ionic',
-'ngAria',
 'config.services',
 'starter.controllers',
 'starter.services',

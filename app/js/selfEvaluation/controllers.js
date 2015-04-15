@@ -52,7 +52,6 @@ angular.module('starter.selfEvaluation.controllers', [])
   selfEvaluationKnowledgeArea.getAllKnowledgeArea($stateParams.id).then(function(success){
     if(success) $scope.rowTestsDetails = doubled(success.data.data);
   }).catch(function(error){
-    console.log(error);
   });
 
   $scope.exit = function(){
@@ -68,8 +67,6 @@ angular.module('starter.selfEvaluation.controllers', [])
   $scope.params = $stateParams;
   $scope.respuesta = {};
   $scope.rollbackAnswersFlag = false;
-
-  console.log($stateParams);
 
   var getArea = function(){
     if(localStorageService.get($scope.params.id + $scope.params.area)){
@@ -90,7 +87,6 @@ angular.module('starter.selfEvaluation.controllers', [])
           }
 
         }).catch(function(error){
-          console.log(error);
         });
     }
   };

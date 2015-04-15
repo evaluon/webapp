@@ -10,7 +10,6 @@ angular.module('starter.controllers', [])
         ).then(function(){
             return updateUser.getUser();
         }).then(function(user){
-            console.log(user);
             if(user.role <= 1){
                 $state.go('home');
             }
