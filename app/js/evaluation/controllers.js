@@ -115,9 +115,6 @@ angular.module('starter.evaluation.controllers', [])
   $scope.open = false;
   $scope.close = false;
 
-  console.log($stateParams);
-
-
   var getArea = function(){
     if(localStorageService.get($scope.params.id + $scope.params.area)){
       $scope.questions = localStorageService.get($scope.params.id + $scope.params.area);
@@ -147,25 +144,22 @@ angular.module('starter.evaluation.controllers', [])
 
   $scope.verifyAnswers = function(){
    $scope.rollbackAnswersFlag = true;
-   var firstUnanswered = null;
 
    _.each($scope.questions, function(question, index){
      if(question.answer){
-       $('#answer-'+index).replaceWith('<p id="answer-'+index+'">'+(index+1)+'.</p>');
-     } else {
-        if (firstUnanswered === null){
-          firstUnanswered = index;
-          $('#answer-'+index).focus();
-        }
-      }
+       question.invisible = true;
+     }
     });
+
   };
 
   $scope.rollbackAnswers = function(){
     $scope.rollbackAnswersFlag = false;
+
     _.each($scope.questions, function(question, index){
-      $('#answer-'+index).replaceWith('<h3 id="answer-'+index+'">'+(index+1)+'.</h3>');
+      question.invisible = false;
     });
+
   };
 
   $scope.sendAnswers = function(){
