@@ -3,7 +3,7 @@
     <div class="row padding item" ng-repeat="tests in rowTestsDetails">
       <div class="col col-50 divIcon item-avatar" ng-repeat="test in tests">
         <a ui-sref="{{routes.test}}({id: {{routes.testId}}, area: {{'test.id'}} })"><h2 class="titleInci">{{test.id}}</h2></a>
-        <menu-icon ref="{{routes.test}}({id: {{routes.testId}}, area: '{{test.id}}' })" img="http://cdn.boolinc.co/evaluon/{{test.image.location}}" description="{{test.id}}"></menu-icon>
+        <menu-icon ref="{{routes.test}}({id: {{routes.testId}}, area: '{{test.id}}' })" img="http://cdn.gentebool.com/evaluon/{{test.image.location}}" description="{{test.id}}"></menu-icon>
       </div>
     </div>
     <button class="button button-block button-inci" ng-click="exit()">Salir</button>
