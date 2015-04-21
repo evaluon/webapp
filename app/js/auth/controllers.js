@@ -61,27 +61,27 @@ angular.module('starter.controllers', [])
         var errorTitle = "Tienes errores en los siguientes campos:";
         var errorMessage = '';
         if(form.id.$invalid)
-            errorMessage = errorMessage + " cédula";
+            errorMessage = errorMessage + "\ncédula";
         if(form.name.$invalid)
-            errorMessage = errorMessage + " nombres";
+            errorMessage = errorMessage + "\nnombres";
         if(form.lastName.$invalid)
-            errorMessage = errorMessage + " apellidos";
+            errorMessage = errorMessage + "\napellidos";
         if(form.birth_date.$invalid)
-            errorMessage = errorMessage + " fecha de nacimiento";
+            errorMessage = errorMessage + "\nfecha de nacimiento";
         if(form.gender.$invalid)
-            errorMessage = errorMessage + " genero";
+            errorMessage = errorMessage + "\ngenero";
         if(form.disabilitie.$invalid)
-            errorMessage = errorMessage + " condición visual";
+            errorMessage = errorMessage + "\ncondición visual";
         if(form.type.$invalid)
-            errorMessage = errorMessage + " tipo de usuario";
+            errorMessage = errorMessage + "\ntipo de usuario";
         if(form.level.$invalid)
-            errorMessage = errorMessage + " nivel de formación";
+            errorMessage = errorMessage + "\nnivel de formación";
         if(form.email.$invalid)
-            errorMessage = errorMessage + " correo";
+            errorMessage = errorMessage + "\ncorreo";
         if(form.password.$invalid)
-            errorMessage = errorMessage + " contraseña";
+            errorMessage = errorMessage + "\ncontraseña";
         else if(user.password != user.password2)
-            errorMessage = errorMessage + "  las contraseñas no coinciden";
+            errorMessage = errorMessage + "\nlas contraseñas no coinciden";
 
         $alert.show(errorTitle, errorMessage);
     }
