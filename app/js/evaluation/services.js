@@ -138,7 +138,7 @@ angular.module('starter.evaluation.services', [])
         }
         else{
           API.closeTest(testId).then(function(success){
-            $alert.show('Mensaje', 'Prueba finalizada exitosamente');
+            $alert.show('Mensaje', 'Evaluación enviada exitosamente');
             $state.go('home');
           });
         }
