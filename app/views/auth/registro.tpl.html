@@ -1,6 +1,8 @@
 <ion-view title="Registro" hide-back-button="false">
-  <ion-content class="padding">
-    <form class="list" name="registryUserForm" ng-submit="registrar($event, user)">
+  <ion-content class="padding" no>
+    <form class="list" name="registryUserForm"
+            ng-submit="registrar($event, user, registryUserForm)"
+            novalidate>
       <label for="id" class="item item-input item-stacked-label">
         <span class="input-label">Número de documento</span>
         <input name="id" type="number"  aria-describedby="registro-user-document" ng-model="user.id" required >
@@ -61,14 +63,14 @@
       </label>
       <label name="password2" class="item item-input item-stacked-label"  required>
         <span class="input-label">Repite la contraseña</span>
-        <input name="password2" type="password" aria-describedby="registro-user-id" ng-model="password2"  required >
+        <input name="password2" type="password" aria-describedby="registro-user-id" ng-model="user.password2"  required >
         <span id ="registro-user-id" class="aria-description">Por último, repita su contraseña</span>
-        <span ng-show="(user.password != password2) && registryUserForm.password2.$dirty" class="text-assertive">Las contraseñas no coinciden</span>
+        <span ng-show="(user.password != user.password2) && registryUserForm.password2.$dirty" class="text-assertive">Las contraseñas no coinciden</span>
       </label>
 
       <h5 style="text-align: center" ng-show="registryUserForm.$invalid || (user.password != password2) || user.birth_date > maxDate" class="text-assertive">Tu formulario contiene campos inválidos</h5>
-      <input ng-disabled="registryUserForm.$invalid || (user.password != password2)" type="submit" class="button button-block button-inci" value="Registrar">
-
+      <input type="submit" class="button button-block button-inci" value="Registrar">
+        <!-- ng-disabled="registryUserForm.$invalid || (user.password != password2)" -->
     </form>
   </ion-content>
 </ion-view>

@@ -29,33 +29,59 @@ angular.module('starter.configuration.controllers', [])
 
   });
 
-  $scope.update = function($event, user){
-    $event.preventDefault();
+  $scope.update = function($event, user, form){
 
-    var date = user.birth_date.toString(10)
-                .replace(/(\d\d)(?=(\d\d)+(?!\d\d))/g, "$1,").split(',');
+    if(form.$valid){
+        var date = user.birth_date.toString(10)
+                    .replace(/(\d\d)(?=(\d\d)+(?!\d\d))/g, "$1,").split(',');
 
-    user.birth_date = new Date(date[0]+date[1], date[2]-1, date[3]);
+        user.birth_date = new Date(date[0]+date[1], date[2]-1, date[3]);
 
-    user.middle_name = '';
-    _.map(user.names.split(' '), function(name, index){
-      if(index === 0) user.first_name = name;
-      else  user.middle_name = user.middle_name + ' ' + name;
-    });
-    var update = {
-      id: user.id,
-      first_name: user.first_name,
-      middle_name: user.middle_name,
-      last_name: user.last_name,
-      birth_date: user.birth_date,
-      mail: user.mail
-    };
+        user.middle_name = '';
+        _.map(user.names.split(' '), function(name, index){
+          if(index === 0) user.first_name = name;
+          else  user.middle_name = user.middle_name + ' ' + name;
+        });
+        var update = {
+          id: user.id,
+          first_name: user.first_name,
+          middle_name: user.middle_name,
+          last_name: user.last_name,
+          birth_date: user.birth_date,
+          mail: user.mail
+        };
 
-    updateUser.updateUser(update).then(function(success){
-      updateUser.updateEvaluee(user.evaluee).then(function(success){
-        $state.go('home');
-      });
-    });
+        updateUser.updateUser(update).then(function(success){
+          updateUser.updateEvaluee(user.evaluee).then(function(success){
+            $state.go('home');
+          });
+        });
+    }
+
+    else{
+        var errorTitle = "Tienes errores en los siguientes campos:";
+        var errorMessage = '';
+        if(form.name.$invalid)
+            errorMessage = errorMessage + "\nnombres";
+        if(form.lastName.$invalid)
+            errorMessage = errorMessage + "\napellidos";
+        if(form.birth_date.$invalid)
+            errorMessage = errorMessage + "\nfecha de nacimiento";
+        if(form.gender.$invalid)
+            errorMessage = errorMessage + "\ngenero";
+        if(form.disabilitie.$invalid)
+            errorMessage = errorMessage + "\ncondición visual";
+        if(form.type.$invalid)
+            errorMessage = errorMessage + "\ntipo de usuario";
+        if(form.level.$invalid)
+            errorMessage = errorMessage + "\nnivel de formación";
+        if(form.email.$invalid)
+            errorMessage = errorMessage + "\ncorreo";
+
+        $alert.show(errorTitle, errorMessage);
+    }
+
+
 
   };
 
